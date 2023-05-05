@@ -32,3 +32,8 @@ GameView (rendering)
 Controller (inputs)
     constructor(id)
     listener & debouncer?
+
+
+
+
+- Edit Sprite Sheets x2
