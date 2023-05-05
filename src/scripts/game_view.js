@@ -1,7 +1,8 @@
 
 export class GameView {
-    static WIDTH = 960;
-    static HEIGHT = 720;
+    static MAIN_SCALE = 0.75;
+    static WIDTH = 960*GameView.MAIN_SCALE;
+    static HEIGHT = 720*GameView.MAIN_SCALE;
 
     constructor(ctx) {
         this.ctx = ctx;
@@ -14,6 +15,7 @@ export class GameView {
         ctx.clearRect(0,0,GameView.WIDTH, GameView.HEIGHT)
 
         // draw background image
+        ctx.scale(GameView.MAIN_SCALE, GameView.MAIN_SCALE)
         ctx.translate(-350,-200);
         ctx.scale(0.9, 0.9);
         let backgroundImg = document.getElementById("train-background");
@@ -22,6 +24,7 @@ export class GameView {
         // draw fighters and other assets
         objects.forEach((obj) => {
             ctx.resetTransform();
+            ctx.scale(GameView.MAIN_SCALE, GameView.MAIN_SCALE)
             obj.draw(ctx);
         })
 
