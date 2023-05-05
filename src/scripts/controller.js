@@ -1,34 +1,42 @@
 
 export class Controller {
     constructor (player, option){
+        let buttonMapping;
+        if (option === 1) {
+            buttonMapping = Controller.CONTROLLER_ONE;
+        } else if (option === 2) {
+            buttonMapping = Controller.CONTROLLER_TWO;
+        }
+
         window.addEventListener("keydown", event => {
-            // console.log("hi")
-            // console.log(event.key)
-            let buttonMapping;
-            if (option === 1) {
-                buttonMapping = Controller.CONTROLLER_ONE;
-            } else if (option === 2) {
-                buttonMapping = Controller.CONTROLLER_TWO;
-            }
-
-
             if (buttonMapping[event.key]) {
-                // console.log("1: " + Controller.CONTROLLER_ONE[event.key]);
                 switch (buttonMapping[event.key]) {
                     case 'LEFT':
-                        player.move({x: -1*player.moveSpeed})
+                        player.vel[0] = -1*player.moveSpeed;
+                        player.currentAction = "run";
                         break;
                     case 'RIGHT':
-                        player.move({x: 1*player.moveSpeed})
-                        break;
-                    case 'UP':
-                        player.move({y: -1*player.moveSpeed})
-                        break;
-                    case 'DOWN':
-                        player.move({y: 1*player.moveSpeed})
+                        player.vel[0] = 1*player.moveSpeed;
+                        player.currentAction = "run";
                         break;
                 }
+            }
+        });
 
+        window.addEventListener("keyup", event => {
+            if (buttonMapping[event.key]) {
+                switch (buttonMapping[event.key]) {
+                    case 'LEFT':
+                        player.vel[0] = 0;
+                        player.character.stopAction("run");
+                        // player.currentAction = "idle";
+                        break;
+                    case 'RIGHT':
+                        player.vel[0] = 0;
+                        player.character.stopAction("run");
+                        // player.currentAction = "idle";
+                        break;
+                }
             }
         });
     }

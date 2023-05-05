@@ -7,7 +7,7 @@ export class SpriteSheet {
         img.id = `${player.name}-sprite`;
         img.hidden = true;
         body.appendChild(img);
-
+        this.player = player;
 
         this.img = document.getElementById(img.id);
 

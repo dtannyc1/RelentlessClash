@@ -6,7 +6,7 @@ export class Player extends Moveable{
         let options = {startpos: startpos};
         super(options);
         this.name = name;
-        this.moveSpeed = 2;
+        this.moveSpeed = 10;
         this.scale = 3.5;
 
         this.character = new Samurai(this);
@@ -17,6 +17,7 @@ export class Player extends Moveable{
 
     draw(ctx){
         // this.character.idle();
+        this.move();
         this.character.currentAction(this.currentAction);
         this.character.draw(ctx, this.pos, this.scale);
     }

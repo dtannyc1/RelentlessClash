@@ -74,16 +74,18 @@ export class Samurai extends SpriteSheet {
     stopAction(name){
         // reset animation
         Samurai.animationFrameInfo[name].framenum = 0;
-        this.animate("idle");
+        // this.animate("idle");
+        this.player.currentAction = "idle";
     }
 
     animate(name) {
         // increment frame number
-        Samurai.animationFrameInfo[name].framenum +=
+        Samurai.animationFrameInfo[name].framenum -=
             Samurai.animationFrameInfo[name].frameSpeed *
             Samurai.frameSpeed;
         Samurai.animationFrameInfo[name].framenum =
-            Samurai.animationFrameInfo[name].framenum %
+            (Samurai.animationFrameInfo[name].framenum +
+                Samurai.animationFrameInfo[name].numFrames) %
             Samurai.animationFrameInfo[name].numFrames;
 
         // define local vars
