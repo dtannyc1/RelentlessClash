@@ -10,7 +10,11 @@ export class Game {
         this.player1 = new Player([450,500], "player1");
         this.controller1 = new Controller(this.player1, 1);
 
-        let objects = [this.player1]
-        this.gameView.draw(objects);
+        this.objects = [this.player1];
+        this.runGame();
+    }
+
+    runGame() {
+        this.gameView.draw(this.objects);
     }
 }

@@ -1,3 +1,4 @@
+import { Moveable } from "./moveable";
 
 export class Controller {
     constructor (player, option){
@@ -19,6 +20,21 @@ export class Controller {
                         player.vel[0] = 1*player.moveSpeed;
                         player.currentAction = "run";
                         break;
+                    case 'UP':
+                        if (player.pos[1] === Moveable.FLOOR) {
+                            player.vel[1] = -1.5*player.moveSpeed;
+                            player.currentAction = "jump";
+                        }
+                        break;
+                    case 'A':
+                        player.currentAction = "attack1";
+                        break;
+                    case 'B':
+                        player.currentAction = "attack2";
+                        break;
+                    case 'Y':
+                        player.currentAction = "attack3";
+                        break;
                 }
             }
         });
@@ -29,12 +45,10 @@ export class Controller {
                     case 'LEFT':
                         player.vel[0] = 0;
                         player.character.stopAction("run");
-                        // player.currentAction = "idle";
                         break;
                     case 'RIGHT':
                         player.vel[0] = 0;
                         player.character.stopAction("run");
-                        // player.currentAction = "idle";
                         break;
                 }
             }

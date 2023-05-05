@@ -43,7 +43,7 @@ export class Samurai extends SpriteSheet {
             framenum: 0,
             originY: 5,
             numFrames: 5,
-            frameSpeed: 1
+            frameSpeed: 2
         },
         attack3: {
             framenum: 0,
@@ -53,7 +53,7 @@ export class Samurai extends SpriteSheet {
         }
     };
 
-    static singleActions = ["attack1", "attack2", "attack3"];
+    static SINGLE_ACTIONS = ["attack1", "attack2", "attack3", "jump"];
 
     // Class Methods:
     constructor(player) {
@@ -62,15 +62,21 @@ export class Samurai extends SpriteSheet {
     }
 
     draw(ctx, pos, scale) {
+        ctx.translate(pos[0]+this.frameWidth*scale/2, pos[1])
+        if (this.player.xFacing === -1) {
+            ctx.scale(-1,1);
+        }
         ctx.drawImage(this.img,
             this.framePosX,this.framePosY,
             this.frameWidth, this.frameHeight,
-            pos[0], pos[1],
+            -this.frameWidth*scale/2, 0,
             this.frameWidth*scale, this.frameHeight*scale)
+        // ctx.resetTransform();
     }
 
     currentAction(name){
-        if (singleActions.includes(name)) {
+        // console.log(this.prototype)
+        if (Samurai.SINGLE_ACTIONS.includes(name)) {
             this.animate(name, true);
         } else {
             this.animate(name);
@@ -90,7 +96,7 @@ export class Samurai extends SpriteSheet {
             Samurai.animationFrameInfo[name].frameSpeed *
             Samurai.frameSpeed;
 
-        if (playOnce && Samurai.animationFrameInfo[name].framenum >
+        if (playOnce && Samurai.animationFrameInfo[name].framenum >=
                 Samurai.animationFrameInfo[name].numFrames){
             this.stopAction(name);
         } else {

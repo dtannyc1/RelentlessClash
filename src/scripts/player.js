@@ -6,6 +6,11 @@ export class Player extends Moveable{
         let options = {startpos: startpos};
         super(options);
         this.name = name;
+        if (name === "player1") {
+            this.xFacing = 1;
+        } else {
+            this.xFacing = -1;
+        }
         this.moveSpeed = 10;
         this.scale = 3.5;
 
