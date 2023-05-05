@@ -5,7 +5,6 @@ Background (Project Name to be determined)
 
 
 Functionality & MVPs
--
 ----
 In {Definitely Not Street Fighter}, users will be able to:
 - Move their character using keyboard presses
