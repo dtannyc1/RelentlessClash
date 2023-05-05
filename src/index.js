@@ -1,8 +1,15 @@
-import Example from "./scripts/example";
+import {Game} from "./scripts/game";
 
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("hello world");
+let canvas = document.querySelector("#main-canvas");
+const ctx = canvas.getContext("2d");
 
-    const main = document.getElementById("main");
-    new Example(main);
-});
+canvas.height = 500;
+canvas.width = 500;
+canvas.style.backgroundColor = "black";
+
+
+// let controller = new Controller(canvas);
+
+// window.controller = controller;
+
+let game = new Game(ctx);
