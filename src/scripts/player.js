@@ -5,6 +5,7 @@ export class Player extends Moveable{
     constructor(startpos, name) {
         let options = {startpos: startpos};
         super(options);
+
         this.name = name;
         if (name === "player1") {
             this.xFacing = 1;
@@ -12,7 +13,7 @@ export class Player extends Moveable{
             this.xFacing = -1;
         }
         this.moveSpeed = 10;
-        this.scale = 3.5;
+        this.scale = 3.15;
 
         this.character = new Samurai(this); // change later when introduce other sprites?
         this.currentAction = "idle";

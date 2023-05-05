@@ -1,4 +1,4 @@
-import { Moveable } from "./moveable";
+import { Game } from "./game";
 
 export class Controller {
     constructor (player, option){
@@ -21,7 +21,7 @@ export class Controller {
                         player.currentAction = "run";
                         break;
                     case 'UP':
-                        if (player.pos[1] === Moveable.FLOOR) {
+                        if (player.pos[1] === Game.FLOOR) {
                             player.vel[1] = -1.5*player.moveSpeed;
                             player.currentAction = "jump";
                         }

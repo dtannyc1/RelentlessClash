@@ -1,7 +1,7 @@
+import { Game } from "./game";
 
 export class Moveable {
     static GRAVITY = 0.75;
-    static FLOOR = 500;
 
     constructor(options) {
         this.pos = options["startpos"];
@@ -16,15 +16,13 @@ export class Moveable {
         this.checkFloor();
         this.checkFacing();
 
-        if (this.name === "player2") {
-            console.log(this.pos);
-        }
     }
 
     checkFloor() {
-        if (this.pos[1] > Moveable.FLOOR) {
+        // console.log(Game.FLOOR)
+        if (this.pos[1] > Game.FLOOR) {
             this.vel[1] = 0;
-            this.pos[1] = Moveable.FLOOR;
+            this.pos[1] = Game.FLOOR;
         }
     }
 
