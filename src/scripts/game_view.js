@@ -14,6 +14,6 @@ export class GameView {
         })
     }
 
-    static WIDTH = 500;
-    static HEIGHT = 500;
+    static WIDTH = 1080;
+    static HEIGHT = 720;
 }

@@ -18,6 +18,6 @@ export class Moveable {
     }
 
     draw() {
-
+        throw new Error("Draw not implemented?")
     }
 }

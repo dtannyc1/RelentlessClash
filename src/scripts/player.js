@@ -6,13 +6,13 @@ export class Player extends Moveable{
 
         let options = {startpos: startpos};
         super(options);
-        this.width = 10;
-        this.height = 50;
+        this.width = 128;
+        this.height = 128;
         this.moveSpeed = 2;
     }
 
     draw(ctx){
-        ctx.fillStyle = "green";
-        ctx.fillRect(this.pos[0], this.pos[1], this.width, this.height);
+        // ctx.fillStyle = "green";
+        // ctx.fillRect(this.pos[0], this.pos[1], this.width, this.height);
     }
 }

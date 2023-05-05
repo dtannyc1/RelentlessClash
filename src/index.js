@@ -3,9 +3,9 @@ import {Game} from "./scripts/game";
 let canvas = document.querySelector("#main-canvas");
 const ctx = canvas.getContext("2d");
 
-canvas.height = 500;
-canvas.width = 500;
-canvas.style.backgroundColor = "black";
+canvas.width = 960;
+canvas.height = 720;
+canvas.style.backgroundColor = "gray";
 
 
 // let controller = new Controller(canvas);
