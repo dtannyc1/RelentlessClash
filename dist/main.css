@@ -4,3 +4,18 @@
 * {
   background-color: black;
 }
+
+h1 {
+  color: white;
+  margin: auto;
+  padding: 20px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#main-canvas {
+  margin: auto;
+}

@@ -1,10 +1,11 @@
 import {Game} from "./scripts/game";
+import { GameView } from "./scripts/game_view";
 
 let canvas = document.querySelector("#main-canvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 960;
-canvas.height = 720;
+canvas.width = GameView.WIDTH;
+canvas.height = GameView.HEIGHT;
 canvas.style.backgroundColor = "gray";
 
 

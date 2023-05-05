@@ -14,7 +14,7 @@ export class Moveable {
         if (options["y"]) {
             this.pos[1] += options["y"];
         }
-        // console.log(this.pos);
+        console.log(this.pos);
     }
 
     draw() {

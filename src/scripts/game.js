@@ -7,7 +7,7 @@ export class Game {
         console.log("Game Made")
         this.ctx = ctx;
         this.gameView = new GameView(this.ctx);
-        this.player1 = new Player([200,200]);
+        this.player1 = new Player([545,500]);
         this.controller1 = new Controller(this.player1, 1);
         // this.player2 = new Player([400,200]);
 
