@@ -62,9 +62,9 @@ export class Controller {
     static CONTROLLER_ONE = {
         f: 'B',
         g: 'A',
-        h: 'LB',
-        r: 'Y',
+        h: 'Y',
         t: 'X',
+        r: 'LB',
         y: 'RB',
         // 6: 'LT',
         // 7: 'RT',
@@ -83,8 +83,8 @@ export class Controller {
     static CONTROLLER_TWO = {
         k: 'B',
         l: 'A',
-        ";": 'LB',
-        "i": 'Y',
+        ";": 'Y',
+        "i": 'LB',
         o: 'X',
         p: 'RB',
         // 6: 'LT',
