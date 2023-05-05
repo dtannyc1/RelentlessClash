@@ -53,6 +53,8 @@ export class Samurai extends SpriteSheet {
         }
     };
 
+    static singleActions = ["attack1", "attack2", "attack3"];
+
     // Class Methods:
     constructor(player) {
         super(player, Samurai.imgSrc, Samurai.frameWidth, Samurai.frameHeight);
@@ -68,7 +70,11 @@ export class Samurai extends SpriteSheet {
     }
 
     currentAction(name){
-        this.animate(name);
+        if (singleActions.includes(name)) {
+            this.animate(name, true);
+        } else {
+            this.animate(name);
+        }
     }
 
     stopAction(name){
@@ -78,22 +84,28 @@ export class Samurai extends SpriteSheet {
         this.player.currentAction = "idle";
     }
 
-    animate(name) {
+    animate(name, playOnce = false) {
         // increment frame number
-        Samurai.animationFrameInfo[name].framenum -=
+        Samurai.animationFrameInfo[name].framenum +=
             Samurai.animationFrameInfo[name].frameSpeed *
             Samurai.frameSpeed;
-        Samurai.animationFrameInfo[name].framenum =
-            (Samurai.animationFrameInfo[name].framenum +
-                Samurai.animationFrameInfo[name].numFrames) %
-            Samurai.animationFrameInfo[name].numFrames;
 
-        // define local vars
-        let fnum = Math.floor(Samurai.animationFrameInfo[name].framenum);
-        let originY = Samurai.animationFrameInfo[name].originY;
+        if (playOnce && Samurai.animationFrameInfo[name].framenum >
+                Samurai.animationFrameInfo[name].numFrames){
+            this.stopAction(name);
+        } else {
+            Samurai.animationFrameInfo[name].framenum =
+                (Samurai.animationFrameInfo[name].framenum +
+                    Samurai.animationFrameInfo[name].numFrames) %
+                Samurai.animationFrameInfo[name].numFrames;
 
-        // update frame
-        this.framePosX = fnum*this.frameWidth;
-        this.framePosY = originY*this.frameHeight
+            // define local vars
+            let fnum = Math.floor(Samurai.animationFrameInfo[name].framenum);
+            let originY = Samurai.animationFrameInfo[name].originY;
+
+            // update frame
+            this.framePosX = fnum*this.frameWidth;
+            this.framePosY = originY*this.frameHeight;
+        }
     }
 }
