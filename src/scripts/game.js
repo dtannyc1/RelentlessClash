@@ -10,7 +10,10 @@ export class Game {
         this.player1 = new Player([450,500], "player1");
         this.controller1 = new Controller(this.player1, 1);
 
-        this.objects = [this.player1];
+        this.player2 = new Player([450,500], "player2");
+        this.controller2 = new Controller(this.player2, 2);
+
+        this.objects = [this.player1, this.player2];
         this.runGame();
     }
 

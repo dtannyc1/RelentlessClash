@@ -14,7 +14,7 @@ export class Player extends Moveable{
         this.moveSpeed = 10;
         this.scale = 3.5;
 
-        this.character = new Samurai(this);
+        this.character = new Samurai(this); // change later when introduce other sprites?
         this.currentAction = "idle";
 
         console.log(`${name} created successfully`)
@@ -27,8 +27,4 @@ export class Player extends Moveable{
         this.character.draw(ctx, this.pos, this.scale);
     }
 
-    // idleAnimation() {
-    //     let spriteSheet = document.getElementById("player1-sprite");
-    //     this.framePosX = (this.framePosX + this.frameWidth) % (spriteSheet.width);
-    // }
 }

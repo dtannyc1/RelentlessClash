@@ -43,12 +43,16 @@ export class Controller {
             if (buttonMapping[event.key]) {
                 switch (buttonMapping[event.key]) {
                     case 'LEFT':
-                        player.vel[0] = 0;
-                        player.character.stopAction("run");
+                        if (player.vel[0] < 0) {
+                            player.vel[0] = 0;
+                            player.character.stopAction("run");
+                        }
                         break;
                     case 'RIGHT':
-                        player.vel[0] = 0;
-                        player.character.stopAction("run");
+                        if (player.vel[0] > 0) {
+                            player.vel[0] = 0;
+                            player.character.stopAction("run");
+                        }
                         break;
                 }
             }

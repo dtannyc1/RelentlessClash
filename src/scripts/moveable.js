@@ -15,6 +15,10 @@ export class Moveable {
 
         this.checkFloor();
         this.checkFacing();
+
+        if (this.name === "player2") {
+            console.log(this.pos);
+        }
     }
 
     checkFloor() {
