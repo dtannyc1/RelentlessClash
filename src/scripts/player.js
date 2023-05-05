@@ -10,12 +10,14 @@ export class Player extends Moveable{
         this.scale = 3.5;
 
         this.character = new Samurai(this);
+        this.currentAction = "idle";
 
         console.log(`${name} created successfully`)
     }
 
     draw(ctx){
-        this.character.run();
+        // this.character.idle();
+        this.character.currentAction(this.currentAction);
         this.character.draw(ctx, this.pos, this.scale);
     }
 

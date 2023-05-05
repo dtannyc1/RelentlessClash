@@ -6,6 +6,7 @@ export class Samurai extends SpriteSheet {
     static imgSrc = "assets/images/Sprite Sheets/Samurai/SpriteSheet.png"; // needs changing
     static frameWidth = 128;
     static frameHeight = 128;
+    static frameSpeed = 0.25;
 
     static animationFrameInfo = {
         idle: {
@@ -18,7 +19,7 @@ export class Samurai extends SpriteSheet {
             framenum: 0,
             originY: 1,
             numFrames: 8,
-            frameSpeed: 0.25
+            frameSpeed: 1
         },
         walk: {
             framenum: 0,
@@ -64,21 +65,23 @@ export class Samurai extends SpriteSheet {
             this.frameWidth, this.frameHeight,
             pos[0], pos[1],
             this.frameWidth*scale, this.frameHeight*scale)
-
-        // requestAnimationFrame(this.idle.bind(this))
     }
 
-    idle() {
+    currentAction(name){
+        this.animate(name);
+    }
+
+    stopAction(name){
+        // reset animation
+        Samurai.animationFrameInfo[name].framenum = 0;
         this.animate("idle");
-    }
-
-    run() {
-        this.animate("run");
     }
 
     animate(name) {
         // increment frame number
-        Samurai.animationFrameInfo[name].framenum += Samurai.animationFrameInfo[name].frameSpeed;
+        Samurai.animationFrameInfo[name].framenum +=
+            Samurai.animationFrameInfo[name].frameSpeed *
+            Samurai.frameSpeed;
         Samurai.animationFrameInfo[name].framenum =
             Samurai.animationFrameInfo[name].framenum %
             Samurai.animationFrameInfo[name].numFrames;
