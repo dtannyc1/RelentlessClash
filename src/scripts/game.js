@@ -4,13 +4,14 @@ import { Player } from "./player.js";
 
 export class Game {
     static FLOOR = 250;
-    static PLAYER1_STARTX = 150;
-    static PLAYER2_STARTX = 450;
+    static PLAYER1_STARTX = -240;
+    static PLAYER2_STARTX = 240;
 
     constructor(ctx) {
-        console.log("Game Made")
-        this.ctx = ctx;
-        this.gameView = new GameView(this.ctx);
+        // this.ctx = ctx;
+
+        this.gameView = new GameView(ctx);
+
         this.player1 = new Player([Game.PLAYER1_STARTX, Game.FLOOR], "player1");
         this.controller1 = new Controller(this.player1, 1);
 

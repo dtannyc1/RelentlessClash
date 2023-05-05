@@ -62,7 +62,7 @@ export class Samurai extends SpriteSheet {
     }
 
     draw(ctx, pos, scale) {
-        ctx.translate(pos[0]+this.frameWidth*scale/2, pos[1])
+        ctx.translate(pos[0], pos[1])
         if (this.player.xFacing === -1) {
             ctx.scale(-1,1);
         }
@@ -71,7 +71,6 @@ export class Samurai extends SpriteSheet {
             this.frameWidth, this.frameHeight,
             -this.frameWidth*scale/2, 0,
             this.frameWidth*scale, this.frameHeight*scale)
-        // ctx.resetTransform();
     }
 
     currentAction(name){
