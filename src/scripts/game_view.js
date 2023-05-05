@@ -4,9 +4,8 @@ export class GameView {
     static HEIGHT = 720;
 
     constructor(ctx) {
-        console.log("Game View Made")
-
         this.ctx = ctx;
+        console.log("Game View Made")
     }
 
     draw(objects) {
@@ -22,5 +21,7 @@ export class GameView {
         objects.forEach((obj) => {
             obj.draw(ctx);
         })
+
+        requestAnimationFrame(this.draw.bind(this, objects))
     }
 }

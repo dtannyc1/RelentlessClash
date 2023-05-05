@@ -1,8 +1,6 @@
 
 export class Moveable {
     constructor(options) {
-        console.log("Moveable Made")
-
         this.pos = options["startpos"];
         this.vel = [0, 0];
     }

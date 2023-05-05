@@ -3,8 +3,6 @@ import { Moveable } from "./moveable.js";
 
 export class Player extends Moveable{
     constructor(startpos, name) {
-        console.log("Player Made")
-
         let options = {startpos: startpos};
         super(options);
         this.name = name;
@@ -12,9 +10,12 @@ export class Player extends Moveable{
         this.scale = 3.5;
 
         this.character = new Samurai(this);
+
+        console.log(`${name} created successfully`)
     }
 
     draw(ctx){
+        this.character.run();
         this.character.draw(ctx, this.pos, this.scale);
     }
 

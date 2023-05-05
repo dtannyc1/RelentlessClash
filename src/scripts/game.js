@@ -13,6 +13,6 @@ export class Game {
 
         let objects = [this.player1]
         this.gameView.draw(objects);
-        setInterval(() => this.gameView.draw([this.player1]), 50);
+        // setInterval(() => this.gameView.draw(objects), 50);
     }
 }
