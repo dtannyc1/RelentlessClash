@@ -1,21 +1,46 @@
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap);
+/*!*****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss (1) ***!
+  \*****************************************************************************************************************************************/
 * {
-  background-color: black;
+  background-color: transparent;
+  margin: 0px;
+  padding: 0px;
 }
 
 h1 {
-  color: white;
+  color: black;
   margin: auto;
   padding: 20px;
+  background-color: transparent;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  font-family: "Press Start 2P", cursive;
+  font-size: 36px;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+  background-image: url("../../assets/images/ArcadeMachine1080p.png");
+  background-position-x: center;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  display: grid;
+  grid-template-rows: 12% 9.6% 57.5% 2% 12% auto;
+  background-color: black;
 }
 
 #main-canvas {
   margin: auto;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  height: 100%;
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -o-crisp-edges;
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor;
 }
