@@ -24,6 +24,7 @@ body {
     background-position-x: center;
     background-size: cover;
     background-repeat: no-repeat;
+    // backdrop-filter: blur(1px);
 }
 
 #arcade-machine {
@@ -45,4 +46,8 @@ body {
     grid-row-start: 3;
     grid-row-end: 4;
     height: 100%;
+    border: 3px solid;
+    border-radius: 3px;
+    border-image-source: linear-gradient(black, rgb(97, 97, 97));
+    border-image-slice: 1;
 }
