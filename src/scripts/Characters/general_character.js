@@ -55,20 +55,28 @@ export class GeneralCharacter {
 
     animate(name, playOnce = false) {
         // increment frame number
-        this.animationFrameInfo[name].framenum +=
-            this.animationFrameInfo[name].frameSpeed;
+        this.animationFrameInfo[name].framenum += 1;
 
-        if (playOnce && this.animationFrameInfo[name].framenum >=
-                this.animationFrameInfo[name].numFrames){
+        let frameNum = this.animationFrameInfo[name].framenum;
+        let totalFrames = this.animationFrameInfo[name].frames.reduce((a,b) => a + b, 0);
+        if (playOnce && frameNum >= totalFrames){
             this.stopAction(name);
         } else {
-            this.animationFrameInfo[name].framenum =
-                (this.animationFrameInfo[name].framenum +
-                    this.animationFrameInfo[name].numFrames) %
-                this.animationFrameInfo[name].numFrames;
+            frameNum = (frameNum + totalFrames) % totalFrames;
 
             // define local vars
-            let fnum = Math.floor(this.animationFrameInfo[name].framenum);
+            let sum = 0;
+            let fnum;
+
+            for (let i = 0; i < this.animationFrameInfo[name].frames.length; i++) {
+                let dur = this.animationFrameInfo[name].frames[i];
+                sum += dur;
+                if (sum > frameNum) {
+                    fnum = i;
+                    break;
+                }
+            }
+
             let originY = this.animationFrameInfo[name].originY;
 
             // update frame

@@ -26,13 +26,13 @@ export class Controller {
                             player.currentAction = "jump";
                         }
                         break;
-                    case 'A':
+                    case 'B':
                         player.currentAction = "attack1";
                         break;
-                    case 'B':
+                    case 'Y':
                         player.currentAction = "attack2";
                         break;
-                    case 'Y':
+                    case 'X':
                         player.currentAction = "attack3";
                         break;
                 }
@@ -61,9 +61,9 @@ export class Controller {
 
     static CONTROLLER_ONE = {
         f: 'B',
-        g: 'A',
-        h: 'Y',
-        t: 'X',
+        g: 'Y',
+        h: 'X',
+        t: 'A',
         r: 'LB',
         y: 'RB',
         // 6: 'LT',

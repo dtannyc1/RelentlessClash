@@ -12,44 +12,37 @@ export class Samurai extends GeneralCharacter {
         idle: {
             framenum: 0,
             originY: 0,
-            numFrames: 6,
-            frameSpeed: 1
+            frames: [4, 4, 4, 4, 4, 4]
         },
         run: {
             framenum: 0,
             originY: 1,
-            numFrames: 8,
-            frameSpeed: 1
+            frames: [4, 4, 4, 4, 4, 4, 4, 4]
         },
         walk: {
             framenum: 0,
             originY: 2,
-            numFrames: 9,
-            frameSpeed: 1
+            frames: [4, 4, 4, 4, 4, 4, 4, 4, 4]
         },
         jump: {
             framenum: 0,
             originY: 3,
-            numFrames: 9,
-            frameSpeed: 1
+            frames: [4, 4, 4, 4, 4, 4, 4, 4, 4]
         },
         attack1: {
             framenum: 0,
             originY: 4,
-            numFrames: 4,
-            frameSpeed: 1
+            frames: [2, 2, 3, 3] //10
         },
         attack2: {
             framenum: 0,
-            originY: 5,
-            numFrames: 5,
-            frameSpeed: 2
+            originY: 6,
+            frames: [6, 7, 4, 3] // 20
         },
         attack3: {
             framenum: 0,
-            originY: 6,
-            numFrames: 4,
-            frameSpeed: 1
+            originY: 5,
+            frames: [3, 6, 8, 4, 4] // 24
         }
     };
 
