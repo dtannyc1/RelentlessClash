@@ -24,5 +24,7 @@ export class Game {
 
     runGame() {
         this.gameView.draw(this.objects);
+
+        requestAnimationFrame(this.runGame.bind(this))
     }
 }

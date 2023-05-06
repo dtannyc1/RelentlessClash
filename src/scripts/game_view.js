@@ -43,7 +43,5 @@ export class GameView {
             ctx.translate(-avgX, 0);
             obj.draw(ctx);
         })
-
-        requestAnimationFrame(this.draw.bind(this, objects))
     }
 }
