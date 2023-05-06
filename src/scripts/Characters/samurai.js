@@ -3,38 +3,38 @@ import { GeneralCharacter } from "./general_character";
 export class Samurai extends GeneralCharacter {
 
     // Specific constants for Samurai Sprite Sheet
-    static imgSrc = "assets/images/Sprite Sheets/Samurai/SpriteSheet.png"; // needs changing
+    static imgSrc = "assets/images/Sprite Sheets/Samurai/SpriteSheet.png";
     static frameWidth = 128;
     static frameHeight = 128;
-    static frameSpeed = 0.25;
-    static idleHurtBox = [[54, 57, 18, 14],
-                          [51, 71, 27, 40],
-                          [52, 109, 26, 17]];
-    static runHurtBox1 = [[79, 60, 15, 15],
-                        [58, 69, 30, 42],
-                        [57, 104, 23, 22]];
-    static runHurtBox2 = [[79, 60, 15, 15],
-                        [58, 69, 30, 42],
-                        [55, 104, 32, 22]];
-    static runHurtBox3 = [[79, 60, 15, 15],
-                        [58, 69, 30, 42],
-                        [53, 104, 37, 22]];
 
     static animationFrameInfo = {
         idle: {
             framenum: 0,
             originY: 0,
             frames: [4, 4, 4, 4, 4, 4],
-            hurtboxes: Array(6).fill(Samurai.idleHurtBox)
+            hurtboxes: [
+                [[54, 57, 18, 14], [51, 71, 27, 40], [52, 109, 26, 17]],
+                [[54, 57, 18, 14], [51, 71, 27, 40], [52, 109, 26, 17]],
+                [[54, 57, 18, 14], [51, 71, 27, 40], [52, 109, 26, 17]],
+                [[54, 57, 18, 14], [51, 71, 27, 40], [52, 109, 26, 17]],
+                [[54, 57, 18, 14], [51, 71, 27, 40], [52, 109, 26, 17]],
+                [[54, 57, 18, 14], [51, 71, 27, 40], [52, 109, 26, 17]]
+            ]
         },
         run: {
             framenum: 0,
             originY: 1,
             frames: [4, 4, 4, 4, 4, 4, 4, 4],
-            hurtboxes: [Samurai.runHurtBox1,Samurai.runHurtBox1,
-                        Samurai.runHurtBox2, Samurai.runHurtBox3,
-                        Samurai.runHurtBox1,Samurai.runHurtBox1,
-                        Samurai.runHurtBox2,Samurai.runHurtBox3]
+            hurtboxes: [
+                [[79, 60, 15, 15], [58, 69, 30, 42], [57, 104, 23, 22]],
+                [[79, 60, 15, 15], [58, 69, 30, 42], [57, 104, 23, 22]],
+                [[79, 60, 15, 15], [58, 69, 30, 42], [55, 104, 32, 22]],
+                [[79, 60, 15, 15], [58, 69, 30, 42], [53, 104, 37, 22]],
+                [[79, 60, 15, 15], [58, 69, 30, 42], [57, 104, 23, 22]],
+                [[79, 60, 15, 15], [58, 69, 30, 42], [57, 104, 23, 22]],
+                [[79, 60, 15, 15], [58, 69, 30, 42], [55, 104, 32, 22]],
+                [[79, 60, 15, 15], [58, 69, 30, 42], [53, 104, 37, 22]]
+            ]
         },
         walk: {
             framenum: 0,
