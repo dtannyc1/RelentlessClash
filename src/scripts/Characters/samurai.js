@@ -144,29 +144,4 @@ export class Samurai extends GeneralCharacter {
             Samurai.SINGLE_ACTIONS);
     }
 
-    draw(ctx, pos, scale) {
-        ctx.translate(pos[0], pos[1])
-        if (this.player.xFacing === -1) {
-            ctx.scale(-1,1);
-        }
-
-        ctx.drawImage(this.img,
-            this.framePosX,this.framePosY,
-            this.frameWidth, this.frameHeight,
-            -this.frameWidth*scale/2, 0,
-            this.frameWidth*scale, this.frameHeight*scale)
-
-        ctx.scale(scale, scale)
-        ctx.translate(-128/2,0);
-
-        // render hurtboxes
-        ctx.fillStyle = "#00ff0025";
-        ctx.fillRect(...this.headHurtBox)
-        ctx.fillRect(...this.bodyHurtBox)
-        ctx.fillRect(...this.legsHurtBox)
-
-        // render hitbox
-        ctx.fillStyle = "#ff000025";
-        ctx.fillRect(...this.hitBox)
-    }
 }
