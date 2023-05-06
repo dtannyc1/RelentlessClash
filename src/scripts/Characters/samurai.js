@@ -140,12 +140,12 @@ export class Samurai extends GeneralCharacter {
         attack1: ["idle", "hurt", "dead"],
         attack2: ["idle", "hurt", "dead"],
         attack3: ["idle", "hurt", "dead"],
-        hurt:   ["idle", "run", "walk", "jump", "attack1", "attack2", "attack3", "hurt", "dead", "guard"],
+        hurt:   ["idle", "hurt", "dead"],
         dead:   [],
         guard:  ["idle", "run", "walk", "jump", "attack1", "attack2", "attack3", "hurt", "dead", "guard"],
     };
 
-    static SINGLE_ACTIONS = ["attack1", "attack2", "attack3", "jump"];
+    static SINGLE_ACTIONS = ["attack1", "attack2", "attack3", "jump", "hurt"];
 
     // Class Methods:
     constructor(player) {
@@ -155,6 +155,7 @@ export class Samurai extends GeneralCharacter {
             Samurai.frameHeight,
             Samurai.animationFrameInfo,
             Samurai.SINGLE_ACTIONS);
+        this.possibleMoves = Samurai.POSSIBLE_MOVES;
     }
 
 }

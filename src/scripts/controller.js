@@ -11,29 +11,43 @@ export class Controller {
 
         window.addEventListener("keydown", event => {
             if (buttonMapping[event.key]) {
+                let moves = player.character.possibleMoves[player.currentAction];
                 switch (buttonMapping[event.key]) {
                     case 'LEFT':
-                        player.vel[0] = -1*player.moveSpeed;
-                        player.currentAction = "run";
+                        if (moves.includes("run")) {
+                            player.vel[0] = -1*player.moveSpeed;
+                            player.currentAction = "run";
+                        }
                         break;
                     case 'RIGHT':
-                        player.vel[0] = 1*player.moveSpeed;
-                        player.currentAction = "run";
+                        if (moves.includes("run")) {
+                            player.vel[0] = 1*player.moveSpeed;
+                            player.currentAction = "run";
+                        }
                         break;
                     case 'UP':
-                        if (player.pos[1] === Game.FLOOR) {
+                        if (player.pos[1] === Game.FLOOR && moves.includes("jump")) {
                             player.vel[1] = -1.5*player.moveSpeed;
                             player.currentAction = "jump";
                         }
                         break;
                     case 'B':
-                        player.currentAction = "attack1";
+                        if (moves.includes("attack1")) {
+                            player.vel[0] = 0;
+                            player.currentAction = "attack1";
+                        }
                         break;
                     case 'Y':
-                        player.currentAction = "attack2";
+                        if (moves.includes("attack2")) {
+                            player.vel[0] = 0;
+                            player.currentAction = "attack2";
+                        }
                         break;
                     case 'X':
-                        player.currentAction = "attack3";
+                        if (moves.includes("attack3")) {
+                            player.vel[0] = 0;
+                            player.currentAction = "attack3";
+                        }
                         break;
                 }
             }
@@ -43,13 +57,13 @@ export class Controller {
             if (buttonMapping[event.key]) {
                 switch (buttonMapping[event.key]) {
                     case 'LEFT':
-                        if (player.vel[0] < 0) {
+                        if (player.vel[0] < 0 && player.currentAction === "run") {
                             player.vel[0] = 0;
                             player.character.stopAction("run");
                         }
                         break;
                     case 'RIGHT':
-                        if (player.vel[0] > 0) {
+                        if (player.vel[0] > 0 && player.currentAction === "run") {
                             player.vel[0] = 0;
                             player.character.stopAction("run");
                         }
