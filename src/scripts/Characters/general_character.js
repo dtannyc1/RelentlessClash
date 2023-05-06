@@ -23,6 +23,9 @@ export class GeneralCharacter {
         this.currentAction = this.currentAction.bind(this);
         this.stopAction = this.stopAction.bind(this);
         this.animate = this.animate.bind(this);
+
+        this.resetHurtBoxes();
+        this.resetHitBox();
     }
 
     draw(ctx, pos, scale) {
@@ -82,6 +85,39 @@ export class GeneralCharacter {
             // update frame
             this.framePosX = fnum*this.frameWidth;
             this.framePosY = originY*this.frameHeight;
+
+            // update hurtboxes
+            if (this.animationFrameInfo[name].hurtboxes) {
+                this.updateHurtboxes(this.animationFrameInfo[name].hurtboxes[fnum])
+            } else {
+                this.resetHurtBoxes();
+            }
+
+            // update hitbox
+            if (this.animationFrameInfo[name].hitboxes) {
+                this.updateHitBox(this.animationFrameInfo[name].hitboxes[fnum])
+            } else {
+                this.resetHitBox();
+            }
         }
+    }
+
+    resetHurtBoxes() {
+        this.headHurtBox = [0,0,0,0];
+        this.bodyHurtBox = [0,0,0,0];
+        this.legsHurtBox = [0,0,0,0];
+    }
+    updateHurtboxes(hurtboxes) {
+        this.headHurtBox = hurtboxes[0];
+        this.bodyHurtBox = hurtboxes[1];
+        this.legsHurtBox = hurtboxes[2];
+    }
+
+    resetHitBox() {
+        this.hitBox = [0,0,0,0];
+    }
+
+    updateHitBox(hitbox) {
+        this.hitBox = hitbox
     }
 }
