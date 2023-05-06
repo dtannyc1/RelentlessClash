@@ -1,6 +1,6 @@
-import { SpriteSheet } from "./sprite_sheet";
+import { GeneralCharacter } from "./general_character";
 
-export class Samurai extends SpriteSheet {
+export class Samurai extends GeneralCharacter {
 
     // Specific constants for Samurai Sprite Sheet
     static imgSrc = "assets/images/Sprite Sheets/Samurai/SpriteSheet.png"; // needs changing
@@ -57,60 +57,12 @@ export class Samurai extends SpriteSheet {
 
     // Class Methods:
     constructor(player) {
-        super(player, Samurai.imgSrc, Samurai.frameWidth, Samurai.frameHeight);
-        this.draw = this.draw.bind(this);
-    }
+        super(player,
+            Samurai.imgSrc,
+            Samurai.frameWidth,
+            Samurai.frameHeight,
+            Samurai.animationFrameInfo,
+            Samurai.SINGLE_ACTIONS);
 
-    draw(ctx, pos, scale) {
-        ctx.translate(pos[0], pos[1])
-        if (this.player.xFacing === -1) {
-            ctx.scale(-1,1);
-        }
-        ctx.drawImage(this.img,
-            this.framePosX,this.framePosY,
-            this.frameWidth, this.frameHeight,
-            -this.frameWidth*scale/2, 0,
-            this.frameWidth*scale, this.frameHeight*scale)
-    }
-
-    currentAction(name){
-        // console.log(this.prototype)
-        if (Samurai.SINGLE_ACTIONS.includes(name)) {
-            this.animate(name, true);
-        } else {
-            this.animate(name);
-        }
-    }
-
-    stopAction(name){
-        // reset animation
-        Samurai.animationFrameInfo[name].framenum = 0;
-        // this.animate("idle");
-        this.player.currentAction = "idle";
-    }
-
-    animate(name, playOnce = false) {
-        // increment frame number
-        Samurai.animationFrameInfo[name].framenum +=
-            Samurai.animationFrameInfo[name].frameSpeed *
-            Samurai.frameSpeed;
-
-        if (playOnce && Samurai.animationFrameInfo[name].framenum >=
-                Samurai.animationFrameInfo[name].numFrames){
-            this.stopAction(name);
-        } else {
-            Samurai.animationFrameInfo[name].framenum =
-                (Samurai.animationFrameInfo[name].framenum +
-                    Samurai.animationFrameInfo[name].numFrames) %
-                Samurai.animationFrameInfo[name].numFrames;
-
-            // define local vars
-            let fnum = Math.floor(Samurai.animationFrameInfo[name].framenum);
-            let originY = Samurai.animationFrameInfo[name].originY;
-
-            // update frame
-            this.framePosX = fnum*this.frameWidth;
-            this.framePosY = originY*this.frameHeight;
-        }
     }
 }
