@@ -109,6 +109,26 @@ export class Samurai extends GeneralCharacter {
                 [87,28,11,37],
                 [87,75,39,35]
             ]
+        },
+        hurt: {
+            framenum: 0,
+            originY: 7,
+            frames: [4,4,4],
+            hurtboxes: [
+                [[46,58,13,14], [46,71,24,37], [43,107,28,19]],
+                [[45,57,13,15], [45,71,23,36], [43,103,29,23]],
+                [[44,58,13,14], [44,70,24,37], [42,104,31,22]]
+            ]
+        },
+        dead: {
+            framenum: 0,
+            originY: 8,
+            frames: [10,10,10,10,10,10]
+        },
+        guard: {
+            framenum: 0,
+            originY: 9,
+            frames: [2,2]
         }
     };
 
