@@ -14,12 +14,12 @@
 h1 {
   color: black;
   margin: auto;
-  padding: 20px;
   background-color: transparent;
   grid-row-start: 1;
   grid-row-end: 2;
   font-family: "Press Start 2P", cursive;
   font-size: min(5vh, 8vw);
+  text-align: center;
 }
 
 body {
