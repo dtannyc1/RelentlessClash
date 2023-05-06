@@ -132,6 +132,19 @@ export class Samurai extends GeneralCharacter {
         }
     };
 
+    static POSSIBLE_MOVES = {
+        idle:   ["idle", "run", "walk", "jump", "attack1", "attack2", "attack3", "hurt", "dead", "guard"],
+        run:    ["idle", "run", "walk", "jump", "attack1", "attack2", "attack3", "hurt", "dead", "guard"],
+        walk:   ["idle", "run", "walk", "jump", "attack1", "attack2", "attack3", "hurt", "dead", "guard"],
+        jump:   ["idle", "attack1", "attack2", "attack3", "hurt", "dead", "guard"],
+        attack1: ["idle", "hurt", "dead"],
+        attack2: ["idle", "hurt", "dead"],
+        attack3: ["idle", "hurt", "dead"],
+        hurt:   ["idle", "run", "walk", "jump", "attack1", "attack2", "attack3", "hurt", "dead", "guard"],
+        dead:   [],
+        guard:  ["idle", "run", "walk", "jump", "attack1", "attack2", "attack3", "hurt", "dead", "guard"],
+    };
+
     static SINGLE_ACTIONS = ["attack1", "attack2", "attack3", "jump"];
 
     // Class Methods:
