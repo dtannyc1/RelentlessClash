@@ -13,4 +13,4 @@ canvas.style.backgroundColor = "gray";
 
 // window.controller = controller;
 
-let game = new Game(ctx);
+window.game = new Game(ctx);
