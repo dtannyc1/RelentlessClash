@@ -8,6 +8,8 @@ export class GameView {
     static BACKGROUND_OFFSET_X = -400;
     static BACKGROUND_OFFSET_Y = -200;
     static BACKGROUND_SCALE = 0.9;
+    static MAX_LEFT = -400;
+    static MAX_RIGHT = 365;
 
     // Class methods
     constructor(ctx) {
@@ -25,7 +27,7 @@ export class GameView {
             sumX += obj.pos[0];
         })
         let avgX = sumX / objects.length;
-        // console.log(avgX)
+        console.log(avgX)
 
         // draw background image
         ctx.scale(GameView.MAIN_SCALE, GameView.MAIN_SCALE)
@@ -45,7 +47,7 @@ export class GameView {
         })
 
         // draw health bars
-        let barThickness = 20;
+        let barThickness = 18;
         let start1 = GameView.WIDTH*0.04;
         let start2 = GameView.WIDTH*0.96;
         let barSize = GameView.WIDTH*0.4;

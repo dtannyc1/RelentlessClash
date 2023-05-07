@@ -15,7 +15,7 @@ export class Player extends Moveable{
         this.moveSpeed = 10;
         this.scale = 3.15;
 
-        this.health = 50;
+        this.health = Math.random()*100;
 
         this.character = new Samurai(this); // change later when introduce other sprites?
         this.currentAction = "idle";
@@ -24,8 +24,6 @@ export class Player extends Moveable{
     }
 
     draw(ctx){
-        // this.character.idle();
-
         this.move();
         this.character.currentAction(this.currentAction);
         this.character.draw(ctx, this.pos, this.scale);
@@ -34,5 +32,4 @@ export class Player extends Moveable{
     assignController(controller) {
         this.controller = controller;
     }
-
 }
