@@ -124,11 +124,18 @@ export class GameView {
 
     enforceCameraLimits(objects){
         objects.forEach((obj) => {
-            if (obj.pos[0] - this.camera_location < -GameView.WIDTH/2/GameView.MAIN_SCALE){
-                obj.pos[0] = -GameView.WIDTH/2/GameView.MAIN_SCALE + this.camera_location;
-            } else if (obj.pos[0] - this.camera_location > GameView.WIDTH/2/GameView.MAIN_SCALE) {
-                obj.pos[0] = GameView.WIDTH/2/GameView.MAIN_SCALE + this.camera_location;
+            // use body hurtbox to calculate x-limit
+            let bodyBox = obj.getHurtBoxes(GameView.MAIN_SCALE)[1]
+            let left = bodyBox[0];
+            let right = bodyBox[0] + bodyBox[2];
+
+            if (left - this.camera_location*GameView.MAIN_SCALE < -GameView.WIDTH/2){
+                let dx = left - this.camera_location*GameView.MAIN_SCALE + GameView.WIDTH/2;
+                obj.pos[0] -= dx;
+            } else if (right - this.camera_location*GameView.MAIN_SCALE > GameView.WIDTH/2) {
+                let dx = right - this.camera_location*GameView.MAIN_SCALE - GameView.WIDTH/2;
+                obj.pos[0] -= dx;
             }
-        })
+        });
     }
 }
