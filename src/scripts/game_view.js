@@ -41,6 +41,10 @@ export class GameView {
             ctx.translate(GameView.WIDTH/2, 0);
             ctx.scale(GameView.MAIN_SCALE, GameView.MAIN_SCALE);
             ctx.translate(-avgX, 0);
+
+            ctx.fillStyle = "blue";
+            ctx.fillRect(obj.pos[0], obj.pos[1], 5,5)
+
             obj.draw(ctx);
         })
     }

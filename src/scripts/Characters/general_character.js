@@ -41,7 +41,7 @@ export class GeneralCharacter {
             this.frameWidth*scale, this.frameHeight*scale)
 
         ctx.scale(scale, scale)
-        ctx.translate(-128/2,0);
+        ctx.translate(-this.frameWidth/2,0);
 
         // render hurtboxes
         ctx.fillStyle = "#00ff0025";
@@ -52,6 +52,7 @@ export class GeneralCharacter {
         // render hitbox
         ctx.fillStyle = "#ff000025";
         ctx.fillRect(...this.hitBox)
+
     }
 
     currentAction(name){
