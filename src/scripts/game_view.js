@@ -23,19 +23,7 @@ export class GameView {
         ctx.clearRect(0,0,GameView.WIDTH, GameView.HEIGHT)
 
         // Calculate camera location
-        let sumX = 0;
-        objects.forEach((obj) => {
-            sumX += obj.pos[0];
-        })
-        let avgX = sumX / objects.length;
-        if (avgX < GameView.CAMERA_LIMIT_LEFT) {
-            this.camera_location = GameView.CAMERA_LIMIT_LEFT;
-        } else if (avgX > GameView.CAMERA_LIMIT_RIGHT) {
-            this.camera_location = GameView.CAMERA_LIMIT_RIGHT;
-        } else {
-            this.camera_location = avgX;
-        }
-        // console.log(avgX)
+        this.calculateCameraLocation(objects);
 
         // draw background image
         this.drawbackground();
@@ -49,7 +37,39 @@ export class GameView {
             obj.draw(ctx);
         })
 
+        // enforce camera limits
+        this.enforceCameraLimits(objects);
+
         // draw health bars
+        this.drawHealthBars(objects);
+    }
+
+    calculateCameraLocation(objects){
+        let sumX = 0;
+        objects.forEach((obj) => {
+            sumX += obj.pos[0];
+        })
+        let avgX = sumX / objects.length;
+        if (avgX < GameView.CAMERA_LIMIT_LEFT) {
+            this.camera_location = GameView.CAMERA_LIMIT_LEFT;
+        } else if (avgX > GameView.CAMERA_LIMIT_RIGHT) {
+            this.camera_location = GameView.CAMERA_LIMIT_RIGHT;
+        } else {
+            this.camera_location = avgX;
+        }
+    }
+
+    drawbackground() {
+        this.ctx.scale(GameView.MAIN_SCALE, GameView.MAIN_SCALE)
+        this.ctx.translate(GameView.BACKGROUND_OFFSET_X - this.camera_location,
+                      GameView.BACKGROUND_OFFSET_Y);
+        this.ctx.scale(GameView.BACKGROUND_SCALE, GameView.BACKGROUND_SCALE);
+        let backgroundImg = document.getElementById("train-background");
+        this.ctx.drawImage(backgroundImg,0,0);
+    }
+
+    drawHealthBars(objects){
+        let ctx = this.ctx;
         let barThickness = 18;
         let start1 = GameView.WIDTH*0.04;
         let start2 = GameView.WIDTH*0.96;
@@ -102,12 +122,13 @@ export class GameView {
         })
     }
 
-    drawbackground() {
-        this.ctx.scale(GameView.MAIN_SCALE, GameView.MAIN_SCALE)
-        this.ctx.translate(GameView.BACKGROUND_OFFSET_X - this.camera_location,
-                      GameView.BACKGROUND_OFFSET_Y);
-        this.ctx.scale(GameView.BACKGROUND_SCALE, GameView.BACKGROUND_SCALE);
-        let backgroundImg = document.getElementById("train-background");
-        this.ctx.drawImage(backgroundImg,0,0);
+    enforceCameraLimits(objects){
+        objects.forEach((obj) => {
+            if (obj.pos[0] - this.camera_location < -GameView.WIDTH/2/GameView.MAIN_SCALE){
+                obj.pos[0] = -GameView.WIDTH/2/GameView.MAIN_SCALE + this.camera_location;
+            } else if (obj.pos[0] - this.camera_location > GameView.WIDTH/2/GameView.MAIN_SCALE) {
+                obj.pos[0] = GameView.WIDTH/2/GameView.MAIN_SCALE + this.camera_location;
+            }
+        })
     }
 }

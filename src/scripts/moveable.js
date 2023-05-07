@@ -1,4 +1,5 @@
 import { Game } from "./game";
+import { GameView } from "./game_view";
 
 export class Moveable {
     static GRAVITY = [0.5, 0.75];
@@ -24,7 +25,6 @@ export class Moveable {
 
         this.checkFloor();
         this.checkFacing();
-
     }
 
     checkFloor() {
