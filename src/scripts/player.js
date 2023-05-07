@@ -37,6 +37,10 @@ export class Player extends Moveable{
         return this.calculateBoxes(main_scale, this.character.hurtboxes)
     }
 
+    getHitBoxes(main_scale) {
+        return this.calculateBoxes(main_scale, this.character.hitboxes)
+    }
+
     calculateBoxes(main_scale, boxes){
         let objBoxes = boxes;
         let pos = this.pos;
