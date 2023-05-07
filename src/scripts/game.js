@@ -86,13 +86,13 @@ export class Game {
                         box2[2] *= GameView.MAIN_SCALE;
                         box2[3] *= GameView.MAIN_SCALE;
 
-                        let ctx = this.gameView.ctx;
-                        ctx.resetTransform();
-                        ctx.fillStyle = "red";
-                        let avgX = (pos1[0]+pos2[0])/2
-                        ctx.translate(GameView.WIDTH/2 - avgX*GameView.MAIN_SCALE, 0);
-                        ctx.fillRect(...box1);
-                        ctx.fillRect(...box2);
+                        // let ctx = this.gameView.ctx;
+                        // ctx.resetTransform();
+                        // ctx.fillStyle = "red";
+                        // let avgX = (pos1[0]+pos2[0])/2
+                        // ctx.translate(GameView.WIDTH/2 - avgX*GameView.MAIN_SCALE, 0);
+                        // ctx.fillRect(...box1);
+                        // ctx.fillRect(...box2);
 
                         collide = this.overlappingBoxes(box1, box2);
                         if (collide) { break; }
