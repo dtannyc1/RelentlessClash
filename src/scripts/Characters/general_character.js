@@ -51,7 +51,9 @@ export class GeneralCharacter {
 
         // render hitbox
         ctx.fillStyle = "#ff000025";
-        ctx.fillRect(...this.hitBox)
+        this.hitBox.forEach((box) => {
+            ctx.fillRect(...box)
+        })
 
     }
 
@@ -144,10 +146,10 @@ export class GeneralCharacter {
     }
 
     resetHitBox() {
-        this.hitBox = [0,0,0,0];
+        this.hitBox = [[0,0,0,0]];
     }
 
     updateHitBox(hitbox) {
-        this.hitBox = hitbox
+        this.hitBox = [hitbox]
     }
 }
