@@ -45,9 +45,9 @@ export class GeneralCharacter {
 
         // render hurtboxes
         ctx.fillStyle = "#00ff0025";
-        ctx.fillRect(...this.headHurtBox)
-        ctx.fillRect(...this.bodyHurtBox)
-        ctx.fillRect(...this.legsHurtBox)
+        this.hurtboxes.forEach((box) => {
+            ctx.fillRect(...box)
+        })
 
         // render hitbox
         ctx.fillStyle = "#ff000025";
@@ -136,14 +136,10 @@ export class GeneralCharacter {
     }
 
     resetHurtBoxes() {
-        this.headHurtBox = [0,0,0,0];
-        this.bodyHurtBox = [0,0,0,0];
-        this.legsHurtBox = [0,0,0,0];
+        this.hurtboxes = [[0,0,0,0],[0,0,0,0],[0,0,0,0]]
     }
     updateHurtboxes(hurtboxes) {
-        this.headHurtBox = hurtboxes[0];
-        this.bodyHurtBox = hurtboxes[1];
-        this.legsHurtBox = hurtboxes[2];
+        this.hurtboxes = hurtboxes;
     }
 
     resetHitBox() {

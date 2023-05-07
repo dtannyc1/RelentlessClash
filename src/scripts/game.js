@@ -26,7 +26,24 @@ export class Game {
 
     runGame() {
         this.gameView.draw(this.objects);
-
+        this.handleCollisions();
         requestAnimationFrame(this.runGame.bind(this))
+    }
+
+    handleCollisions() {
+        this.handleHit();
+        this.handlePush();
+    }
+
+    handlePush(){
+        for (let i = 0; i < this.objects.length; i++) {
+            for (let j = i+1; j < this.objects.length; j++) {
+                let obj1Boxes = this.objects[i].character.hurtboxes;
+            }
+        }
+    }
+
+    handleHit(){
+
     }
 }
