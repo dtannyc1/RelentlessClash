@@ -35,13 +35,12 @@ export class Game {
 
     handlePush(){
         for (let i = 0; i < this.objects.length; i++) {
-            let hurtboxes1 = this.calculateBoxes(this.objects[i],
-                                    this.objects[i].character.hurtboxes);
-            for (let j = i+1; j < this.objects.length; j++) {
-                let collide = false;
-                let hurtboxes2 = this.calculateBoxes(this.objects[j],
-                                    this.objects[j].character.hurtboxes);
+            let hurtboxes1 = this.objects[i].getHurtBoxes(GameView.MAIN_SCALE);
 
+            for (let j = i+1; j < this.objects.length; j++) {
+                let hurtboxes2 = this.objects[j].getHurtBoxes(GameView.MAIN_SCALE);
+
+                let collide = false;
                 let collisionData = [];
                 for (let k = 0; k < hurtboxes1.length; k++){
                     for (let m = 0; m < hurtboxes2.length; m++) {
@@ -95,35 +94,5 @@ export class Game {
         } else {
             return true;
         }
-    }
-
-    calculateBoxes(player, inputBoxes) {
-        let objBoxes = inputBoxes;
-        let pos = player.pos;
-        let xFacing = player.xFacing;
-        let scale = player.scale;
-        let frameWidth = player.character.frameWidth;
-
-        let outputBoxes = [];
-        for (let k = 0; k < objBoxes.length; k++){
-            let box = objBoxes[k].slice();
-
-            if (xFacing === 1) {
-                box[0] = pos[0] - frameWidth*scale/2 + box[0]*scale;
-            } else {
-                box[0] = pos[0] + frameWidth*scale/2 - box[0]*scale - box[2]*scale;
-            }
-            box[1] = pos[1] + box[1]*scale;
-            box[2] *= scale;
-            box[3] *= scale;
-
-            box[0] *= GameView.MAIN_SCALE;
-            box[1] *= GameView.MAIN_SCALE;
-            box[2] *= GameView.MAIN_SCALE;
-            box[3] *= GameView.MAIN_SCALE;
-
-            outputBoxes.push(box);
-        }
-        return outputBoxes;
     }
 }

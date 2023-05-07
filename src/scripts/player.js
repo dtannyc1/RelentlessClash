@@ -32,4 +32,34 @@ export class Player extends Moveable{
     assignController(controller) {
         this.controller = controller;
     }
+
+    getHurtBoxes(main_scale) {
+        let objBoxes = this.character.hurtboxes;
+        let pos = this.pos;
+        let xFacing = this.xFacing;
+        let scale = this.scale;
+        let frameWidth = this.character.frameWidth;
+
+        let outputBoxes = [];
+        for (let k = 0; k < objBoxes.length; k++){
+            let box = objBoxes[k].slice();
+
+            if (xFacing === 1) {
+                box[0] = pos[0] - frameWidth*scale/2 + box[0]*scale;
+            } else {
+                box[0] = pos[0] + frameWidth*scale/2 - box[0]*scale - box[2]*scale;
+            }
+            box[1] = pos[1] + box[1]*scale;
+            box[2] *= scale;
+            box[3] *= scale;
+
+            box[0] *= main_scale;
+            box[1] *= main_scale;
+            box[2] *= main_scale;
+            box[3] *= main_scale;
+
+            outputBoxes.push(box);
+        }
+        return outputBoxes;
+    }
 }
