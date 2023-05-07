@@ -11,7 +11,7 @@ export class Samurai extends GeneralCharacter {
         idle: {
             framenum: 0,
             originY: 0,
-            frames: [4, 4, 4, 4, 4, 4],
+            frames: Array(6).fill(12),
             hurtboxes: [
                 [[54, 57, 18, 14], [51, 71, 27, 40], [52, 109, 26, 17]],
                 [[54, 57, 18, 14], [51, 71, 27, 40], [52, 109, 26, 17]],
@@ -24,7 +24,7 @@ export class Samurai extends GeneralCharacter {
         run: {
             framenum: 0,
             originY: 1,
-            frames: [4, 4, 4, 4, 4, 4, 4, 4],
+            frames: Array(8).fill(6),
             hurtboxes: [
                 [[79, 60, 15, 15], [58, 69, 30, 42], [57, 104, 23, 22]],
                 [[79, 60, 15, 15], [58, 69, 30, 42], [57, 104, 23, 22]],
