@@ -66,7 +66,27 @@ export class GeneralCharacter {
     stopAction(name){
         // reset animation
         this.animationFrameInfo[name].framenum = 0;
-        this.player.currentAction = "idle";
+
+        if (this.player.controller.heldButtons.length > 0) {
+            let arr = this.player.controller.heldButtons;
+            let button = arr[arr.length-1];
+
+            switch (button){
+                case 'LEFT':
+                    this.player.vel[0] = -1*this.player.moveSpeed;
+                    this.player.currentAction = "run";
+                    break;
+                case 'RIGHT':
+                    this.player.vel[0] = this.player.moveSpeed;
+                    this.player.currentAction = "run";
+                    break;
+                default:
+                    this.player.currentAction = "idle";
+                    break;
+            }
+        } else {
+            this.player.currentAction = "idle";
+        }
     }
 
     animate(name, playOnce = false) {

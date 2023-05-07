@@ -17,46 +17,48 @@ export class Controller {
 
                 if (!this.heldButtons.includes(buttonMapping[event.key])) {
                     this.heldButtons.push(buttonMapping[event.key]);
+
+                    switch (buttonMapping[event.key]) {
+                        case 'LEFT':
+                            if (moves.includes("run")) {
+                                player.vel[0] = -1*player.moveSpeed;
+                                player.currentAction = "run";
+                            }
+                            break;
+                        case 'RIGHT':
+                            if (moves.includes("run")) {
+                                player.vel[0] = 1*player.moveSpeed;
+                                player.currentAction = "run";
+                            }
+                            break;
+                        case 'UP':
+                            if (player.pos[1] === Game.FLOOR && moves.includes("jump")) {
+                                player.vel[1] = -2*player.moveSpeed;
+                                player.currentAction = "jump";
+                            }
+                            break;
+                        case 'B':
+                            if (moves.includes("attack1")) {
+                                // player.vel[0] = 0;
+                                player.currentAction = "attack1";
+                            }
+                            break;
+                        case 'Y':
+                            if (moves.includes("attack2")) {
+                                // player.vel[0] = 0;
+                                player.currentAction = "attack2";
+                            }
+                            break;
+                        case 'X':
+                            if (moves.includes("attack3")) {
+                                // player.vel[0] = 0;
+                                player.currentAction = "attack3";
+                            }
+                            break;
+                    }
                 }
 
-                switch (buttonMapping[event.key]) {
-                    case 'LEFT':
-                        if (moves.includes("run")) {
-                            player.vel[0] = -1*player.moveSpeed;
-                            player.currentAction = "run";
-                        }
-                        break;
-                    case 'RIGHT':
-                        if (moves.includes("run")) {
-                            player.vel[0] = 1*player.moveSpeed;
-                            player.currentAction = "run";
-                        }
-                        break;
-                    case 'UP':
-                        if (player.pos[1] === Game.FLOOR && moves.includes("jump")) {
-                            player.vel[1] = -2*player.moveSpeed;
-                            player.currentAction = "jump";
-                        }
-                        break;
-                    case 'B':
-                        if (moves.includes("attack1")) {
-                            // player.vel[0] = 0;
-                            player.currentAction = "attack1";
-                        }
-                        break;
-                    case 'Y':
-                        if (moves.includes("attack2")) {
-                            // player.vel[0] = 0;
-                            player.currentAction = "attack2";
-                        }
-                        break;
-                    case 'X':
-                        if (moves.includes("attack3")) {
-                            // player.vel[0] = 0;
-                            player.currentAction = "attack3";
-                        }
-                        break;
-                }
+
             }
         });
 
