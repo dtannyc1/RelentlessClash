@@ -14,9 +14,11 @@ export class Game {
 
         this.player1 = new Player([Game.PLAYER1_STARTX, Game.FLOOR*0.75], "player1");
         this.controller1 = new Controller(this.player1, 1);
+        this.player1.assignController(this.controller1);
 
         this.player2 = new Player([Game.PLAYER2_STARTX, Game.FLOOR*0.75], "player2");
         this.controller2 = new Controller(this.player2, 2);
+        this.player2.assignController(this.controller2);
 
         this.objects = [this.player1, this.player2];
         this.runGame();

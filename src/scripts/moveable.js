@@ -1,7 +1,7 @@
 import { Game } from "./game";
 
 export class Moveable {
-    static GRAVITY = 0.75;
+    static GRAVITY = [0.5, 0.75];
 
     constructor(options) {
         this.pos = options["startpos"];
@@ -9,8 +9,17 @@ export class Moveable {
     }
 
     move() {
+        if (this.pos[1] === Game.FLOOR && this.currentAction !== "run") {
+            if (this.vel[0] < -Moveable.GRAVITY[0]) {
+                this.vel[0] += Moveable.GRAVITY[0];
+            } else if (this.vel[0] > Moveable.GRAVITY[0]) {
+                this.vel[0] -= Moveable.GRAVITY[0];
+            } else {
+                this.vel[0] = 0;
+            }
+        }
         this.pos[0] += this.vel[0];
-        this.vel[1] += Moveable.GRAVITY;
+        this.vel[1] += Moveable.GRAVITY[1];
         this.pos[1] += this.vel[1];
 
         this.checkFloor();

@@ -44,7 +44,7 @@ export class Samurai extends GeneralCharacter {
         jump: {
             framenum: 0,
             originY: 3,
-            frames: [4, 8, 8, 8, 8, 8, 8, 8, 8],
+            frames: [4, 7, 7, 7, 7, 7, 7, 7, 7],
             hurtboxes: [
                 [[71,58,17,15], [58,71,27,38], [53,110,36,16]],
                 [[60,65,16,14], [57,77,22,34], [54,109,32,17]],

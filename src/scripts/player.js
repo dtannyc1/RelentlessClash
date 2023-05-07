@@ -23,9 +23,14 @@ export class Player extends Moveable{
 
     draw(ctx){
         // this.character.idle();
+
         this.move();
         this.character.currentAction(this.currentAction);
         this.character.draw(ctx, this.pos, this.scale);
+    }
+
+    assignController(controller) {
+        this.controller = controller;
     }
 
 }
