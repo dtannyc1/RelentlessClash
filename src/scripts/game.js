@@ -3,7 +3,7 @@ import { GameView } from "./game_view.js";
 import { Player } from "./player.js";
 
 export class Game {
-    static FLOOR = 250;
+    static FLOOR = 175;
     static PLAYER1_STARTX = -240;
     static PLAYER2_STARTX = 240;
 
@@ -35,105 +35,51 @@ export class Game {
         this.handlePush();
     }
 
-    // handlePush(){
-    //     for (let i = 0; i < this.objects.length; i++) {
-    //         for (let j = i+1; j < this.objects.length; j++) {
-
-    //             let obj1Boxes = this.objects[i].character.hurtboxes;
-    //             let pos1 = this.objects[i].pos;
-    //             let xFacing1 = this.objects[i].xFacing;
-    //             let scale1 = this.objects[i].scale;
-    //             let frameWidth1 = this.objects[i].character.frameWidth;
-
-    //             let obj2Boxes = this.objects[j].character.hurtboxes;
-    //             let pos2 = this.objects[j].pos;
-    //             let xFacing2 = this.objects[j].xFacing;
-    //             let scale2 = this.objects[j].scale;
-    //             let frameWidth2 = this.objects[j].character.frameWidth;
-
-    //             let collide = false;
-    //             for (let k = 0; k < obj1Boxes.length; k++){
-    //                 let box1 = obj1Boxes[k].slice();
-
-    //                 if (xFacing1 === 1) {
-    //                     box1[0] = pos1[0] - frameWidth1*scale1/2 + box1[0]*scale1;
-    //                 } else {
-    //                     box1[0] = pos1[0] + frameWidth1*scale1/2 - box1[0]*scale1 - box1[2]*scale1;
-    //                 }
-    //                 box1[1] = pos1[1] + box1[1]*scale1;
-    //                 box1[2] *= scale1;
-    //                 box1[3] *= scale1;
-
-    //                 box1[0] *= GameView.MAIN_SCALE;
-    //                 box1[1] *= GameView.MAIN_SCALE;
-    //                 box1[2] *= GameView.MAIN_SCALE;
-    //                 box1[3] *= GameView.MAIN_SCALE;
-
-    //                 for (let m = 0; m < obj2Boxes.length; m++) {
-
-    //                     let box2 = obj2Boxes[m].slice();
-    //                     if (xFacing2 === 1) {
-    //                         box2[0] = pos2[0] - frameWidth2*scale2/2 + box2[0]*scale2;
-    //                     } else {
-    //                         box2[0] = pos2[0] + frameWidth2*scale2/2 - box2[0]*scale2 - box2[2]*scale2;
-    //                     }
-    //                     box2[1] = pos2[1] + box2[1]*scale2;
-    //                     box2[2] *= scale2;
-    //                     box2[3] *= scale2;
-
-    //                     box2[0] *= GameView.MAIN_SCALE;
-    //                     box2[1] *= GameView.MAIN_SCALE;
-    //                     box2[2] *= GameView.MAIN_SCALE;
-    //                     box2[3] *= GameView.MAIN_SCALE;
-
-    //                     // let ctx = this.gameView.ctx;
-    //                     // ctx.resetTransform();
-    //                     // ctx.fillStyle = "red";
-    //                     // let avgX = (pos1[0]+pos2[0])/2
-    //                     // ctx.translate(GameView.WIDTH/2 - avgX*GameView.MAIN_SCALE, 0);
-    //                     // ctx.fillRect(...box1);
-    //                     // ctx.fillRect(...box2);
-
-    //                     collide = this.overlappingBoxes(box1, box2);
-    //                     if (collide) { break; }
-    //                 }
-    //                 if (collide) { break; }
-    //             }
-
-    //             if (collide) {
-    //                 let avgVelX = (this.objects[i].vel[0] + this.objects[j].vel[0])/2;
-    //                 let avgVelY = (this.objects[i].vel[1] + this.objects[j].vel[1])/2;
-
-    //                 this.objects[i].vel = [avgVelX, avgVelY];
-    //                 this.objects[j].vel = [avgVelX, avgVelY];
-    //             }
-    //         }
-    //     }
-    // }
-
     handlePush(){
         for (let i = 0; i < this.objects.length; i++) {
-            let hurtboxes1 = this.calculateBoxes(this.objects[i], this.objects[i].character.hurtboxes);
+            let hurtboxes1 = this.calculateBoxes(this.objects[i],
+                                    this.objects[i].character.hurtboxes);
             for (let j = i+1; j < this.objects.length; j++) {
                 let collide = false;
-                let hurtboxes2 = this.calculateBoxes(this.objects[j], this.objects[j].character.hurtboxes);
+                let hurtboxes2 = this.calculateBoxes(this.objects[j],
+                                    this.objects[j].character.hurtboxes);
 
+                let collisionData = [];
                 for (let k = 0; k < hurtboxes1.length; k++){
                     for (let m = 0; m < hurtboxes2.length; m++) {
                         let box1 = hurtboxes1[k].slice();
                         let box2 = hurtboxes2[m].slice();
                         collide = this.overlappingBoxes(box1, box2);
-                        if (collide) { break; }
+                        if (collide) {
+                            collisionData.push(box1);
+                            collisionData.push(box2);
+                            break;
+                        }
                     }
                     if (collide) { break; }
                 }
 
                 if (collide) {
-                    let avgVelX = (this.objects[i].vel[0] + this.objects[j].vel[0])/2;
-                    let avgVelY = (this.objects[i].vel[1] + this.objects[j].vel[1])/2;
+                    // let avgVelX = (this.objects[i].vel[0] + this.objects[j].vel[0])/2;
+                    // let avgVelY = (this.objects[i].vel[1] + this.objects[j].vel[1])/2;
 
-                    this.objects[i].vel = [avgVelX, avgVelY];
-                    this.objects[j].vel = [avgVelX, avgVelY];
+                    // this.objects[i].vel = [avgVelX, avgVelY];
+                    // this.objects[j].vel = [avgVelX, avgVelY];
+
+                    // should set their positions so they're right next to each other
+                    let box1 = collisionData[0];
+                    let box2 = collisionData[1];
+                    let object1 = this.objects[i];
+                    let object2 = this.objects[j];
+                    if (box1[0] < box2[0]) {
+                        let dx = ((box1[0] + box1[3]) - box2[0])/2;
+                        object1.pos[0] -= dx;
+                        object2.pos[0] += dx;
+                    } else {
+                        let dx = ((box2[0] + box2[3]) - box1[0])/2;
+                        object2.pos[0] -= dx;
+                        object1.pos[0] += dx;
+                    }
                 }
             }
         }
