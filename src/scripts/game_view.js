@@ -8,12 +8,13 @@ export class GameView {
     static BACKGROUND_OFFSET_X = -400;
     static BACKGROUND_OFFSET_Y = -200;
     static BACKGROUND_SCALE = 0.9;
-    static MAX_LEFT = -400;
-    static MAX_RIGHT = 365;
+    static CAMERA_LIMIT_LEFT = -400;
+    static CAMERA_LIMIT_RIGHT = 365;
 
     // Class methods
     constructor(ctx) {
         this.ctx = ctx;
+        this.camera_location = 0;
     }
 
     draw(objects) {
@@ -27,22 +28,24 @@ export class GameView {
             sumX += obj.pos[0];
         })
         let avgX = sumX / objects.length;
-        console.log(avgX)
+        if (avgX < GameView.CAMERA_LIMIT_LEFT) {
+            this.camera_location = GameView.CAMERA_LIMIT_LEFT;
+        } else if (avgX > GameView.CAMERA_LIMIT_RIGHT) {
+            this.camera_location = GameView.CAMERA_LIMIT_RIGHT;
+        } else {
+            this.camera_location = avgX;
+        }
+        // console.log(avgX)
 
         // draw background image
-        ctx.scale(GameView.MAIN_SCALE, GameView.MAIN_SCALE)
-        ctx.translate(GameView.BACKGROUND_OFFSET_X - avgX,
-                      GameView.BACKGROUND_OFFSET_Y);
-        ctx.scale(GameView.BACKGROUND_SCALE, GameView.BACKGROUND_SCALE);
-        let backgroundImg = document.getElementById("train-background");
-        ctx.drawImage(backgroundImg,0,0);
+        this.drawbackground();
 
         // draw fighters and other assets
         objects.forEach((obj) => {
             ctx.resetTransform();
             ctx.translate(GameView.WIDTH/2, 0);
             ctx.scale(GameView.MAIN_SCALE, GameView.MAIN_SCALE);
-            ctx.translate(-avgX, 0);
+            ctx.translate(-this.camera_location, 0);
             obj.draw(ctx);
         })
 
@@ -97,5 +100,14 @@ export class GameView {
                 }
             }
         })
+    }
+
+    drawbackground() {
+        this.ctx.scale(GameView.MAIN_SCALE, GameView.MAIN_SCALE)
+        this.ctx.translate(GameView.BACKGROUND_OFFSET_X - this.camera_location,
+                      GameView.BACKGROUND_OFFSET_Y);
+        this.ctx.scale(GameView.BACKGROUND_SCALE, GameView.BACKGROUND_SCALE);
+        let backgroundImg = document.getElementById("train-background");
+        this.ctx.drawImage(backgroundImg,0,0);
     }
 }
