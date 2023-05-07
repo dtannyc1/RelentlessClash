@@ -8,8 +8,6 @@ export class Game {
     static PLAYER2_STARTX = 240;
 
     constructor(ctx) {
-        // this.ctx = ctx;
-
         this.gameView = new GameView(ctx);
 
         this.player1 = new Player([Game.PLAYER1_STARTX, Game.FLOOR*0.75], "player1");
@@ -60,13 +58,6 @@ export class Game {
                 }
 
                 if (collide) {
-                    // let avgVelX = (this.objects[i].vel[0] + this.objects[j].vel[0])/2;
-                    // let avgVelY = (this.objects[i].vel[1] + this.objects[j].vel[1])/2;
-
-                    // this.objects[i].vel = [avgVelX, avgVelY];
-                    // this.objects[j].vel = [avgVelX, avgVelY];
-
-                    // should set their positions so they're right next to each other
                     let box1 = collisionData[0];
                     let box2 = collisionData[1];
                     let object1 = this.objects[i];
