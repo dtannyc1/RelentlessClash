@@ -23,12 +23,16 @@ export class Controller {
                             if (moves.includes("run")) {
                                 player.vel[0] = -1*player.moveSpeed;
                                 player.currentAction = "run";
+                            } else{
+                                player.vel[0] = -1*player.moveSpeed;
                             }
                             break;
                         case 'RIGHT':
                             if (moves.includes("run")) {
                                 player.vel[0] = 1*player.moveSpeed;
                                 player.currentAction = "run";
+                            } else {
+                                player.vel[0] = 1*player.moveSpeed;
                             }
                             break;
                         case 'UP':
