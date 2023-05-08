@@ -1,3 +1,4 @@
+import { Train } from "./Backgrounds/train";
 
 export class GameView {
     // Constants
@@ -15,6 +16,9 @@ export class GameView {
     constructor(ctx) {
         this.ctx = ctx;
         this.camera_location = 0;
+
+        // inject images for background
+        this.background = new Train(ctx);
     }
 
     draw(objects) {
@@ -26,7 +30,7 @@ export class GameView {
         this.calculateCameraLocation(objects);
 
         // draw background image
-        this.drawbackground();
+        this.background.drawBackground(this.camera_location, GameView.MAIN_SCALE);
 
         // draw fighters and other assets
         objects.forEach((obj) => {
@@ -41,7 +45,7 @@ export class GameView {
         this.enforceCameraLimits(objects);
 
         // draw foreground image
-        this.drawForeground();
+        this.background.drawForeground(this.camera_location, GameView.MAIN_SCALE);
 
         // draw health bars
         this.drawHealthBars(objects);
@@ -62,18 +66,18 @@ export class GameView {
         }
     }
 
-    drawbackground() {
-        this.ctx.scale(GameView.MAIN_SCALE, GameView.MAIN_SCALE)
-        this.ctx.translate(GameView.BACKGROUND_OFFSET_X - this.camera_location,
-                      GameView.BACKGROUND_OFFSET_Y);
-        this.ctx.scale(GameView.BACKGROUND_SCALE, GameView.BACKGROUND_SCALE);
-        let backgroundImg = document.getElementById("train-background");
-        this.ctx.drawImage(backgroundImg,0,0);
-    }
+    // drawbackground() {
+    //     this.ctx.scale(GameView.MAIN_SCALE, GameView.MAIN_SCALE)
+    //     this.ctx.translate(GameView.BACKGROUND_OFFSET_X - this.camera_location,
+    //                   GameView.BACKGROUND_OFFSET_Y);
+    //     this.ctx.scale(GameView.BACKGROUND_SCALE, GameView.BACKGROUND_SCALE);
+    //     let backgroundImg = document.getElementById("train-background");
+    //     this.ctx.drawImage(backgroundImg,0,0);
+    // }
 
-    drawForeground() {
+    // drawForeground() {
 
-    }
+    // }
 
     drawHealthBars(objects){
         let ctx = this.ctx;
