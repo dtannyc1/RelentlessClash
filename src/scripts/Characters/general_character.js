@@ -43,18 +43,19 @@ export class GeneralCharacter {
         ctx.scale(scale, scale)
         ctx.translate(-this.frameWidth/2,0);
 
-        // render hurtboxes
-        ctx.fillStyle = "#00ff0025";
-        this.hurtboxes.forEach((box) => {
-            ctx.fillRect(...box)
-        })
+        if (this.player.renderBoxes) {
+            // render hurtboxes
+            ctx.fillStyle = "#00ff0025";
+            this.hurtboxes.forEach((box) => {
+                ctx.fillRect(...box)
+            })
 
-        // render hitbox
-        ctx.fillStyle = "#ff000025";
-        this.hitboxes.forEach((box) => {
-            ctx.fillRect(...box)
-        })
-
+            // render hitbox
+            ctx.fillStyle = "#ff000025";
+            this.hitboxes.forEach((box) => {
+                ctx.fillRect(...box)
+            })
+        }
     }
 
     currentAction(name){

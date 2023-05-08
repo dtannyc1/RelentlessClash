@@ -156,4 +156,9 @@ export class Game {
             return true;
         }
     }
+
+    toggleRenderBoxes() {
+        this.player1.toggleRenderBoxes();
+        this.player2.toggleRenderBoxes();
+    }
 }

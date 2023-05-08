@@ -19,6 +19,7 @@ export class Player extends Moveable{
 
         this.character = new Samurai(this); // change later when introduce other sprites?
         this.currentAction = "idle";
+        this.renderBoxes = false;
 
         console.log(`${name} created successfully`)
     }
@@ -77,5 +78,9 @@ export class Player extends Moveable{
             outputBoxes.push(box);
         }
         return outputBoxes;
+    }
+
+    toggleRenderBoxes() {
+        this.renderBoxes = !this.renderBoxes;
     }
 }
