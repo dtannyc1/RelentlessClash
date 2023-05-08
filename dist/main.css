@@ -25,14 +25,14 @@ h1 {
 }
 
 body {
-  background-image: url(../assets/images/Backgrounds/asian_night.png);
+  background-image: url("../assets/images/Backgrounds/asian_night.png");
   background-position-x: center;
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 #arcade-machine {
-  background-image: url(../assets/images/ArcadeMachineTransparentV21080p.png);
+  background-image: url("../assets/images/ArcadeMachineTransparentV21080p.png");
   background-position-x: center;
   background-size: auto 100%;
   background-repeat: no-repeat;
