@@ -74,7 +74,7 @@ export class Commander extends GeneralCharacter {
         attack2: {
             framenum: 0,
             originY: 6,
-            frames: [6, 7, 4, 3],
+            frames: [6, 8, 6, 5],
             hurtboxes: [
                 [[63,65,13,15], [43,79,33,32], [35,109,39,17]],
                 [[56,60,12,15], [47,73,24,40], [35,109,39,17]],
