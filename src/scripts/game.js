@@ -103,7 +103,6 @@ export class Game {
 
         // actually deal with the hits
         if (hits.length > 0) {
-            console.log(hits);
             hits.forEach((hit) => {
                 let origin = hit[0];
                 let target = hit[1];
