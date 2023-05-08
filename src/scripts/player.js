@@ -1,5 +1,6 @@
 import { Commander } from "./Characters/commander.js";
 import { Samurai } from "./Characters/samurai.js";
+import { Game } from "./game.js";
 import { Moveable } from "./moveable.js";
 
 export class Player extends Moveable{
@@ -25,6 +26,12 @@ export class Player extends Moveable{
         this.currentAction = "idle";
         this.renderBoxes = false;
 
+        this.handleButtonPress = this.handleButtonPress.bind(this);
+        this.handleButtonRelease = this.handleButtonRelease.bind(this);
+        this.stun = this.stun.bind(this);
+        this.unstun = this.unstun.bind(this);
+
+        this.stunned = false;
         console.log(`${name} created successfully`)
     }
 
@@ -86,5 +93,79 @@ export class Player extends Moveable{
 
     toggleRenderBoxes() {
         this.renderBoxes = !this.renderBoxes;
+    }
+
+    handleButtonPress(button){
+        if (!this.stunned) {
+            let moves = this.character.possibleMoves[this.currentAction];
+
+            switch (button) {
+                case 'LEFT':
+                    if (moves.includes("run")) {
+                        this.vel[0] = -1*this.moveSpeed;
+                        this.currentAction = "run";
+                    } else{
+                        this.vel[0] = -1*this.moveSpeed;
+                    }
+                    break;
+                case 'RIGHT':
+                    if (moves.includes("run")) {
+                        this.vel[0] = 1*this.moveSpeed;
+                        this.currentAction = "run";
+                    } else {
+                        this.vel[0] = 1*this.moveSpeed;
+                    }
+                    break;
+                case 'UP':
+                    if (this.pos[1] === Game.FLOOR && moves.includes("jump")) {
+                        this.vel[1] = -2*this.moveSpeed;
+                        this.currentAction = "jump";
+                    }
+                    break;
+                case 'B':
+                    if (moves.includes("attack1")) {
+                        this.currentAction = "attack1";
+                    }
+                    break;
+                case 'Y':
+                    if (moves.includes("attack2")) {
+                        this.currentAction = "attack2";
+                    }
+                    break;
+                case 'X':
+                    if (moves.includes("attack3")) {
+                        this.currentAction = "attack3";
+                    }
+                    break;
+            }
+        }
+    }
+
+    handleButtonRelease(button){
+        if (!this.stunned) {
+            switch (button) {
+                case 'LEFT':
+                    if (this.vel[0] < 0 && this.currentAction === "run") {
+                        this.vel[0] = 0;
+                        this.character.stopAction("run");
+                    }
+                    break;
+                case 'RIGHT':
+                    if (this.vel[0] > 0 && this.currentAction === "run") {
+                        this.vel[0] = 0;
+                        this.character.stopAction("run");
+                    }
+                    break;
+            }
+        }
+    }
+
+    stun(duration) {
+        this.stunned = true;
+        setInterval(this.unstun, duration);
+    }
+
+    unstun() {
+        this.stunned = false;
     }
 }

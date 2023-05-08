@@ -13,80 +13,20 @@ export class Controller {
 
         window.addEventListener("keydown", event => {
             if (buttonMapping[event.key]) {
-                let moves = player.character.possibleMoves[player.currentAction];
-
                 if (!this.heldButtons.includes(buttonMapping[event.key])) {
                     this.heldButtons.push(buttonMapping[event.key]);
-
-                    switch (buttonMapping[event.key]) {
-                        case 'LEFT':
-                            if (moves.includes("run")) {
-                                player.vel[0] = -1*player.moveSpeed;
-                                player.currentAction = "run";
-                            } else{
-                                player.vel[0] = -1*player.moveSpeed;
-                            }
-                            break;
-                        case 'RIGHT':
-                            if (moves.includes("run")) {
-                                player.vel[0] = 1*player.moveSpeed;
-                                player.currentAction = "run";
-                            } else {
-                                player.vel[0] = 1*player.moveSpeed;
-                            }
-                            break;
-                        case 'UP':
-                            if (player.pos[1] === Game.FLOOR && moves.includes("jump")) {
-                                player.vel[1] = -2*player.moveSpeed;
-                                player.currentAction = "jump";
-                            }
-                            break;
-                        case 'B':
-                            if (moves.includes("attack1")) {
-                                // player.vel[0] = 0;
-                                player.currentAction = "attack1";
-                            }
-                            break;
-                        case 'Y':
-                            if (moves.includes("attack2")) {
-                                // player.vel[0] = 0;
-                                player.currentAction = "attack2";
-                            }
-                            break;
-                        case 'X':
-                            if (moves.includes("attack3")) {
-                                // player.vel[0] = 0;
-                                player.currentAction = "attack3";
-                            }
-                            break;
-                    }
+                    player.handleButtonPress(buttonMapping[event.key]);
                 }
-
-
             }
         });
 
         window.addEventListener("keyup", event => {
             if (buttonMapping[event.key]) {
-
                 if (this.heldButtons.includes(buttonMapping[event.key])) {
                     let idx = this.heldButtons.indexOf(buttonMapping[event.key]);
                     this.heldButtons.splice(idx, 1);
-                }
 
-                switch (buttonMapping[event.key]) {
-                    case 'LEFT':
-                        if (player.vel[0] < 0 && player.currentAction === "run") {
-                            player.vel[0] = 0;
-                            player.character.stopAction("run");
-                        }
-                        break;
-                    case 'RIGHT':
-                        if (player.vel[0] > 0 && player.currentAction === "run") {
-                            player.vel[0] = 0;
-                            player.character.stopAction("run");
-                        }
-                        break;
+                    player.handleButtonRelease(buttonMapping[event.key]);
                 }
             }
         });
@@ -99,18 +39,10 @@ export class Controller {
         r: 'LB',
         t: 'A',
         y: 'RB',
-        // 6: 'LT',
-        // 7: 'RT',
-        // 8: 'M',     // minus
-        // 9: 'P',     // plus
-        // 10: 'LJ',   // left joystick
-        // 11: 'RJ',   // right joystick
-        w: 'UP',   // up
-        s: 'DOWN',    // down
+        w: 'UP',
+        s: 'DOWN',
         a: 'LEFT',
-        d: 'RIGHT',
-        // 16: 'HOME',
-        // 17: 'SS'
+        d: 'RIGHT'
     };
 
     static CONTROLLER_TWO = {
@@ -120,17 +52,9 @@ export class Controller {
         "i": 'LB',
         o: 'A',
         p: 'RB',
-        // 6: 'LT',
-        // 7: 'RT',
-        // 8: 'M',     // minus
-        // 9: 'P',     // plus
-        // 10: 'LJ',   // left joystick
-        // 11: 'RJ',   // right joystick
-        ArrowUp: 'UP',   // up
-        ArrowDown: 'DOWN',    // down
+        ArrowUp: 'UP',
+        ArrowDown: 'DOWN',
         ArrowLeft: 'LEFT',
-        ArrowRight: 'RIGHT',
-        // 16: 'HOME',
-        // 17: 'SS'
+        ArrowRight: 'RIGHT'
     };
 }
