@@ -15,7 +15,7 @@ export class Player extends Moveable{
         this.moveSpeed = 10;
         this.scale = 3.15;
 
-        this.health = Math.random()*100;
+        this.health = 100;
 
         this.character = new Samurai(this); // change later when introduce other sprites?
         this.currentAction = "idle";
