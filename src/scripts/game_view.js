@@ -40,6 +40,9 @@ export class GameView {
         // enforce camera limits
         this.enforceCameraLimits(objects);
 
+        // draw foreground image
+        this.drawForeground();
+
         // draw health bars
         this.drawHealthBars(objects);
     }
@@ -66,6 +69,10 @@ export class GameView {
         this.ctx.scale(GameView.BACKGROUND_SCALE, GameView.BACKGROUND_SCALE);
         let backgroundImg = document.getElementById("train-background");
         this.ctx.drawImage(backgroundImg,0,0);
+    }
+
+    drawForeground() {
+
     }
 
     drawHealthBars(objects){
