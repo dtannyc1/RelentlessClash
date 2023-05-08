@@ -13,7 +13,17 @@ export class GameView {
         this.camera_location = 0;
 
         // inject images for background
-        this.background = new War(ctx);
+        switch (Math.floor(Math.random()*2)) {
+            case (0):
+                this.background = new Train(ctx);
+                break;
+            case (1):
+                this.background = new War(ctx);
+                break;
+            default:
+                this.background = new Train(ctx);
+                break;
+        }
     }
 
     draw(objects) {
