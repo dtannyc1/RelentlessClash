@@ -160,4 +160,20 @@ export class Game {
         this.player1.toggleRenderBoxes();
         this.player2.toggleRenderBoxes();
     }
+
+    isRoundOver() {
+        if (this.player1.health === 0 || this.player2.health === 0) {
+            if (this.player1.health === 0 && this.player2.health === 0) {
+
+            } else if (this.player1.health === 0){
+
+            } else {
+
+            }
+        }
+    }
+
+    resetRound() {
+        console.log("Round Reset")
+    }
 }

@@ -123,7 +123,7 @@ export class Samurai extends GeneralCharacter {
         dead: {
             framenum: 0,
             originY: 8,
-            frames: [10,10,10,10,10,10]
+            frames: [4,4,6,30,6,1000]
         },
         guard: {
             framenum: 0,
