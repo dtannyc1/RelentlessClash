@@ -76,7 +76,68 @@ export class Game {
     }
 
     handleHit(){
+        // determine who is hitting which box
+        let hits = [];
+        for (let i = 0; i < this.objects.length; i++) {
+            let hitbox = this.objects[i].getHitBoxes(GameView.MAIN_SCALE);
+            if (hitbox) {
+                hitbox = hitbox[0];
+                for (let j = 0; j < this.objects.length; j++) {
+                    if (j !== i) {
+                        let hit = false;
+                        let hurtboxes = this.objects[j].getHurtBoxes(GameView.MAIN_SCALE);
+                        for (let k = 0; k < hurtboxes.length; k++) {
+                            if (this.overlappingBoxes(hitbox, hurtboxes[k])){
+                                hits.push([this.objects[i], this.objects[j], k]);
+                                hit = true;
+                                break;
+                            }
+                        }
+                        if (hit) {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
+        // actually deal with the hits
+        if (hits.length > 0) {
+            console.log(hits);
+            hits.forEach((hit) => {
+                let origin = hit[0];
+                let target = hit[1];
+                let boxNum = hit[2];
+
+                let damage = 0;
+                switch (origin.currentAction){
+                    case ("attack1"):
+                        damage = 1;
+                        break;
+                    case ("attack2"):
+                        damage = 2;
+                        break;
+                    case ("attack3"):
+                        damage = 3;
+                        break;
+                }
+
+                // deal damage
+                target.health -= damage*(boxNum+1)*0.25;
+                if (target.health < 0){
+                    target.health = 0;
+                }
+
+                // cause knockback
+                let knockback = 10;
+                if (origin.pos[0] < target.pos[0]){
+                    // debugger
+                    target.pos[0] += knockback*(damage);
+                } else{
+                    target.pos[0] -= knockback*(damage);
+                }
+            })
+        }
     }
 
     overlappingBoxes(box1, box2) {

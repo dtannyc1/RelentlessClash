@@ -34,11 +34,19 @@ export class Player extends Moveable{
     }
 
     getHurtBoxes(main_scale) {
-        return this.calculateBoxes(main_scale, this.character.hurtboxes)
+        if (this.character.hurtboxes) {
+            return this.calculateBoxes(main_scale, this.character.hurtboxes)
+        } else {
+            return [];
+        }
     }
 
     getHitBoxes(main_scale) {
-        return this.calculateBoxes(main_scale, this.character.hitboxes)
+        if (this.character.hitboxes) {
+            return this.calculateBoxes(main_scale, this.character.hitboxes)
+        } else {
+            return [];
+        }
     }
 
     calculateBoxes(main_scale, boxes){
