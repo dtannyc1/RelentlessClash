@@ -1,3 +1,4 @@
+import { Commander } from "./Characters/commander.js";
 import { Samurai } from "./Characters/samurai.js";
 import { Moveable } from "./moveable.js";
 
@@ -9,15 +10,18 @@ export class Player extends Moveable{
         this.name = name;
         if (name === "player1") {
             this.xFacing = 1;
+            this.character = new Samurai(this); // change later when introduce other sprites?
+
         } else {
             this.xFacing = -1;
+            this.character = new Commander(this); // change later when introduce other sprites?
+
         }
         this.moveSpeed = 10;
         this.scale = 3.15;
 
         this.health = 100;
 
-        this.character = new Samurai(this); // change later when introduce other sprites?
         this.currentAction = "idle";
         this.renderBoxes = false;
 
