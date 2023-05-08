@@ -28,6 +28,7 @@ export class Game {
 
     runGame() {
         this.gameView.draw(this.objects);
+        this.gameView.renderScore(this.scores);
         this.handleCollisions();
         // if (!this.roundOver) {
         //     this.isRoundOver();

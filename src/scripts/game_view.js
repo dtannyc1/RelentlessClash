@@ -66,19 +66,6 @@ export class GameView {
         }
     }
 
-    // drawbackground() {
-    //     this.ctx.scale(GameView.MAIN_SCALE, GameView.MAIN_SCALE)
-    //     this.ctx.translate(GameView.BACKGROUND_OFFSET_X - this.camera_location,
-    //                   GameView.BACKGROUND_OFFSET_Y);
-    //     this.ctx.scale(GameView.BACKGROUND_SCALE, GameView.BACKGROUND_SCALE);
-    //     let backgroundImg = document.getElementById("train-background");
-    //     this.ctx.drawImage(backgroundImg,0,0);
-    // }
-
-    // drawForeground() {
-
-    // }
-
     drawHealthBars(objects){
         let ctx = this.ctx;
         let barThickness = 18;
@@ -148,5 +135,14 @@ export class GameView {
                 obj.pos[0] -= dx;
             }
         });
+    }
+
+    renderScore(score) {
+        let formattedScore = score.join(' - ')
+        this.ctx.font = "28px Arial";
+        this.ctx.fillStyle = "yellow";
+        this.ctx.textAlign = "center";
+
+        this.ctx.fillText(formattedScore, GameView.WIDTH*0.5, GameView.WIDTH*0.053)
     }
 }
