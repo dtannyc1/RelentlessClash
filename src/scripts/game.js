@@ -19,12 +19,19 @@ export class Game {
         this.player2.assignController(this.controller2);
 
         this.objects = [this.player1, this.player2];
+        this.scores = [0,0];
+
+        this.resetRound = this.resetRound.bind(this);
+        this.roundOver = false;
         this.runGame();
     }
 
     runGame() {
         this.gameView.draw(this.objects);
         this.handleCollisions();
+        if (!this.roundOver) {
+            this.isRoundOver();
+        }
         requestAnimationFrame(this.runGame.bind(this))
     }
 
@@ -163,17 +170,46 @@ export class Game {
 
     isRoundOver() {
         if (this.player1.health === 0 || this.player2.health === 0) {
+            this.roundOver = true;
             if (this.player1.health === 0 && this.player2.health === 0) {
+                this.player1.currentAction = "dead";
+                this.player2.currentAction = "dead";
+                this.player1.stun(5000);
+                this.player2.stun(5000);
 
+                setTimeout(this.resetRound, 4500);
             } else if (this.player1.health === 0){
+                this.scores[1] += 1;
+                this.player1.currentAction = "dead";
+                this.player1.stun(5000);
+                this.player2.stun(5000);
 
+                setTimeout(this.resetRound, 4500);
             } else {
+                this.scores[0] += 1;
+                this.player2.currentAction = "dead";
+                this.player1.stun(5000);
+                this.player2.stun(5000);
 
+                setTimeout(this.resetRound, 4500);
             }
         }
     }
 
     resetRound() {
         console.log("Round Reset")
+        console.log(this.scores)
+
+        this.player1.pos = [Game.PLAYER1_STARTX, Game.FLOOR*0.75];
+        this.player2.pos = [Game.PLAYER2_STARTX, Game.FLOOR*0.75];
+
+        this.player1.health = 100;
+        this.player2.health = 100;
+
+        this.player1.currentAction = "idle";
+        this.player2.currentAction = "idle";
+
+        this.roundOver = false;
+        // debugger
     }
 }
