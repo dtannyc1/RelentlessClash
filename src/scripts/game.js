@@ -22,7 +22,8 @@ export class Game {
         this.scores = [0,0];
 
         this.resetRound = this.resetRound.bind(this);
-        this.roundOver = false;
+
+        this.resetRound();
         this.runGame();
     }
 
@@ -208,8 +209,11 @@ export class Game {
         this.player1.health = 100;
         this.player2.health = 100;
 
-        this.player1.currentAction = "idle";
-        this.player2.currentAction = "idle";
+        this.player1.currentAction = "jump";
+        this.player2.currentAction = "jump";
+
+        this.player1.character.animationFrameInfo["jump"].framenum = 32;
+        this.player2.character.animationFrameInfo["jump"].framenum = 32;
 
         this.player1.xFacing = 1;
         this.player2.xFacing = -1;
