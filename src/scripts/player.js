@@ -34,7 +34,7 @@ export class Player extends Moveable{
 
         this.stunned = false;
         this.runAnimation = true;
-        console.log(`${name} created successfully`)
+        // console.log(`${name} created successfully`)
     }
 
     draw(ctx){
