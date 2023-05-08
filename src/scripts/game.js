@@ -29,9 +29,9 @@ export class Game {
     runGame() {
         this.gameView.draw(this.objects);
         this.handleCollisions();
-        if (!this.roundOver) {
-            this.isRoundOver();
-        }
+        // if (!this.roundOver) {
+        //     this.isRoundOver();
+        // }
         requestAnimationFrame(this.runGame.bind(this))
     }
 
@@ -110,6 +110,7 @@ export class Game {
 
         // actually deal with the hits
         if (hits.length > 0) {
+            let roundEnd = false;
             hits.forEach((hit) => {
                 let origin = hit[0];
                 let target = hit[1];
@@ -131,6 +132,7 @@ export class Game {
                 // deal damage
                 target.health -= damage*(boxNum+1)*0.25;
                 if (target.health < 0){
+                    roundEnd = true;
                     target.health = 0;
                 }
 
@@ -143,6 +145,10 @@ export class Game {
                     target.pos[0] -= knockback*(damage);
                 }
             })
+
+            if (roundEnd) {
+                this.isRoundOver();
+            }
         }
     }
 
@@ -197,8 +203,8 @@ export class Game {
     }
 
     resetRound() {
-        console.log("Round Reset")
-        console.log(this.scores)
+        // console.log("Round Reset")
+        // console.log(this.scores)
 
         this.player1.pos = [Game.PLAYER1_STARTX, Game.FLOOR*0.75];
         this.player2.pos = [Game.PLAYER2_STARTX, Game.FLOOR*0.75];
