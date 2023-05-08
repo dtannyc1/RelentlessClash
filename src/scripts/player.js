@@ -30,14 +30,18 @@ export class Player extends Moveable{
         this.handleButtonRelease = this.handleButtonRelease.bind(this);
         this.stun = this.stun.bind(this);
         this.unstun = this.unstun.bind(this);
+        this.runAnimationState = this.runAnimationState.bind(this);
 
         this.stunned = false;
+        this.runAnimation = true;
         console.log(`${name} created successfully`)
     }
 
     draw(ctx){
         this.move();
-        this.character.currentAction(this.currentAction);
+        if (this.runAnimation) {
+            this.character.currentAction(this.currentAction);
+        }
         this.character.draw(ctx, this.pos, this.scale);
     }
 
@@ -167,5 +171,9 @@ export class Player extends Moveable{
 
     unstun() {
         this.stunned = false;
+    }
+
+    runAnimationState(bool = true) {
+        this.runAnimation = bool;
     }
 }

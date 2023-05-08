@@ -188,6 +188,7 @@ export class Game {
             } else if (this.player1.health === 0){
                 this.scores[1] += 1;
                 this.player1.currentAction = "dead";
+                this.player2.runAnimationState(false);
                 this.player1.stun(5000);
                 this.player2.stun(5000);
 
@@ -195,6 +196,7 @@ export class Game {
             } else {
                 this.scores[0] += 1;
                 this.player2.currentAction = "dead";
+                this.player1.runAnimationState(false);
                 this.player1.stun(5000);
                 this.player2.stun(5000);
 
@@ -215,6 +217,12 @@ export class Game {
 
         this.player1.currentAction = "idle";
         this.player2.currentAction = "idle";
+
+        this.player1.xFacing = 1;
+        this.player2.xFacing = -1;
+
+        this.player1.runAnimationState();
+        this.player2.runAnimationState();
 
         this.roundOver = false;
         // debugger
