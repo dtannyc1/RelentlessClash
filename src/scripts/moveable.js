@@ -7,10 +7,11 @@ export class Moveable {
     constructor(options) {
         this.pos = options["startpos"];
         this.vel = [0, 0];
+        this.FLOOR = options["floor"];
     }
 
     move() {
-        if (this.pos[1] === Game.FLOOR && this.currentAction !== "run") {
+        if (this.pos[1] === this.FLOOR && this.currentAction !== "run") {
             if (this.vel[0] < -Moveable.GRAVITY[0]) {
                 this.vel[0] += Moveable.GRAVITY[0];
             } else if (this.vel[0] > Moveable.GRAVITY[0]) {
@@ -28,10 +29,9 @@ export class Moveable {
     }
 
     checkFloor() {
-        // console.log(Game.FLOOR)
-        if (this.pos[1] > Game.FLOOR) {
+        if (this.pos[1] > this.FLOOR) {
             this.vel[1] = 0;
-            this.pos[1] = Game.FLOOR;
+            this.pos[1] = this.FLOOR;
         }
     }
 

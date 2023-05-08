@@ -1,4 +1,5 @@
 import { Train } from "./Backgrounds/train";
+import { War } from "./Backgrounds/war";
 
 export class GameView {
     // Constants
@@ -6,19 +7,13 @@ export class GameView {
     static WIDTH = 960*GameView.MAIN_SCALE;
     static HEIGHT = 720*GameView.MAIN_SCALE;
 
-    static BACKGROUND_OFFSET_X = -400;
-    static BACKGROUND_OFFSET_Y = -200;
-    static BACKGROUND_SCALE = 0.9;
-    static CAMERA_LIMIT_LEFT = -400;
-    static CAMERA_LIMIT_RIGHT = 365;
-
     // Class methods
     constructor(ctx) {
         this.ctx = ctx;
         this.camera_location = 0;
 
         // inject images for background
-        this.background = new Train(ctx);
+        this.background = new War(ctx);
     }
 
     draw(objects) {
@@ -57,10 +52,10 @@ export class GameView {
             sumX += obj.pos[0];
         })
         let avgX = sumX / objects.length;
-        if (avgX < GameView.CAMERA_LIMIT_LEFT) {
-            this.camera_location = GameView.CAMERA_LIMIT_LEFT;
-        } else if (avgX > GameView.CAMERA_LIMIT_RIGHT) {
-            this.camera_location = GameView.CAMERA_LIMIT_RIGHT;
+        if (avgX < this.background.CAMERA_LIMIT_LEFT) {
+            this.camera_location = this.background.CAMERA_LIMIT_LEFT;
+        } else if (avgX > this.background.CAMERA_LIMIT_RIGHT) {
+            this.camera_location = this.background.CAMERA_LIMIT_RIGHT;
         } else {
             this.camera_location = avgX;
         }

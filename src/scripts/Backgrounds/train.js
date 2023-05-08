@@ -5,6 +5,7 @@ export class Train {
     static BACKGROUND_SCALE = 0.9;
     static CAMERA_LIMIT_LEFT = -400;
     static CAMERA_LIMIT_RIGHT = 365;
+    static FLOOR = 175;
 
     static BACKGROUND_IMAGES = [
         ["assets/images/Backgrounds/Postapocalypce4/Bright/bg.png", 0],
@@ -21,6 +22,10 @@ export class Train {
 
     constructor(ctx) {
         this.ctx = ctx;
+        this.CAMERA_LIMIT_LEFT = Train.CAMERA_LIMIT_LEFT;
+        this.CAMERA_LIMIT_RIGHT = Train.CAMERA_LIMIT_RIGHT;
+        this.FLOOR = Train.FLOOR;
+
         let body = document.querySelector("body");
 
         for (let i = 0; i < Train.BACKGROUND_IMAGES.length; i++) {

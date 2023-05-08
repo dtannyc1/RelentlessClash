@@ -4,12 +4,12 @@ import { Game } from "./game.js";
 import { Moveable } from "./moveable.js";
 
 export class Player extends Moveable{
-    constructor(startpos, name) {
-        let options = {startpos: startpos};
+    constructor(options) {
+        // let options = {startpos: startpos};
         super(options);
 
-        this.name = name;
-        if (name === "player1") {
+        this.name = options["name"];
+        if (this.name === "player1") {
             this.xFacing = 1;
             this.character = new Samurai(this); // change later when introduce other sprites?
 
@@ -121,7 +121,7 @@ export class Player extends Moveable{
                     }
                     break;
                 case 'UP':
-                    if (this.pos[1] === Game.FLOOR && moves.includes("jump")) {
+                    if (this.pos[1] === this.FLOOR && moves.includes("jump")) {
                         this.vel[1] = -2*this.moveSpeed;
                         this.currentAction = "jump";
                     }

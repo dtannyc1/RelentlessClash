@@ -3,18 +3,24 @@ import { GameView } from "./game_view.js";
 import { Player } from "./player.js";
 
 export class Game {
-    static FLOOR = 175;
     static PLAYER1_STARTX = -240;
     static PLAYER2_STARTX = 240;
 
     constructor(ctx) {
         this.gameView = new GameView(ctx);
+        this.FLOOR = this.gameView.background.FLOOR;
 
-        this.player1 = new Player([Game.PLAYER1_STARTX, Game.FLOOR*0.75], "player1");
+        this.player1 = new Player({
+            startpos: [Game.PLAYER1_STARTX, this.FLOOR*0.75],
+            name: "player1",
+            floor: this.FLOOR});
         this.controller1 = new Controller(this.player1, 1);
         this.player1.assignController(this.controller1);
 
-        this.player2 = new Player([Game.PLAYER2_STARTX, Game.FLOOR*0.75], "player2");
+        this.player2 = new Player({
+            startpos: [Game.PLAYER2_STARTX, this.FLOOR*0.75],
+            name: "player2",
+            floor: this.FLOOR});
         this.controller2 = new Controller(this.player2, 2);
         this.player2.assignController(this.controller2);
 
@@ -203,8 +209,8 @@ export class Game {
     }
 
     resetRound() {
-        this.player1.pos = [Game.PLAYER1_STARTX, Game.FLOOR*0.75];
-        this.player2.pos = [Game.PLAYER2_STARTX, Game.FLOOR*0.75];
+        this.player1.pos = [Game.PLAYER1_STARTX, this.FLOOR*0.75];
+        this.player2.pos = [Game.PLAYER2_STARTX, this.FLOOR*0.75];
 
         this.player1.health = 100;
         this.player2.health = 100;
