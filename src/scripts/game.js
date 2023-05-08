@@ -30,9 +30,6 @@ export class Game {
         this.gameView.draw(this.objects);
         this.gameView.renderScore(this.scores);
         this.handleCollisions();
-        // if (!this.roundOver) {
-        //     this.isRoundOver();
-        // }
         requestAnimationFrame(this.runGame.bind(this))
     }
 
@@ -140,7 +137,6 @@ export class Game {
                 // cause knockback
                 let knockback = 10;
                 if (origin.pos[0] < target.pos[0]){
-                    // debugger
                     target.pos[0] += knockback*(damage);
                 } else{
                     target.pos[0] -= knockback*(damage);
@@ -206,9 +202,6 @@ export class Game {
     }
 
     resetRound() {
-        // console.log("Round Reset")
-        // console.log(this.scores)
-
         this.player1.pos = [Game.PLAYER1_STARTX, Game.FLOOR*0.75];
         this.player2.pos = [Game.PLAYER2_STARTX, Game.FLOOR*0.75];
 
@@ -225,6 +218,5 @@ export class Game {
         this.player2.runAnimationState();
 
         this.roundOver = false;
-        // debugger
     }
 }
