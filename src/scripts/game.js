@@ -33,7 +33,9 @@ export class Game {
         this.scores = [0,0];
 
         this.resetRound = this.resetRound.bind(this);
+    }
 
+    start() {
         this.resetRound();
         this.runGame();
     }

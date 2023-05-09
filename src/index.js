@@ -1,5 +1,6 @@
 import { Game } from "./scripts/game";
 import { GameView } from "./scripts/game_view";
+import { MainMenu } from "./scripts/mainmenu";
 
 // set background
 // let body = document.querySelector("body");
@@ -25,4 +26,6 @@ canvas.width = GameView.WIDTH;
 canvas.height = GameView.HEIGHT;
 canvas.style.backgroundColor = "black";
 
-window.game = new Game(ctx, controller1ctx, controller2ctx);
+// window.game = new Game(ctx, controller1ctx, controller2ctx);
+
+window.menu = new MainMenu(ctx, controller1ctx, controller2ctx);
