@@ -6,6 +6,7 @@ import { Player } from "./player.js";
 export class Game {
     static PLAYER1_STARTX = -240;
     static PLAYER2_STARTX = 240;
+    static KNOCKBACK = 10;
 
     constructor(ctx, controller1ctx, controller2ctx) {
         this.gameView = new GameView(ctx);
@@ -49,6 +50,7 @@ export class Game {
     handleCollisions() {
         this.handleHit();
         this.handlePush();
+        this.handleSwordCollisions();
     }
 
     handlePush(){
@@ -148,11 +150,10 @@ export class Game {
                 }
 
                 // cause knockback
-                let knockback = 10;
                 if (origin.pos[0] < target.pos[0]){
-                    target.pos[0] += knockback*(damage);
+                    target.pos[0] += Game.KNOCKBACK*(damage);
                 } else{
-                    target.pos[0] -= knockback*(damage);
+                    target.pos[0] -= Game.KNOCKBACK*(damage);
                 }
             })
 
@@ -160,6 +161,53 @@ export class Game {
                 this.isRoundOver();
             }
         }
+    }
+
+    handleSwordCollisions() {
+        let hits = [];
+        for (let i = 0; i < this.objects.length; i++) {
+            let hitboxes1 = this.objects[i].getHitBoxes(GameView.MAIN_SCALE);
+            if (hitboxes1) {
+                hitboxes1 = hitboxes1[0];
+                for (let j = 0; j < this.objects.length; j++) {
+                    if (j !== i) {
+                        let hitboxes2 = this.objects[j].getHitBoxes(GameView.MAIN_SCALE);
+                        if (hitboxes2) {
+                            hitboxes2 = hitboxes2[0];
+
+                            if (this.overlappingBoxes(hitboxes1, hitboxes2)){
+                                hits.push([this.objects[i], this.objects[j]]);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        hits.forEach((hit) => {
+            let origin = hit[0];
+            let target = hit[1];
+
+            let damage = 4;
+                switch (origin.currentAction){
+                    case ("attack1"):
+                        damage *= 1;
+                        break;
+                    case ("attack2"):
+                        damage *= 2;
+                        break;
+                    case ("attack3"):
+                        damage *= 3;
+                        break;
+                }
+
+            if (origin.pos[0] < target.pos[0]){
+                target.pos[0] += Game.KNOCKBACK*(damage);
+            } else{
+                target.pos[0] -= Game.KNOCKBACK*(damage);
+            }
+        })
     }
 
     overlappingBoxes(box1, box2) {
