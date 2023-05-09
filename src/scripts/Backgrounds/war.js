@@ -4,7 +4,7 @@ export class War {
     static BACKGROUND_OFFSET_Y = -150;
     static BACKGROUND_SCALE = 0.85;
     static CAMERA_LIMIT_LEFT = -400;
-    static CAMERA_LIMIT_RIGHT = 270;
+    static CAMERA_LIMIT_RIGHT = 190;
     static FLOOR = 250;
 
     static BACKGROUND_IMAGES = [
@@ -50,27 +50,32 @@ export class War {
     }
 
     drawBackground(camera_location, scale) {
+        this.ctx.resetTransform();
+
         for (let i = 0; i < War.BACKGROUND_IMAGES.length; i++){
             let multiplier = War.BACKGROUND_IMAGES[i][1];
-            this.ctx.resetTransform();
-            this.ctx.scale(scale, scale)
-            this.ctx.translate(War.BACKGROUND_OFFSET_X - camera_location*multiplier,
-                        War.BACKGROUND_OFFSET_Y);
-            this.ctx.scale(War.BACKGROUND_SCALE, War.BACKGROUND_SCALE);
-            // let backgroundImg = document.getElementById(`background-${i}`);
-            this.ctx.drawImage(this.backgroundImgs[i],0,0);
+            let sx = -scale*(War.BACKGROUND_OFFSET_X - camera_location*multiplier);
+            let sy = -scale*(War.BACKGROUND_OFFSET_Y);
+            let sw = 720/War.BACKGROUND_SCALE/scale;
+            let sh = 540/War.BACKGROUND_SCALE/scale;
+            this.ctx.drawImage(this.backgroundImgs[i],
+                sx, sy, sw, sh,
+                0, 0, 720, 540);
         }
     }
 
     drawForeground(camera_location, scale) {
+        this.ctx.resetTransform();
+
         for (let i = 0; i < War.FOREGROUND_IMAGES.length; i++){
             let multiplier = War.FOREGROUND_IMAGES[i][1];
-            this.ctx.resetTransform();
-            this.ctx.scale(scale, scale)
-            this.ctx.translate(War.BACKGROUND_OFFSET_X - camera_location*multiplier,
-                        War.BACKGROUND_OFFSET_Y);
-            this.ctx.scale(War.BACKGROUND_SCALE, War.BACKGROUND_SCALE);
-            this.ctx.drawImage(this.foregroundImgs[i],0,0);
+            let sx = -(War.BACKGROUND_OFFSET_X - camera_location*multiplier)/scale;
+            let sy = -(War.BACKGROUND_OFFSET_Y)/scale;
+            let sw = 720/War.BACKGROUND_SCALE/scale;
+            let sh = 540/War.BACKGROUND_SCALE/scale;
+            this.ctx.drawImage(this.foregroundImgs[i],
+                sx, sy, sw, sh,
+                0, 0, 720, 540);
         }
     }
 }

@@ -50,26 +50,32 @@ export class Train {
     }
 
     drawBackground(camera_location, scale) {
+        this.ctx.resetTransform();
+
         for (let i = 0; i < Train.BACKGROUND_IMAGES.length; i++){
             let multiplier = Train.BACKGROUND_IMAGES[i][1];
-            this.ctx.resetTransform();
-            this.ctx.scale(scale, scale)
-            this.ctx.translate(Train.BACKGROUND_OFFSET_X - camera_location*multiplier,
-                        Train.BACKGROUND_OFFSET_Y);
-            this.ctx.scale(Train.BACKGROUND_SCALE, Train.BACKGROUND_SCALE);
-            this.ctx.drawImage(this.backgroundImgs[i],0,0);
+            let sx = -scale*(Train.BACKGROUND_OFFSET_X - camera_location*multiplier);
+            let sy = -scale*(Train.BACKGROUND_OFFSET_Y);
+            let sw = 720/Train.BACKGROUND_SCALE/scale;
+            let sh = 540/Train.BACKGROUND_SCALE/scale;
+            this.ctx.drawImage(this.backgroundImgs[i],
+                sx, sy, sw, sh,
+                0, 0, 720, 540);
         }
     }
 
     drawForeground(camera_location, scale) {
+        this.ctx.resetTransform();
+
         for (let i = 0; i < Train.FOREGROUND_IMAGES.length; i++){
             let multiplier = Train.FOREGROUND_IMAGES[i][1];
-            this.ctx.resetTransform();
-            this.ctx.scale(scale, scale)
-            this.ctx.translate(Train.BACKGROUND_OFFSET_X - camera_location*multiplier,
-                        Train.BACKGROUND_OFFSET_Y);
-            this.ctx.scale(Train.BACKGROUND_SCALE, Train.BACKGROUND_SCALE);
-            this.ctx.drawImage(this.foregroundImgs[i],0,0);
+            let sx = -(Train.BACKGROUND_OFFSET_X - camera_location*multiplier)/scale;
+            let sy = -(Train.BACKGROUND_OFFSET_Y)/scale;
+            let sw = 720/Train.BACKGROUND_SCALE/scale;
+            let sh = 540/Train.BACKGROUND_SCALE/scale;
+            this.ctx.drawImage(this.foregroundImgs[i],
+                sx, sy, sw, sh,
+                0, 0, 720, 540);
         }
     }
 }
