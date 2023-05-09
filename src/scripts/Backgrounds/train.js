@@ -4,7 +4,7 @@ export class Train {
     static BACKGROUND_OFFSET_Y = -200;
     static BACKGROUND_SCALE = 0.9;
     static CAMERA_LIMIT_LEFT = -400;
-    static CAMERA_LIMIT_RIGHT = 365;
+    static CAMERA_LIMIT_RIGHT = 225;
     static FLOOR = 175;
 
     static BACKGROUND_IMAGES = [
