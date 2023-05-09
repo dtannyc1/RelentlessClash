@@ -1,3 +1,4 @@
+import { ComputerController } from "./computer_controller.js";
 import { Controller } from "./controller.js";
 import { GameView } from "./game_view.js";
 import { Player } from "./player.js";
@@ -21,7 +22,10 @@ export class Game {
             startpos: [Game.PLAYER2_STARTX, this.FLOOR*0.75],
             name: "player2",
             floor: this.FLOOR});
-        this.controller2 = new Controller(this.player2, 2, controller2ctx);
+        // this.controller2 = new Controller(this.player2, 2, controller2ctx);
+        // this.player2.assignController(this.controller2);
+        this.controller2 = new ComputerController(this.player2, 2,
+                                            controller2ctx, this.player1, 8);
         this.player2.assignController(this.controller2);
 
         this.objects = [this.player1, this.player2];
@@ -137,7 +141,7 @@ export class Game {
                 }
 
                 // deal damage
-                target.health -= damage*(boxNum+1)*0.25;
+                target.health -= damage*(3-boxNum)*0.25;
                 if (target.health < 0){
                     roundEnd = true;
                     target.health = 0;

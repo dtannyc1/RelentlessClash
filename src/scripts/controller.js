@@ -1,7 +1,7 @@
 import { Game } from "./game";
 
 export class Controller {
-    constructor (player, option, ctx){
+    constructor (player, option, ctx, bindKeys = true){
         let buttonMapping;
         this.imgs = [];
         this.ctx = ctx;
@@ -31,25 +31,27 @@ export class Controller {
 
         this.heldButtons = [];
 
-        window.addEventListener("keydown", event => {
-            if (buttonMapping[event.key]) {
-                if (!this.heldButtons.includes(buttonMapping[event.key])) {
-                    this.heldButtons.push(buttonMapping[event.key]);
-                    player.handleButtonPress(buttonMapping[event.key]);
+        if (bindKeys) {
+            window.addEventListener("keydown", event => {
+                if (buttonMapping[event.key]) {
+                    if (!this.heldButtons.includes(buttonMapping[event.key])) {
+                        this.heldButtons.push(buttonMapping[event.key]);
+                        player.handleButtonPress(buttonMapping[event.key]);
+                    }
                 }
-            }
-        });
+            });
 
-        window.addEventListener("keyup", event => {
-            if (buttonMapping[event.key]) {
-                if (this.heldButtons.includes(buttonMapping[event.key])) {
-                    let idx = this.heldButtons.indexOf(buttonMapping[event.key]);
-                    this.heldButtons.splice(idx, 1);
+            window.addEventListener("keyup", event => {
+                if (buttonMapping[event.key]) {
+                    if (this.heldButtons.includes(buttonMapping[event.key])) {
+                        let idx = this.heldButtons.indexOf(buttonMapping[event.key]);
+                        this.heldButtons.splice(idx, 1);
 
-                    player.handleButtonRelease(buttonMapping[event.key]);
+                        player.handleButtonRelease(buttonMapping[event.key]);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         this.draw = this.draw.bind(this);
     }

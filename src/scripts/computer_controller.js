@@ -1,40 +1,12 @@
 import { Controller } from "./controller";
 
 export class ComputerController extends Controller {
-    constructor (player, option, ctx, opponent){
-        let buttonMapping;
-        this.imgs = [];
-        this.ctx = ctx;
+    constructor (player, option, ctx, opponent, difficulty = 6){
+        super(player, option, ctx, false);
+
         this.player = player;
         this.opponent = opponent;
 
-        if (option === 1) {
-            buttonMapping = Controller.CONTROLLER_ONE;
-            let body = document.querySelector("body");
-            for (const [key, src] of Object.entries(Controller.CONTROLLER_ONE_IMG_SRC)) {
-                let img = document.createElement('img');
-                img.src = src;
-                img.id = `controller1-${key}`;
-                img.hidden = true;
-                body.appendChild(img);
-                this.imgs.push([key,img]);
-            }
-        } else if (option === 2) {
-            buttonMapping = Controller.CONTROLLER_TWO;
-            let body = document.querySelector("body");
-            for (const [key, src] of Object.entries(Controller.CONTROLLER_TWO_IMG_SRC)) {
-                let img = document.createElement('img');
-                img.src = src;
-                img.id = `controller2-${key}`;
-                img.hidden = true;
-                body.appendChild(img);
-                this.imgs.push([key,img]);
-            }
-        }
-
-        this.heldButtons = [];
-
-        this.draw = this.draw.bind(this);
         this.chooseAction = this.chooseAction.bind(this);
         this.takeAction = this.takeAction.bind(this);
         this.pressButton = this.pressButton.bind(this);
@@ -42,21 +14,28 @@ export class ComputerController extends Controller {
         this.updateDistanceFromOpponent = this.updateDistanceFromOpponent.bind(this);
 
         // difficulty scales the update rate of actions
-        this.difficulty = option["difficulty"];
-        this.buttonReleaseDelay = (20-this.difficulty)*100;
+        this.difficulty = difficulty;
+        // this.buttonReleaseDelay = (20-this.difficulty)*100;
 
         this.relPos = [1000,1000];
 
         setInterval(this.chooseAction, 100);
+        // Notes on delay values:
+        // 400 feels slow, too easy
+        // 200 feels good
+        // 100 is aggressive
     }
 
     chooseAction() {
         this.updateDistanceFromOpponent();
-        // if (Math.abs(this.relPos[0]) < 100) {
-        //     // this.takeAction("attack");
-        // } else
-        if (this.relPos[0] > 20){
+        if (Math.abs(this.relPos[0]) > 200){
             this.takeAction("run");
+        } else if (Math.random()*10 < this.difficulty) {
+            this.takeAction("attack");
+        } else if (Math.abs(this.relPos[1]) > 20) {
+            if (Math.random()*10 < this.difficulty) {
+                this.takeAction("jump");
+            }
         } else {
             this.takeAction("idle");
         }
@@ -66,27 +45,47 @@ export class ComputerController extends Controller {
         if (action === "attack") {
             let choices = ["B", "Y", "X"];
             let choice = choices[Math.floor(Math.random()*choices.length)];
-            this.heldButtons.push(choice);
-            this.player.handleButtonPress(choice);
+            this.pressButton(choice);
+            setTimeout(() => this.releaseButton(choice), 500);
+            // console.log("attacking")
+        } else if (action === "run") {
+            if (this.relPos[0] > 0) {
+                this.releaseButton("LEFT");
+                if (this.player.vel[0] === 0) {
+                    this.releaseButton("RIGHT");
+                }
+                this.pressButton("RIGHT");
+                // setTimeout(() => this.releaseButton("RIGHT"), 500);
+            } else if (this.relPos[0] < 0) {
+                this.releaseButton("RIGHT");
+                if (this.player.vel[0] === 0) {
+                    this.releaseButton("LEFT");
+                }
+                this.pressButton("LEFT");
+                // setTimeout(() => this.releaseButton("LEFT"), 500);
+            }
+            // console.log("running")
+        } else if (action === "jump") {
+            this.pressButton("UP");
+            setTimeout(() => this.releaseButton("UP"), 500);
         } else if (action === "idle") {
             while (this.heldButtons.length > 0) {
                 this.releaseButton(this.heldButtons[0]);
             }
-        } else if (action === "run") {
-            if (this.relPos[0] > 0) {
-                this.pressButton("RIGHT");
-            } else if (this.relPos[0] < 0) {
-                this.pressButton("LEFT");
-            }
+            // console.log("idle")
         }
     }
 
     pressButton(button) {
-        this.heldButtons.push(button);
-        this.player.handleButtonPress(button);
+        if (!this.heldButtons.includes(button)) {
+            this.heldButtons.push(button);
+            this.player.handleButtonPress(button);
+        }
     }
 
     releaseButton(button){
+        // debugger
+        // console.log(button)
         if (this.heldButtons.indexOf(button) !== -1) {
             this.heldButtons.splice(this.heldButtons.indexOf(button),1);
             this.player.handleButtonRelease(button);
@@ -94,6 +93,7 @@ export class ComputerController extends Controller {
     }
 
     updateDistanceFromOpponent(){
+        // debugger
         this.relPos[0] = this.opponent.pos[0] - this.player.pos[0];
         this.relPos[1] = this.opponent.pos[1] - this.player.pos[1];
     }
