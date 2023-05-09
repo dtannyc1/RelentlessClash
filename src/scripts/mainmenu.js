@@ -9,7 +9,10 @@ export class MainMenu {
         this.gameStarted = false;
         // this.startGame();
         // this.loadFont();
-        this.draw();
+        this.computerplayer1 = true;
+        this.computerplayer2 = true;
+        // this.draw();
+        this.startGame();
     }
 
     draw(){
@@ -18,8 +21,7 @@ export class MainMenu {
         this.ctx.fillStyle = "yellow";
         this.ctx.textAlign = "center";
         this.ctx.font = "20px 'Press Start 2P'";
-        // debugger
-        // console.log(this.ctx.font)
+
         this.ctx.fillText("Press H/K to join the game",
                     GameView.WIDTH*0.5, GameView.HEIGHT*0.5);
 

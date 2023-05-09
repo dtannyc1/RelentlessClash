@@ -2,11 +2,13 @@ import { Game } from "./game";
 
 export class Controller {
     constructor (player, option, ctx, bindKeys = true){
-        let buttonMapping;
+        this.buttonMapping = undefined;
         this.imgs = [];
         this.ctx = ctx;
+        this.player = player;
+
         if (option === 1) {
-            buttonMapping = Controller.CONTROLLER_ONE;
+            this.buttonMapping = Controller.CONTROLLER_ONE;
             let body = document.querySelector("body");
             for (const [key, src] of Object.entries(Controller.CONTROLLER_ONE_IMG_SRC)) {
                 let img = document.createElement('img');
@@ -17,7 +19,7 @@ export class Controller {
                 this.imgs.push([key,img]);
             }
         } else if (option === 2) {
-            buttonMapping = Controller.CONTROLLER_TWO;
+            this.buttonMapping = Controller.CONTROLLER_TWO;
             let body = document.querySelector("body");
             for (const [key, src] of Object.entries(Controller.CONTROLLER_TWO_IMG_SRC)) {
                 let img = document.createElement('img');
@@ -30,30 +32,45 @@ export class Controller {
         }
 
         this.heldButtons = [];
+        this.handleKeyDown = this.handleKeyDown.bind(this);
+        this.handleKeyUp = this.handleKeyUp.bind(this);
 
         if (bindKeys) {
-            window.addEventListener("keydown", event => {
-                if (buttonMapping[event.key]) {
-                    if (!this.heldButtons.includes(buttonMapping[event.key])) {
-                        this.heldButtons.push(buttonMapping[event.key]);
-                        player.handleButtonPress(buttonMapping[event.key]);
-                    }
-                }
-            });
+            window.addEventListener("keydown", this.handleKeyDown);
 
-            window.addEventListener("keyup", event => {
-                if (buttonMapping[event.key]) {
-                    if (this.heldButtons.includes(buttonMapping[event.key])) {
-                        let idx = this.heldButtons.indexOf(buttonMapping[event.key]);
-                        this.heldButtons.splice(idx, 1);
-
-                        player.handleButtonRelease(buttonMapping[event.key]);
-                    }
-                }
-            });
+            window.addEventListener("keyup", this.handleKeyUp);
         }
 
         this.draw = this.draw.bind(this);
+    }
+
+    handleKeyDown(event) {
+        // debugger
+        if (this.buttonMapping[event.key]) {
+            if (!this.heldButtons.includes(this.buttonMapping[event.key])) {
+                this.heldButtons.push(this.buttonMapping[event.key]);
+                if (this.player) {
+                    this.player.handleButtonPress(this.buttonMapping[event.key]);
+                }
+            }
+        }
+    }
+
+    handleKeyUp(event) {
+        if (this.buttonMapping[event.key]) {
+            if (this.heldButtons.includes(this.buttonMapping[event.key])) {
+                let idx = this.heldButtons.indexOf(this.buttonMapping[event.key]);
+                this.heldButtons.splice(idx, 1);
+                if (this.player) {
+                    this.player.handleButtonRelease(this.buttonMapping[event.key]);
+                }
+            }
+        }
+    }
+
+    destroy() {
+        window.removeEventListener("keydown", this.handleKeyDown);
+        window.removeEventListener("keyup", this.handleKeyUp);
     }
 
     draw() {
