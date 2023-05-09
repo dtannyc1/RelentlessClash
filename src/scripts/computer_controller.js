@@ -15,11 +15,11 @@ export class ComputerController extends Controller {
 
         // difficulty scales the update rate of actions
         this.difficulty = difficulty;
-        // this.buttonReleaseDelay = (20-this.difficulty)*100;
+        this.buttonReleaseDelay = 250 + (10-this.difficulty)*500;
 
         this.relPos = [1000,1000];
 
-        setInterval(this.chooseAction, 100);
+        setInterval(this.chooseAction, 100 + (10-this.difficulty) * 30);
         // Notes on delay values:
         // 400 feels slow, too easy
         // 200 feels good
@@ -28,26 +28,32 @@ export class ComputerController extends Controller {
 
     chooseAction() {
         this.updateDistanceFromOpponent();
-        if (Math.abs(this.relPos[0]) > 200){
+        if (Math.abs(this.relPos[0]) > 200 && Math.random()*10 < this.difficulty){
             this.takeAction("run");
-        } else if (Math.random()*10 < this.difficulty) {
-            this.takeAction("attack");
-        } else if (Math.abs(this.relPos[1]) > 20) {
-            if (Math.random()*10 < this.difficulty) {
-                this.takeAction("jump");
-            }
         } else {
-            this.takeAction("idle");
+            if (Math.random()*10 < this.difficulty) {
+                this.takeAction("attack");
+            }
+            if (Math.abs(this.relPos[1]) > 20) {
+                if (Math.random()*10 < this.difficulty) {
+                    this.takeAction("jump");
+                }
+            } else {
+                this.takeAction("idle");
+            }
         }
     }
 
     takeAction(action){
         if (action === "attack") {
             let choices = ["B", "Y", "X"];
-            let choice = choices[Math.floor(Math.random()*choices.length)];
-            this.pressButton(choice);
-            setTimeout(() => this.releaseButton(choice), 500);
-            // console.log("attacking")
+            if (!this.heldButtons.includes("B") &&
+                    !this.heldButtons.includes("Y") &&
+                        !this.heldButtons.includes("X")) {
+                let choice = choices[Math.floor(Math.random()*choices.length)];
+                this.pressButton(choice);
+                setTimeout(() => this.releaseButton(choice), this.buttonReleaseDelay);
+            }
         } else if (action === "run") {
             if (this.relPos[0] > 0) {
                 this.releaseButton("LEFT");
@@ -55,24 +61,20 @@ export class ComputerController extends Controller {
                     this.releaseButton("RIGHT");
                 }
                 this.pressButton("RIGHT");
-                // setTimeout(() => this.releaseButton("RIGHT"), 500);
             } else if (this.relPos[0] < 0) {
                 this.releaseButton("RIGHT");
                 if (this.player.vel[0] === 0) {
                     this.releaseButton("LEFT");
                 }
                 this.pressButton("LEFT");
-                // setTimeout(() => this.releaseButton("LEFT"), 500);
             }
-            // console.log("running")
         } else if (action === "jump") {
             this.pressButton("UP");
-            setTimeout(() => this.releaseButton("UP"), 500);
+            setTimeout(() => this.releaseButton("UP"), this.buttonReleaseDelay);
         } else if (action === "idle") {
             while (this.heldButtons.length > 0) {
                 this.releaseButton(this.heldButtons[0]);
             }
-            // console.log("idle")
         }
     }
 

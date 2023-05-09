@@ -25,7 +25,7 @@ export class Game {
         // this.controller2 = new Controller(this.player2, 2, controller2ctx);
         // this.player2.assignController(this.controller2);
         this.controller2 = new ComputerController(this.player2, 2,
-                                            controller2ctx, this.player1, 8);
+                                            controller2ctx, this.player1, 10);
         this.player2.assignController(this.controller2);
 
         this.objects = [this.player1, this.player2];
@@ -232,6 +232,9 @@ export class Game {
 
         this.player1.runAnimationState();
         this.player2.runAnimationState();
+
+        this.player1.stun(1000);
+        this.player2.stun(1000);
 
         this.roundOver = false;
     }
