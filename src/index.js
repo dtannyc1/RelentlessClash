@@ -17,6 +17,8 @@ controller1canvas.height = 227;
 const controller1ctx = controller1canvas.getContext("2d");
 
 let controller2canvas = document.querySelector("#controller2")
+controller2canvas.width = 663;
+controller2canvas.height = 227;
 const controller2ctx = controller2canvas.getContext("2d");
 
 canvas.width = GameView.WIDTH;

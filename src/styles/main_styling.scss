@@ -24,7 +24,10 @@ body {
     background-position-x: center;
     background-size: cover;
     background-repeat: no-repeat;
-    // backdrop-filter: blur(1px);
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
 }
 
 #arcade-machine {
@@ -56,16 +59,14 @@ body {
     grid-row-start: 5;
     grid-row-end: 6;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     height: 100%;
 }
 
 #controller1 {
     height: 100%;
-    width: 40%;
 }
 
 #controller2 {
     height: 100%;
-    width: 40%;
 }

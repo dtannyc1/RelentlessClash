@@ -56,7 +56,7 @@ export class Controller {
 
     draw() {
         this.ctx.resetTransform()
-        this.ctx.clearRect(0,0,1000,1000);
+        this.ctx.clearRect(0, 0, 663, 227);
         // debugger
         this.imgs.forEach((arr) => {
             let key = arr[0];
@@ -98,11 +98,22 @@ export class Controller {
     };
 
     static CONTROLLER_ONE_IMG_SRC = {
-        "UP": "assets/images/ControllerKeys/W.png",
-        "LEFT": "assets/images/ControllerKeys/A.png"
+        "UP": "assets/images/ControllerKeys/1up.png",
+        "LEFT": "assets/images/ControllerKeys/1left.png",
+        "DOWN": "assets/images/ControllerKeys/1down.png",
+        "RIGHT": "assets/images/ControllerKeys/1right.png",
+        "B": "assets/images/ControllerKeys/1attack1.png",
+        "Y": "assets/images/ControllerKeys/1attack2.png",
+        "X": "assets/images/ControllerKeys/1attack3.png"
     };
 
     static CONTROLLER_TWO_IMG_SRC = {
-        "UP": "assets/images/ControllerKeys/W.png"
+        "UP": "assets/images/ControllerKeys/2up.png",
+        "RIGHT": "assets/images/ControllerKeys/2right.png",
+        "DOWN": "assets/images/ControllerKeys/2down.png",
+        "LEFT": "assets/images/ControllerKeys/2left.png",
+        "B": "assets/images/ControllerKeys/2attack1.png",
+        "Y": "assets/images/ControllerKeys/2attack2.png",
+        "X": "assets/images/ControllerKeys/2attack3.png"
     };
 }
