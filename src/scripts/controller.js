@@ -29,6 +29,28 @@ export class Controller {
                 body.appendChild(img);
                 this.imgs.push([key,img]);
             }
+        } else if (option === 3) {
+            this.buttonMapping = Controller.CONTROLLER_MENU;
+            let body = document.querySelector("body");
+            for (const [key, src] of Object.entries(Controller.CONTROLLER_ONE_IMG_SRC)) {
+                let img = document.createElement('img');
+                img.src = src;
+                img.id = `controller1-${key}`;
+                img.hidden = true;
+                body.appendChild(img);
+                this.imgs.push([key,img]);
+            }
+        } else if (option === 4) {
+            this.buttonMapping = Controller.CONTROLLER_MENU;
+            let body = document.querySelector("body");
+            for (const [key, src] of Object.entries(Controller.CONTROLLER_TWO_IMG_SRC)) {
+                let img = document.createElement('img');
+                img.src = src;
+                img.id = `controller2-${key}`;
+                img.hidden = true;
+                body.appendChild(img);
+                this.imgs.push([key,img]);
+            }
         }
 
         this.heldButtons = [];
@@ -49,6 +71,7 @@ export class Controller {
         if (this.buttonMapping[event.key]) {
             if (!this.heldButtons.includes(this.buttonMapping[event.key])) {
                 this.heldButtons.push(this.buttonMapping[event.key]);
+                console.log("buttons held: " + this.heldButtons)
                 if (this.player) {
                     this.player.handleButtonPress(this.buttonMapping[event.key]);
                 }
@@ -71,6 +94,7 @@ export class Controller {
     destroy() {
         window.removeEventListener("keydown", this.handleKeyDown);
         window.removeEventListener("keyup", this.handleKeyUp);
+        this.imgs.forEach(img => { img.remove();})
     }
 
     draw() {
@@ -115,6 +139,12 @@ export class Controller {
         ArrowLeft: 'LEFT',
         ArrowRight: 'RIGHT'
     };
+
+    static CONTROLLER_MENU =  {
+        " ": " ",
+        "k": "k",
+        "h": "h"
+    }
 
     static CONTROLLER_ONE_IMG_SRC = {
         "UP": "assets/images/ControllerKeys/1up.png",
