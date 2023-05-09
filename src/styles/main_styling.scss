@@ -33,7 +33,7 @@ body {
     background-size: auto 100%;
     background-repeat: no-repeat;
     display: grid;
-    grid-template-rows: 12% 9.6% 57.5% 2% 12% auto;
+    grid-template-rows: 12% 9.6% 57.5% 4.5% 12% auto;
     background-color: transparent;
     height: 100%;
     justify-content: center;
@@ -50,4 +50,22 @@ body {
     border-radius: 3px;
     border-image-source: linear-gradient(black, rgb(97, 97, 97));
     border-image-slice: 1;
+}
+
+.controllers {
+    grid-row-start: 5;
+    grid-row-end: 6;
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+#controller1 {
+    height: 100%;
+    width: 40%;
+}
+
+#controller2 {
+    height: 100%;
+    width: 40%;
 }

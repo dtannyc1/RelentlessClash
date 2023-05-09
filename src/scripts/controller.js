@@ -1,12 +1,32 @@
 import { Game } from "./game";
 
 export class Controller {
-    constructor (player, option){
+    constructor (player, option, ctx){
         let buttonMapping;
+        this.imgs = [];
+        this.ctx = ctx;
         if (option === 1) {
             buttonMapping = Controller.CONTROLLER_ONE;
+            let body = document.querySelector("body");
+            for (const [key, src] of Object.entries(Controller.CONTROLLER_ONE_IMG_SRC)) {
+                let img = document.createElement('img');
+                img.src = src;
+                img.id = `controller1-${key}`;
+                img.hidden = true;
+                body.appendChild(img);
+                this.imgs.push([key,img]);
+            }
         } else if (option === 2) {
             buttonMapping = Controller.CONTROLLER_TWO;
+            let body = document.querySelector("body");
+            for (const [key, src] of Object.entries(Controller.CONTROLLER_TWO_IMG_SRC)) {
+                let img = document.createElement('img');
+                img.src = src;
+                img.id = `controller2-${key}`;
+                img.hidden = true;
+                body.appendChild(img);
+                this.imgs.push([key,img]);
+            }
         }
 
         this.heldButtons = [];
@@ -30,6 +50,25 @@ export class Controller {
                 }
             }
         });
+
+        this.draw = this.draw.bind(this);
+    }
+
+    draw() {
+        this.ctx.resetTransform()
+        this.ctx.clearRect(0,0,1000,1000);
+        // debugger
+        this.imgs.forEach((arr) => {
+            let key = arr[0];
+            let img = arr[1];
+
+            if (this.heldButtons.includes(key)) {
+                this.ctx.drawImage(img, 0, 5, 663, 227);
+            } else {
+                this.ctx.drawImage(img, 0, 0, 663, 227);
+            }
+        })
+
     }
 
     static CONTROLLER_ONE = {
@@ -56,5 +95,14 @@ export class Controller {
         ArrowDown: 'DOWN',
         ArrowLeft: 'LEFT',
         ArrowRight: 'RIGHT'
+    };
+
+    static CONTROLLER_ONE_IMG_SRC = {
+        "UP": "assets/images/ControllerKeys/W.png",
+        "LEFT": "assets/images/ControllerKeys/A.png"
+    };
+
+    static CONTROLLER_TWO_IMG_SRC = {
+        "UP": "assets/images/ControllerKeys/W.png"
     };
 }

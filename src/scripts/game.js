@@ -6,7 +6,7 @@ export class Game {
     static PLAYER1_STARTX = -240;
     static PLAYER2_STARTX = 240;
 
-    constructor(ctx) {
+    constructor(ctx, controller1ctx, controller2ctx) {
         this.gameView = new GameView(ctx);
         this.FLOOR = this.gameView.background.FLOOR;
 
@@ -14,14 +14,14 @@ export class Game {
             startpos: [Game.PLAYER1_STARTX, this.FLOOR*0.75],
             name: "player1",
             floor: this.FLOOR});
-        this.controller1 = new Controller(this.player1, 1);
+        this.controller1 = new Controller(this.player1, 1, controller1ctx);
         this.player1.assignController(this.controller1);
 
         this.player2 = new Player({
             startpos: [Game.PLAYER2_STARTX, this.FLOOR*0.75],
             name: "player2",
             floor: this.FLOOR});
-        this.controller2 = new Controller(this.player2, 2);
+        this.controller2 = new Controller(this.player2, 2, controller2ctx);
         this.player2.assignController(this.controller2);
 
         this.objects = [this.player1, this.player2];
@@ -36,6 +36,8 @@ export class Game {
     runGame() {
         this.gameView.draw(this.objects);
         this.gameView.renderScore(this.scores);
+        this.controller1.draw();
+        this.controller2.draw();
         this.handleCollisions();
         requestAnimationFrame(this.runGame.bind(this))
     }
