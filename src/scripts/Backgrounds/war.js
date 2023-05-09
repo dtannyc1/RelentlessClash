@@ -28,12 +28,15 @@ export class War {
 
         let body = document.querySelector("body");
 
+        this.backgroundImgs = [];
+        this.foregroundImgs = [];
         for (let i = 0; i < War.BACKGROUND_IMAGES.length; i++) {
             let img = document.createElement('img');
             img.src = War.BACKGROUND_IMAGES[i][0];
             img.id = `background-${i}`;
             img.hidden = true;
             body.appendChild(img);
+            this.backgroundImgs.push(img);
         }
 
         for (let i = 0; i < War.FOREGROUND_IMAGES.length; i++) {
@@ -42,6 +45,7 @@ export class War {
             img.id = `foreground-${i}`;
             img.hidden = true;
             body.appendChild(img);
+            this.foregroundImgs.push(img);
         }
     }
 
@@ -53,8 +57,8 @@ export class War {
             this.ctx.translate(War.BACKGROUND_OFFSET_X - camera_location*multiplier,
                         War.BACKGROUND_OFFSET_Y);
             this.ctx.scale(War.BACKGROUND_SCALE, War.BACKGROUND_SCALE);
-            let backgroundImg = document.getElementById(`background-${i}`);
-            this.ctx.drawImage(backgroundImg,0,0);
+            // let backgroundImg = document.getElementById(`background-${i}`);
+            this.ctx.drawImage(this.backgroundImgs[i],0,0);
         }
     }
 
@@ -66,8 +70,7 @@ export class War {
             this.ctx.translate(War.BACKGROUND_OFFSET_X - camera_location*multiplier,
                         War.BACKGROUND_OFFSET_Y);
             this.ctx.scale(War.BACKGROUND_SCALE, War.BACKGROUND_SCALE);
-            let backgroundImg = document.getElementById(`foreground-${i}`);
-            this.ctx.drawImage(backgroundImg,0,0);
+            this.ctx.drawImage(this.foregroundImgs[i],0,0);
         }
     }
 }

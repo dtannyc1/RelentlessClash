@@ -57,7 +57,6 @@ export class Train {
             this.ctx.translate(Train.BACKGROUND_OFFSET_X - camera_location*multiplier,
                         Train.BACKGROUND_OFFSET_Y);
             this.ctx.scale(Train.BACKGROUND_SCALE, Train.BACKGROUND_SCALE);
-            // let backgroundImg = document.getElementById(`background-${i}`);
             this.ctx.drawImage(this.backgroundImgs[i],0,0);
         }
     }
@@ -70,7 +69,6 @@ export class Train {
             this.ctx.translate(Train.BACKGROUND_OFFSET_X - camera_location*multiplier,
                         Train.BACKGROUND_OFFSET_Y);
             this.ctx.scale(Train.BACKGROUND_SCALE, Train.BACKGROUND_SCALE);
-            // let backgroundImg = document.getElementById(`foreground-${i}`);
             this.ctx.drawImage(this.foregroundImgs[i],0,0);
         }
     }
