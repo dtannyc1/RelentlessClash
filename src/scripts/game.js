@@ -26,6 +26,7 @@ export class Game {
 
         this.controller1.assignOpponent(this.player2);
         this.controller2.assignOpponent(this.player1);
+        debugger
 
         this.objects = [this.player1, this.player2];
         this.scores = [0,0];

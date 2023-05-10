@@ -33,5 +33,5 @@ window.addEventListener("gamepadconnected", controllerConnectListener);
 // Modal.handleModalClick = Modal.handleModalClick.bind(menu);
 
 // Modal Handling:
-let modal = document.querySelector(".modal");
+let modal = document.querySelector("#modal-holder");
 modal.addEventListener("click", Modal.handleModalClick)
