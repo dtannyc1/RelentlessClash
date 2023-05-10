@@ -57,7 +57,6 @@ export class Controller {
         if (this.buttonMapping[event.key]) {
             if (!this.heldButtons.includes(this.buttonMapping[event.key])) {
                 this.heldButtons.push(this.buttonMapping[event.key]);
-                console.log("buttons held: " + this.heldButtons)
                 if (this.player) {
                     this.player.handleButtonPress(this.buttonMapping[event.key]);
                 }

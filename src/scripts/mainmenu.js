@@ -13,11 +13,11 @@ export class MainMenu {
         this.computerplayer1 = true;
         this.computerplayer2 = true;
 
-        this.controller1 = new Controller(this, 3, this.controller1ctx);
-        // this.controller2 = new Controller(this, 4, this.controller2ctx);
+        // this.controller1 = new Controller(this, 1, this.controller1ctx);
+        // this.controller2 = new Controller(this, 2, this.controller2ctx);
 
-        this.draw();
-        // this.startGame();
+        // this.draw();
+        this.startGame();
     }
 
     draw(){
