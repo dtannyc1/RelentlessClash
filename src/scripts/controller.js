@@ -31,6 +31,7 @@ export class Controller {
             }
         }
 
+
         this.heldButtons = [];
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleKeyUp = this.handleKeyUp.bind(this);

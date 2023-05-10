@@ -13,11 +13,11 @@ export class MainMenu {
         this.computerplayer1 = true;
         this.computerplayer2 = true;
 
-        this.controller1 = new Controller(this, 1, this.controller1ctx);
-        this.controller2 = new Controller(this, 2, this.controller2ctx);
+        this.controller1 = new Controller(null, 1, this.controller1ctx);
+        this.controller2 = new Controller(null, 2, this.controller2ctx);
 
-        // this.draw();
-        this.startGame();
+        this.draw();
+        // this.startGame();
     }
 
     draw(){
@@ -32,25 +32,25 @@ export class MainMenu {
 
         // draw controllers
         this.controller1.draw();
-        // this.controller2.draw();
+        this.controller2.draw();
 
         // show if human or computer player
         let ctx = this.controller1ctx;
         ctx.fillStyle = "yellow";
-        ctx.textAlign = "center";
+        ctx.textAlign = "left";
         ctx.font = "20px 'Press Start 2P'";
         if (this.computerplayer1) {
-            ctx.fillText("Computer Player 1", 375, 50);
+            ctx.fillText("Computer Player 1", 225, 40);
         } else {
             ctx.fillText("Human Player 1", 375, 50);
         }
 
         ctx = this.controller2ctx;
         ctx.fillStyle = "yellow";
-        ctx.textAlign = "center";
+        ctx.textAlign = "right";
         ctx.font = "20px 'Press Start 2P'";
         if (this.computerplayer2) {
-            ctx.fillText("Computer Player 2", 375, 50);
+            ctx.fillText("Computer Player 2", 425, 40);
         } else {
             ctx.fillText("Human Player 2", 375, 50);
         }

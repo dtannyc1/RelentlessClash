@@ -59,6 +59,11 @@ table {
   border-spacing: 0;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 * {
   background-color: transparent;
   margin: 0px;
@@ -81,12 +86,14 @@ h1 {
 body {
   background-image: url("../assets/images/Backgrounds/asian_night.png");
   background-position-x: center;
-  background-size: cover;
   background-repeat: no-repeat;
   display: flex;
   height: 100%;
   width: 100%;
   justify-content: center;
+  position: absolute;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 #arcade-machine {
