@@ -29,6 +29,7 @@ export class Game {
 
         this.objects = [this.player1, this.player2];
         this.scores = [0,0];
+        this.gameOver = false;
 
         this.resetRound = this.resetRound.bind(this);
     }
@@ -44,7 +45,9 @@ export class Game {
         this.controller1.draw();
         this.controller2.draw();
         this.handleCollisions();
-        requestAnimationFrame(this.runGame.bind(this))
+        if (!this.gameOver) {
+            requestAnimationFrame(this.runGame.bind(this))
+        }
     }
 
     handleCollisions() {
@@ -240,26 +243,40 @@ export class Game {
                 this.player2.currentAction = "dead";
                 this.player1.stun(5000);
                 this.player2.stun(5000);
-
-                setTimeout(this.resetRound, 4500);
             } else if (this.player1.health === 0){
                 this.scores[1] += 1;
                 this.player1.currentAction = "dead";
                 this.player2.runAnimationState(false);
                 this.player1.stun(5000);
                 this.player2.stun(5000);
-
-                setTimeout(this.resetRound, 4500);
             } else {
                 this.scores[0] += 1;
                 this.player2.currentAction = "dead";
                 this.player1.runAnimationState(false);
                 this.player1.stun(5000);
                 this.player2.stun(5000);
+            }
 
+            if (!this.isGameOver()) {
                 setTimeout(this.resetRound, 4500);
+            } else {
+                setTimeout(this.endGame, 4500);
             }
         }
+    }
+
+    isGameOver(){
+        // end game if winning by 2
+        if (Math.abs(this.scores[0] - this.scores[1]) >= 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    endGame(){
+        this.gameOver = true;
+        console.log("Game Over")
     }
 
     randomizeStage() {

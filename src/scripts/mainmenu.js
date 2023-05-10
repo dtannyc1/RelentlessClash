@@ -124,6 +124,15 @@ export class MainMenu {
         // console.log("released: " + button)
     }
 
+    restartMenu() {
+        this.addListeners();
+        this.controller1.removeListeners();
+        this.controller2.removeListeners();
+        this.controller1.addListeners();
+        this.controller2.addListeners();
+        this.gameStarted = false;
+    }
+
     startGame() {
         this.removeListeners();
         this.gameStarted = true;
