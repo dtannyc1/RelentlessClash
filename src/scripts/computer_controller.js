@@ -15,18 +15,13 @@ export class ComputerController extends Controller {
 
         // difficulty scales the update rate of actions
         this.difficulty = difficulty;
-        this.buttonReleaseDelay = 250 + (10-this.difficulty)*500;
+        this.buttonReleaseDelay = 250 + (10-this.difficulty)*250;
 
         this.relPos = [1000,1000];
-
-        // Notes on delay values:
-        // 400 feels slow, too easy
-        // 200 feels good
-        // 100 is aggressive
     }
 
     startController() {
-        setInterval(this.chooseAction, 100 + (10-this.difficulty) * 30);
+        setInterval(this.chooseAction, 100 + (10-this.difficulty) * 15);
     }
 
     assignOpponent(opponent) {
@@ -98,8 +93,6 @@ export class ComputerController extends Controller {
     }
 
     releaseButton(button){
-        // debugger
-        // console.log(button)
         if (this.heldButtons.indexOf(button) !== -1) {
             this.heldButtons.splice(this.heldButtons.indexOf(button),1);
             if (this.player) {
@@ -109,7 +102,6 @@ export class ComputerController extends Controller {
     }
 
     updateDistanceFromOpponent(){
-        // debugger
         if (this.player && this.opponent) {
             this.relPos[0] = this.opponent.pos[0] - this.player.pos[0];
             this.relPos[1] = this.opponent.pos[1] - this.player.pos[1];
