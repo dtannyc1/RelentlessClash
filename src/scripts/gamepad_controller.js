@@ -2,10 +2,10 @@ import { Controller } from "./controller";
 
 export class GamePadController extends Controller {
     static BUTTON_MAPPING = {
-        0: 'B',
-        1: 'A',
-        2: 'Y',
-        3: 'X',
+        0: 'UP', // changed
+        1: 'X',  // changed
+        2: 'B', // changed
+        3: 'Y', // changed
         4: 'LB',
         5: 'RB',
         6: 'LT',
@@ -23,11 +23,9 @@ export class GamePadController extends Controller {
     }
 
     constructor(gamepad, ctx) {
-        super(null, 3, ctx);
+        super(null, 3, ctx, false);
         this.gamepad = gamepad;
         this.buttonMapping = Gamepad.BUTTON_MAPPING;
-        console.log("Gamepad connected")
-        console.log(this)
 
         this.gameLoop = this.gameLoop.bind(this);
 
@@ -35,12 +33,11 @@ export class GamePadController extends Controller {
     }
 
     draw() {
-        // do nothing?
+        this.ctx.clearRect(0,0,1000,1000);
     }
 
     gameLoop() {
         if (this.player) {
-            // console.log("listening")
             const gamepads = navigator.getGamepads();
             let controller = gamepads[this.gamepad.index];
 
@@ -53,10 +50,7 @@ export class GamePadController extends Controller {
                 }
             }
 
-            // left/right is first number, right is 1
-            // up/down is second number, down is 1
             let leftJoystick = [controller.axes[0], controller.axes[1]];
-            // let rightJoystick = [controller.axes[2], controller.axes[3]];
 
             if (leftJoystick[0] > 0.25){
                 this.player.handleButtonRelease("LEFT");
@@ -65,11 +59,11 @@ export class GamePadController extends Controller {
                 this.player.handleButtonRelease("RIGHT");
                 this.player.handleButtonPress("LEFT");
             }
-            if (leftJoystick[1] < -0.25){
-                this.player.handleButtonPress("UP");
-            } else {
-                this.player.handleButtonRelease("UP");
-            }
+            // if (leftJoystick[1] < -0.25){
+            //     this.player.handleButtonPress("UP");
+            // } else {
+            //     this.player.handleButtonRelease("UP");
+            // }
         }
     }
 }

@@ -22,6 +22,7 @@ export class MainMenu {
 
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleKeyUp = this.handleKeyUp.bind(this);
+        this.addGamePad = this.addGamePad.bind(this);
 
         this.addListeners();
         this.draw();
@@ -169,12 +170,14 @@ export class MainMenu {
 
     addGamePad(gamepad) {
         if (this.controller1.gamepad === undefined) {
-            console.log("player1 assigned controller")
+            // console.log("player1 assigned controller")
             this.controller1.removeListeners();
+            this.computerplayer1 = false;
             this.controller1 = new GamePadController(gamepad, this.controller1ctx);
         } else if (this.controller2.gamepad === undefined) {
-            console.log("player2 assigned controller")
+            // console.log("player2 assigned controller")
             this.controller2.removeListeners();
+            this.computerplayer2 = false;
             this.controller2 = new GamePadController(gamepad, this.controller2ctx);
         }
     }
