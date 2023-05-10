@@ -12,18 +12,19 @@ export class GameView {
         this.ctx = ctx;
         this.camera_location = 0;
 
-        // inject images for background
-        switch (Math.floor(Math.random()*2)) {
-            case (0):
-                this.background = new Train(ctx);
-                break;
-            case (1):
-                this.background = new War(ctx);
-                break;
-            default:
-                this.background = new Train(ctx);
-                break;
-        }
+        this.loadStages();
+
+        this.randomizeStage();
+    }
+
+    loadStages() {
+        this.stages = [];
+        this.stages.push(new Train(this.ctx));
+        this.stages.push(new War(this.ctx));
+    }
+
+    randomizeStage() {
+        this.background = this.stages[Math.floor(Math.random()*this.stages.length)];
     }
 
     draw(objects) {

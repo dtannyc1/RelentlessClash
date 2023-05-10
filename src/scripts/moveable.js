@@ -28,6 +28,10 @@ export class Moveable {
         this.checkFacing();
     }
 
+    setFloor(floor) {
+        this.FLOOR = floor;
+    }
+
     checkFloor() {
         if (this.pos[1] > this.FLOOR) {
             this.vel[1] = 0;

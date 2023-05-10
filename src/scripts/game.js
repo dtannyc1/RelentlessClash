@@ -262,7 +262,16 @@ export class Game {
         }
     }
 
+    randomizeStage() {
+        this.gameView.randomizeStage();
+        this.FLOOR = this.gameView.background.FLOOR;
+        this.player1.setFloor(this.FLOOR);
+        this.player2.setFloor(this.FLOOR);
+    }
+
     resetRound() {
+        this.randomizeStage();
+
         this.player1.pos = [Game.PLAYER1_STARTX, this.FLOOR*0.75];
         this.player2.pos = [Game.PLAYER2_STARTX, this.FLOOR*0.75];
 
