@@ -47,6 +47,7 @@ export class Player extends Moveable{
 
     assignController(controller) {
         this.controller = controller;
+        this.controller.assignPlayer(this);
     }
 
     getHurtBoxes(main_scale) {

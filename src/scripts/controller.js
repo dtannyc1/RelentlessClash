@@ -52,6 +52,10 @@ export class Controller {
         window.removeEventListener("keyup", this.handleKeyUp);
     }
 
+    assignPlayer(player) {
+        this.player = player;
+    }
+
     handleKeyDown(event) {
         // debugger
         if (this.buttonMapping[event.key]) {

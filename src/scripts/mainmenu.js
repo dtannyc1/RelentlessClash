@@ -13,8 +13,8 @@ export class MainMenu {
         this.computerplayer1 = true;
         this.computerplayer2 = true;
 
-        // this.controller1 = new Controller(this, 1, this.controller1ctx);
-        // this.controller2 = new Controller(this, 2, this.controller2ctx);
+        this.controller1 = new Controller(this, 1, this.controller1ctx);
+        this.controller2 = new Controller(this, 2, this.controller2ctx);
 
         // this.draw();
         this.startGame();
@@ -76,7 +76,7 @@ export class MainMenu {
 
     startGame() {
         this.gameStarted = true;
-        this.game = new Game(this.ctx, this.controller1ctx, this.controller2ctx);
+        this.game = new Game(this.ctx, this.controller1, this.controller2);
         this.game.start();
     }
 
