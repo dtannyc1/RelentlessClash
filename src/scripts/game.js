@@ -1,5 +1,3 @@
-import { ComputerController } from "./computer_controller.js";
-import { Controller } from "./controller.js";
 import { GameView } from "./game_view.js";
 import { Player } from "./player.js";
 
@@ -25,6 +23,9 @@ export class Game {
             floor: this.FLOOR});
         this.controller2 = controller2;
         this.player2.assignController(this.controller2);
+
+        this.controller1.assignOpponent(this.player2);
+        this.controller2.assignOpponent(this.player1);
 
         this.objects = [this.player1, this.player2];
         this.scores = [0,0];

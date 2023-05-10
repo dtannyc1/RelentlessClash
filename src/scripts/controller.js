@@ -57,6 +57,10 @@ export class Controller {
         this.player = player;
     }
 
+    assignOpponent(opponent) {
+        this.opponent = opponent;
+    }
+
     handleKeyDown(event) {
         // debugger
         if (this.buttonMapping[event.key]) {
