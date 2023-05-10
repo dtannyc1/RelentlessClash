@@ -1,13 +1,6 @@
-import { Game } from "./scripts/game";
 import { GameView } from "./scripts/game_view";
 import { MainMenu } from "./scripts/mainmenu";
-
-// set background
-// let body = document.querySelector("body");
-// body.style.backgroundImage = "url('../assets/images/Backgrounds/asian_night.png')"
-
-// let arcadeMachine = document.querySelector("#arcade-machine");
-// arcadeMachine.style.backgroundImage = "url('../assets/images/ArcadeMachineTransparentV21080p.png')"
+import * as Modal from "./scripts/modals";
 
 let canvas = document.querySelector("#main-canvas");
 const ctx = canvas.getContext("2d");
@@ -36,3 +29,8 @@ function controllerConnectListener(event) {
 }
 
 window.addEventListener("gamepadconnected", controllerConnectListener);
+
+
+// Modal Handling:
+let modal = document.querySelector(".modal");
+modal.addEventListener("click", Modal.handleModalClick)
