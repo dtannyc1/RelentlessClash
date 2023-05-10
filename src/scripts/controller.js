@@ -29,28 +29,6 @@ export class Controller {
                 body.appendChild(img);
                 this.imgs.push([key,img]);
             }
-        } else if (option === 3) {
-            this.buttonMapping = Controller.CONTROLLER_MENU;
-            let body = document.querySelector("body");
-            for (const [key, src] of Object.entries(Controller.CONTROLLER_ONE_IMG_SRC)) {
-                let img = document.createElement('img');
-                img.src = src;
-                img.id = `controller1-${key}`;
-                img.hidden = true;
-                body.appendChild(img);
-                this.imgs.push([key,img]);
-            }
-        } else if (option === 4) {
-            this.buttonMapping = Controller.CONTROLLER_MENU;
-            let body = document.querySelector("body");
-            for (const [key, src] of Object.entries(Controller.CONTROLLER_TWO_IMG_SRC)) {
-                let img = document.createElement('img');
-                img.src = src;
-                img.id = `controller2-${key}`;
-                img.hidden = true;
-                body.appendChild(img);
-                this.imgs.push([key,img]);
-            }
         }
 
         this.heldButtons = [];
@@ -58,12 +36,20 @@ export class Controller {
         this.handleKeyUp = this.handleKeyUp.bind(this);
 
         if (bindKeys) {
-            window.addEventListener("keydown", this.handleKeyDown);
-
-            window.addEventListener("keyup", this.handleKeyUp);
+            this.addListeners();
         }
 
         this.draw = this.draw.bind(this);
+    }
+
+    addListeners() {
+        window.addEventListener("keydown", this.handleKeyDown);
+        window.addEventListener("keyup", this.handleKeyUp);
+    }
+
+    removeListeners() {
+        window.removeEventListener("keydown", this.handleKeyDown);
+        window.removeEventListener("keyup", this.handleKeyUp);
     }
 
     handleKeyDown(event) {
@@ -89,12 +75,6 @@ export class Controller {
                 }
             }
         }
-    }
-
-    destroy() {
-        window.removeEventListener("keydown", this.handleKeyDown);
-        window.removeEventListener("keyup", this.handleKeyUp);
-        this.imgs.forEach(img => { img.remove();})
     }
 
     draw() {
@@ -139,12 +119,6 @@ export class Controller {
         ArrowLeft: 'LEFT',
         ArrowRight: 'RIGHT'
     };
-
-    static CONTROLLER_MENU =  {
-        " ": " ",
-        "k": "k",
-        "h": "h"
-    }
 
     static CONTROLLER_ONE_IMG_SRC = {
         "UP": "assets/images/ControllerKeys/1up.png",
