@@ -27,11 +27,11 @@ function gameLoop() {
     let leftJoystick = [controller.axes[0], controller.axes[1]];
     let rightJoystick = [controller.axes[2], controller.axes[3]];
 
-    if (leftJoystick[0]**2 + leftJoystick[1]**2) {
+    if (leftJoystick[0]**2 + leftJoystick[1]**2 > 0.25) {
         console.log(leftJoystick);
     }
 
-    if (rightJoystick[0]**2 + rightJoystick[1]**2) {
+    if (rightJoystick[0]**2 + rightJoystick[1]**2 > 0.25) {
         console.log(rightJoystick);
     }
 }

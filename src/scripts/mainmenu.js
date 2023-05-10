@@ -1,5 +1,6 @@
 import { ComputerController } from "./computer_controller";
 import { Controller } from "./controller";
+import { GamePadController } from "./gamepad_controller";
 import { Game } from "./game";
 import { GameView } from "./game_view";
 
@@ -164,5 +165,17 @@ export class MainMenu {
 
     togglePlayer2() {
         this.computerplayer2 = !this.computerplayer2;
+    }
+
+    addGamePad(gamepad) {
+        if (this.controller1.gamepad === undefined) {
+            console.log("player1 assigned controller")
+            this.controller1.removeListeners();
+            this.controller1 = new GamePadController(gamepad, this.controller1ctx);
+        } else if (this.controller2.gamepad === undefined) {
+            console.log("player2 assigned controller")
+            this.controller2.removeListeners();
+            this.controller2 = new GamePadController(gamepad, this.controller2ctx);
+        }
     }
 }

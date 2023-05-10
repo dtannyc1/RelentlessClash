@@ -28,4 +28,11 @@ canvas.style.backgroundColor = "black";
 
 // window.game = new Game(ctx, controller1ctx, controller2ctx);
 
-window.menu = new MainMenu(ctx, controller1ctx, controller2ctx);
+let menu = new MainMenu(ctx, controller1ctx, controller2ctx);
+window.menu = menu;
+
+function controllerConnectListener(event) {
+    menu.addGamePad(event.gamepad);
+}
+
+window.addEventListener("gamepadconnected", controllerConnectListener);
