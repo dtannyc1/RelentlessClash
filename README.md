@@ -1,6 +1,9 @@
 ![Demo Combat](assets/images/MainLogo.jpg)
 __Background__
 ----
+
+![Demo Combat](assets/images/DemoGifs/parrying.gif)
+
 Relentless Clash is a fighting game written in vanilla JavaScript in which 2 players engage in rapid sword combat until one player wins by two rounds. Players can control their characters using a keyboard or a controller. The major functionality of the game was written in a week, with minor art assets added afterwards.
 
 __Technologies, Libraries, and APIs__
@@ -13,22 +16,23 @@ __Technologies, Libraries, and APIs__
 
 __Key Features__
 ----
-![Demo Combat](assets/images/DemoGifs/parrying.gif)
 
 In Relentless Clash, users can:
 - Move their character using a keyboard or a controller and see dynamic feedback on their keypresses on the screen
 - See a visual display of their current health via a health bar as well as their current score
-- Swing their swords to deal damage to their opponent or parry their attacks
+- Swing their swords to deal damage to their opponent or parry their opponent's attacks
 - Play against a computer player with 10 different difficulty levels
 
 __Code Snippets__
 ----
 
-There are many methods that come together to allow the users to play and interact with the in-game world.
+There are many methods that come together to allow the users to play and interact with the in-game world. Here are some of the highlights for the major functions of the game.
 
 __Collision Detection__
 
-For every frame of animation, each character has multiple hurt boxes, and, optionally, multiple hit boxes if they are attacking. Collision between characters is calculated by checking if two characters' hit and hurt boxes overlap in any way. The function Game#overlappingBoxes is generalized to work with any type of box to determine if the two boxes are overlapping.
+![Hit and Hurt Boxes](assets/images/DemoGifs/hitboxes.gif)
+
+For every frame of animation, each character has multiple hurt boxes (shown in the gif in green) and, optionally, multiple hit boxes (shown in the gif in red) if they are attacking. Collision between characters is calculated by checking if two characters' hit and hurt boxes overlap in any way. The function Game#overlappingBoxes is generalized to work with any type of box to determine if the two boxes are overlapping.
 
 ```
 overlappingBoxes(box1, box2) {
@@ -51,10 +55,9 @@ overlappingBoxes(box1, box2) {
 
 Using this basic collision detection, the game can cause damage and knockback when a hit box overlaps an opponent's hurt box, push characters when a character's hurt box collides with an opponent's hurt box, and cause knockback when two hit boxes collide.
 
-![Basic Attack](assets/images/DemoGifs/basic_attack.gif)
-
-
 __Damage Calculation__
+
+![Basic Attack](assets/images/DemoGifs/basic_attack.gif)
 
 The amount of damage dealt to a character when they are hit with an attack is dependent on:
 
