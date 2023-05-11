@@ -45,13 +45,13 @@ export class GeneralCharacter {
 
         if (this.player.renderBoxes) {
             // render hurtboxes
-            ctx.fillStyle = "#00ff0025";
+            ctx.fillStyle = "#00ff0050";
             this.hurtboxes.forEach((box) => {
                 ctx.fillRect(...box)
             })
 
             // render hitbox
-            ctx.fillStyle = "#ff000025";
+            ctx.fillStyle = "#ff000050";
             this.hitboxes.forEach((box) => {
                 ctx.fillRect(...box)
             })

@@ -35,6 +35,7 @@ export class Game {
         this.resetRound = this.resetRound.bind(this);
         this.endGame = this.endGame.bind(this);
         this.menu = menu;
+        window.game = this;
     }
 
     start() {
