@@ -32,8 +32,14 @@ export class Game {
         this.gameOver = false;
         this.paused = true;
 
+        this.setupMusic();
+
         this.resetRound = this.resetRound.bind(this);
         this.endGame = this.endGame.bind(this);
+        this.togglePlayingAudio  = this.togglePlayingAudio.bind(this);
+        this.mute = this.mute.bind(this);
+        this.unmute = this.unmute.bind(this);
+
         this.menu = menu;
         window.game = this;
     }
@@ -195,6 +201,14 @@ export class Game {
             }
         }
 
+        if (hits.length > 0) {
+            if (!this.playingAudio){
+                this.swordClashSound.play();
+                this.playingAudio = true;
+                setTimeout(this.togglePlayingAudio, 500);
+            }
+        }
+
         hits.forEach((hit) => {
             let origin = hit[0];
             let target = hit[1];
@@ -337,5 +351,27 @@ export class Game {
 
     winner() {
         return (this.scores[0] > this.scores[1]) ? "Player 1" : "Player 2";
+    }
+
+    setupMusic() {
+        this.swordClashSound = new Audio("assets/music/SwordClash.mp3");
+        this.swordClashSound.loop = false;
+        this.playingAudio = false;
+    }
+
+    mute(){
+        this.swordClashSound.volume = 0;
+        this.player1.mute();
+        this.player2.mute();
+    }
+
+    unmute() {
+        this.swordClashSound.volume = 1;
+        this.player1.unmute();
+        this.player2.unmute();
+    }
+
+    togglePlayingAudio() {
+        this.playingAudio = false;
     }
 }

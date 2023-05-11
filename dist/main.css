@@ -126,6 +126,17 @@ body {
   font-family: "Press Start 2P";
 }
 
+#mute-button {
+  grid-row-start: 4;
+  grid-row-end: 5;
+  height: 100px;
+  font-size: 60px;
+  position: relative;
+  left: 6vh;
+  top: -3vh;
+  cursor: pointer;
+}
+
 .controllers {
   grid-row-start: 5;
   grid-row-end: 6;

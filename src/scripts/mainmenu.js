@@ -30,8 +30,12 @@ export class MainMenu {
         this.addListeners();
         this.draw();
         // this.startGame();
+        this.setupMusic();
 
         this.generateStartModal();
+
+        this.muteButton = document.querySelector("#mute-button");
+        this.muteButton.addEventListener("click", this.toggleMute);
     }
 
     generateStartModal() {
@@ -55,7 +59,10 @@ export class MainMenu {
         this.modalButtons.innerHTML = '';
         this.modalButtons.appendChild(button1);
         this.modalButtons.appendChild(button2);
-        button1.addEventListener("click", this.hideModal);
+        button1.addEventListener("click", () => {
+            this.hideModal();
+            this.menuMusic.play();
+        });
         button2.addEventListener("click", this.generateHowToModal)
 
         this.showModal();
@@ -205,6 +212,9 @@ export class MainMenu {
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
         this.startComputerGame = this.startComputerGame.bind(this);
+        this.mute = this.mute.bind(this);
+        this.unmute = this.unmute.bind(this);
+        this.toggleMute = this.toggleMute.bind(this);
     }
 
     showModal(){
@@ -326,6 +336,11 @@ export class MainMenu {
 
     restartMenu(gameEnded = false) {
         // this.addListeners();
+        this.gameMusic.pause();
+        this.gameMusic.currentTime = 0;
+        this.menuMusic.currentTime = 0;
+        this.menuMusic.play();
+
         this.controller1.removeListeners();
         this.controller2.removeListeners();
         this.controller1.addListeners();
@@ -340,6 +355,10 @@ export class MainMenu {
     startGame() {
         // this.removeListeners();
         this.gameStarted = true;
+        this.menuMusic.pause();
+        this.menuMusic.currentTime = 0;
+        this.gameMusic.currentTime = 0;
+        this.gameMusic.play();
 
         let cont1, cont2;
         if (this.computerplayer1) {
@@ -387,6 +406,44 @@ export class MainMenu {
             this.controller2.removeListeners();
             this.computerplayer2 = false;
             this.controller2 = new GamePadController(gamepad, this.controller2ctx);
+        }
+    }
+
+    setupMusic() {
+        this.menuMusic = new Audio("assets/music/Dani Stob - Facing The Enemy.mp3");
+        this.menuMusic.loop = true;
+        // this.menuMusic.play();
+
+        this.gameMusic = new Audio("assets/music/Dani Stob - Arena Fight.mp3");
+        this.gameMusic.loop = true;
+        this.muted = false;
+    }
+
+    toggleMute() {
+        if (this.muted) {
+            this.unmute();
+            this.muted = false;
+        } else {
+            this.mute();
+            this.muted = true;
+        }
+    }
+
+    mute() {
+        this.menuMusic.volume = 0;
+        this.gameMusic.volume = 0;
+
+        if (this.game){
+            this.game.mute();
+        }
+    }
+
+    unmute() {
+        this.menuMusic.volume = 1;
+        this.gameMusic.volume = 1;
+
+        if (this.game) {
+            this.game.unmute();
         }
     }
 }

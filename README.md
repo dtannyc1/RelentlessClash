@@ -151,3 +151,7 @@ __Art Credits:__
 [War Pixel Art Background](https://craftpix.net/freebies/free-war-pixel-art-2d-backgrounds/) on craftpix.net
 
 [Post Apocalyptic Pixel Art Background](https://craftpix.net/freebies/free-post-apocalyptic-pixel-art-game-backgrounds/) on craftpix.net
+
+[Music from Sci Fi & Adventure Music Pack](https://danistob.itch.io/sci-fi-adventure-music-pack) by Dani Stob
+
+[Sword SFX](https://pixabay.com/) on pixabay

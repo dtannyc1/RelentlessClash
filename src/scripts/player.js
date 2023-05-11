@@ -23,6 +23,8 @@ export class Player extends Moveable{
 
         this.health = 100;
 
+        this.setupMusic();
+
         this.currentAction = "idle";
         this.renderBoxes = false;
 
@@ -31,6 +33,9 @@ export class Player extends Moveable{
         this.stun = this.stun.bind(this);
         this.unstun = this.unstun.bind(this);
         this.runAnimationState = this.runAnimationState.bind(this);
+        this.togglePlayingAudio = this.togglePlayingAudio.bind(this);
+        this.mute = this.mute.bind(this);
+        this.unmute = this.unmute.bind(this);
 
         this.stunned = false;
         this.runAnimation = true;
@@ -143,6 +148,12 @@ export class Player extends Moveable{
                     }
                     break;
             }
+
+            if ((button === "B" || button === "Y" || button || "X") && !this.playingAudio){
+                this.swordSounds[Math.floor(Math.random() * this.swordSounds.length)].play();
+                this.playingAudio = true;
+                setTimeout(this.togglePlayingAudio, 500);
+            }
         }
     }
 
@@ -178,5 +189,35 @@ export class Player extends Moveable{
 
     runAnimationState(bool = true) {
         this.runAnimation = bool;
+    }
+
+    setupMusic() {
+        this.swordSounds = [
+            new Audio("assets/music/SwordSwipe1.mp3"),
+            new Audio("assets/music/SwordSwipe2.mp3"),
+            new Audio("assets/music/SwordSwipe3.mp3"),
+            new Audio("assets/music/SwordSwipe4.mp3"),
+            new Audio("assets/music/SwordSwipe5.mp3")
+        ];
+        this.swordSounds.forEach((sound) => {
+            sound.loop = false;
+        })
+        this.playingAudio = false;
+    }
+
+    togglePlayingAudio() {
+        this.playingAudio = !this.playingAudio;
+    }
+
+    mute() {
+        this.swordSounds.forEach((sound) => {
+            sound.volume = 0;
+        })
+    }
+
+    unmute(){
+        this.swordSounds.forEach((sound) => {
+            sound.volume = 1;
+        })
     }
 }
