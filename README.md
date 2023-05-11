@@ -1,43 +1,148 @@
-Background (Project Name to be determined)
+__Background__
 ----
-{Definitely not Street Fighter} is a fighting game in which the user will fight in 3 rounds of combat against a computer AI using their keyboard to move a character around the screen. The player whose health bar hits zero first loses the round, and the player who wins 2 out of 3 rounds will be declared the victor.
+Relentless Clash is a fighting game written in vanilla JavaScript in which 2 players engage in rapid sword combat until one player wins by two rounds. Players can control their characters using a keyboard or a controller. The major functionality of the game was written in a week, with minor art assets added afterwards.
 
-
-Functionality & MVPs
+__Technologies, Libraries, and APIs__
 ----
-In {Definitely Not Street Fighter}, users will be able to:
+- Canvas API
+- Keyboard API
+- GamePad API
+- HTML
+- CSS
+
+__Key Features__
+----
+![Demo Combat](assets/images/DemoGifs/parrying.gif)
+
+In Relentless Clash, users will be able to:
 - Move their character using keyboard presses
 - See a visual display of their current health via a health bar
 - Punch and kick their opponent to deal damage to them
 - Play against a computer player
 
-In addition, this project will include:
-- An __About__ modal to describe the rules of the game
-- A production README
-
-Wireframe
+__Code Snippets__
 ----
-![wireframe](./assets/images/streetfighter.png)
 
-Technologies, Libraries, and APIs
-----
-The project will be implemented with the following technology:
-- __Canvas API__ to render the actual game
-- __Keyboard API__ to register keypresses
+There are many methods that come together to allow the users to play and interact with the in-game world.
 
-Implementation Timeline
-----
-- __Friday__: Minimal implementation of classes in order to get basic working functionality. By end of day, a single character will be visible on the canvas and will respond to keyboard presses. Commands to
-- __Saturday__: Moving characters will be animated via sprites and the camera will move around to follow them.
-- __Sunday__: Implementation of collision detection which will involve setting up hit boxes and hurt boxes. This will be a two day project.
-- __Monday__: Collision detection and damage calculations part 2, electric boogaloo.
-- __Tuesday__: Implementation of the computer player AI. It will approach the human player and throw some punches and kicks when it is within a certain distance to the player.
-- __Wednesday__: Aesthetics for the general website to match the theme of the artwork chosen for the sprites. Focus will be entirely on styling while maintaining core functionality.
-- __Thursday__: Deploy game on Github, work on production README, and wrap up any remaining features
+__Collision Detection__
 
-Bonus Features
+For every frame of animation, each character has multiple hurt boxes, and, optionally, multiple hit boxes if they are attacking. Collision between characters is calculated by checking if two characters' hit and hurt boxes overlap in any way. The function Game#overlappingBoxes is generalized to work with any type of box to determine if the two boxes are overlapping.
+
+```
+overlappingBoxes(box1, box2) {
+  let x1m, y1m, x1M, y1M;
+  let x2m, y2m, x2M, y2M;
+  [x1m, y1m, x1M, y1M] = [box1[0], box1[1],
+                          box1[0] + box1[2], box1[1] + box1[3]];
+  [x2m, y2m, x2M, y2M] = [box2[0], box2[1],
+                          box2[0] + box2[2], box2[1] + box2[3]];
+
+  if (x2m >= x1M || x1m >= x2M) {
+    return false;
+  } else if (y2m >= y1M || y1m >= y2M) {
+    return false;
+  } else {
+    return true;
+  }
+}
+```
+
+Using this basic collision detection, the game can cause damage and knockback when a hit box overlaps an opponent's hurt box, push characters when a character's hurt box collides with an opponent's hurt box, and cause knockback when two hit boxes collide.
+
+![Basic Attack](assets/images/DemoGifs/basic_attack.gif)
+
+
+__Damage Calculation__
+
+The amount of damage dealt to a character when they are hit with an attack is dependent on:
+
+- the strength of the attack
+- the hurt box(es) where the attack hits
+- the number of frames in which the character collides with the hurt box
+
+This code snippet demonstrates iteration through characters stored in an objects array to calculate hits, then deal damage and cause knockback which scales with the damage taken by the character.
+
+```
+handleHit(){
+  // determine who is hitting which box
+  let hits = [];
+  for (let i = 0; i < this.objects.length; i++) {
+    let hitbox = this.objects[i].getHitBoxes(GameView.MAIN_SCALE);
+    if (hitbox) {
+      hitbox = hitbox[0];
+      for (let j = 0; j < this.objects.length; j++) {
+        if (j !== i) {
+          let hit = false;
+          let hurtboxes = this.objects[j].getHurtBoxes(GameView.MAIN_SCALE);
+          for (let k = 0; k < hurtboxes.length; k++) {
+            if (this.overlappingBoxes(hitbox, hurtboxes[k])){
+              hits.push([this.objects[i], this.objects[j], k]);
+              hit = true;
+              break;
+            }
+          }
+          if (hit) {
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  // actually deal with the hits
+  if (hits.length > 0) {
+    let roundEnd = false;
+    hits.forEach((hit) => {
+      let origin = hit[0];
+      let target = hit[1];
+      let boxNum = hit[2];
+
+      let damage = 0;
+      switch (origin.currentAction){
+        case ("attack1"):
+          damage = 1;
+          break;
+        case ("attack2"):
+          damage = 2;
+          break;
+        case ("attack3"):
+          damage = 3;
+          break;
+      }
+
+      // deal damage
+      target.health -= damage*(3-boxNum)*0.25;
+      if (target.health < 0){
+        roundEnd = true;
+        target.health = 0;
+      }
+
+      // cause knockback
+      if (origin.pos[0] < target.pos[0]){
+        target.pos[0] += Game.KNOCKBACK*(damage);
+      } else{
+        target.pos[0] -= Game.KNOCKBACK*(damage);
+      }
+    })
+
+    if (roundEnd) {
+      this.isRoundOver();
+    }
+  }
+}
+```
+
+__Future Plans:__
 ----
-- __Gamepad API__ for using Switch/Xbox controllers to play the game
-- A Menu for selecting your fighter
-- Custom fighter artwork
-- Special Attacks & Projectile Attacks
+I plan to add more gameplay stages and characters. Once these art assets are implemented, players will be able to choose their fighter from a menu before initiating combat. Additionally, some background music and sword sound effects will be added to enhance the ambiance of the gameplay.
+
+__Art Credits:__
+----
+[Asian Night - Pixel Art Wallpaper](https://www.flickr.com/photos/rodrixap/10591266994/in/photostream/) by RodrixAP
+
+[Samurai Characters Pixel Art](https://craftpix.net/freebies/free-samurai-pixel-art-sprite-sheets/) on craftpix.net
+
+[War Pixel Art Background](https://craftpix.net/freebies/free-war-pixel-art-2d-backgrounds/) on craftpix.net
+
+[Post Apocalyptic Pixel Art Background](https://craftpix.net/freebies/free-post-apocalyptic-pixel-art-game-backgrounds/) on craftpix.net
