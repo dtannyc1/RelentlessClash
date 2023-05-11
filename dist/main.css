@@ -155,10 +155,9 @@ body {
 }
 
 #modal {
-  background: gray;
+  background: black;
   color: red;
   font-size: 100px;
-  border-radius: 30px;
   width: 77vh;
   height: 57.5%;
   position: relative;

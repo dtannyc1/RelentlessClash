@@ -26,26 +26,29 @@ export class Game {
 
         this.controller1.assignOpponent(this.player2);
         this.controller2.assignOpponent(this.player1);
-        debugger
 
         this.objects = [this.player1, this.player2];
         this.scores = [0,0];
         this.gameOver = false;
+        this.paused = true;
 
         this.resetRound = this.resetRound.bind(this);
     }
 
     start() {
+        this.paused = false;
         this.resetRound();
         this.runGame();
     }
 
     runGame() {
-        this.gameView.draw(this.objects);
-        this.gameView.renderScore(this.scores);
-        this.controller1.draw();
-        this.controller2.draw();
-        this.handleCollisions();
+        if (!this.paused) {
+            this.gameView.draw(this.objects);
+            this.gameView.renderScore(this.scores);
+            this.controller1.draw();
+            this.controller2.draw();
+            this.handleCollisions();
+        }
         if (!this.gameOver) {
             requestAnimationFrame(this.runGame.bind(this))
         }
@@ -277,6 +280,8 @@ export class Game {
 
     endGame(){
         this.gameOver = true;
+        this.player1.stun();
+        this.player2.stun();
         console.log("Game Over")
     }
 
@@ -312,5 +317,17 @@ export class Game {
         this.player2.stun(1000);
 
         this.roundOver = false;
+    }
+
+    pause(){
+        this.paused = true;
+        this.player1.stun();
+        this.player2.stun();
+    }
+
+    unpause() {
+        this.paused = false;
+        this.player1.unstun();
+        this.player2.unstun();
     }
 }

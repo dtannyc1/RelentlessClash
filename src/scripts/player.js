@@ -167,7 +167,9 @@ export class Player extends Moveable{
 
     stun(duration) {
         this.stunned = true;
-        setTimeout(this.unstun, duration);
+        if (duration) {
+            setTimeout(this.unstun, duration);
+        }
     }
 
     unstun() {
