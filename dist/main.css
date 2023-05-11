@@ -5,6 +5,10 @@
 /*!*****************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss (1) ***!
   \*****************************************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap);
+/*!*****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss (2) ***!
+  \*****************************************************************************************************************************************/
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -143,7 +147,7 @@ body {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   font-size: 100px;
@@ -163,8 +167,8 @@ body {
   position: relative;
   top: 0.5%;
   display: grid;
-  grid-template-rows: 75% 25%;
-  grid-template-columns: 75% 25%;
+  grid-template-rows: 85% 15%;
+  grid-template-columns: 85% 15%;
 }
 
 #links {
@@ -189,6 +193,19 @@ body {
   grid-row-end: 2;
   grid-column-start: 1;
   grid-column-end: 3;
+  text-align: center;
+  font-size: 2.3vh;
+  display: flex;
+  align-items: center;
+  color: blue;
+  line-height: 130%;
+  font-family: "Press Start 2P", cursive;
+}
+#main-modal-content ul {
+  width: 100%;
+}
+#main-modal-content li {
+  padding: 20px 100px;
 }
 
 #modal-buttons {
@@ -196,4 +213,25 @@ body {
   grid-row-end: 3;
   grid-column-start: 1;
   grid-column-end: 3;
+  display: flex;
+  justify-content: space-around;
+  font-size: 2.5vh;
+}
+#modal-buttons div {
+  text-align: center;
+  font-family: "Press Start 2P", cursive;
+  color: blue;
+  font-size: 2.5vh;
+  border: solid blue 1px;
+  margin: 20px 0px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+#modal-buttons div:hover {
+  margin: 16px 0px;
+  padding: 24px;
+  font-size: 110%;
 }

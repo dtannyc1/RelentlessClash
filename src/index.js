@@ -1,6 +1,6 @@
 import { GameView } from "./scripts/game_view";
 import { MainMenu } from "./scripts/mainmenu";
-import * as Modal from "./scripts/modals";
+// import * as Modal from "./scripts/modals";
 
 let canvas = document.querySelector("#main-canvas");
 const ctx = canvas.getContext("2d");
@@ -29,9 +29,3 @@ function controllerConnectListener(event) {
 }
 
 window.addEventListener("gamepadconnected", controllerConnectListener);
-
-// Modal.handleModalClick = Modal.handleModalClick.bind(menu);
-
-// Modal Handling:
-let modal = document.querySelector("#modal-holder");
-modal.addEventListener("click", Modal.handleModalClick)

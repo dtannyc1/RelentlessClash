@@ -6,7 +6,7 @@ export class Game {
     static PLAYER2_STARTX = 240;
     static KNOCKBACK = 10;
 
-    constructor(ctx, controller1, controller2) {
+    constructor(ctx, controller1, controller2, menu) {
         this.gameView = new GameView(ctx);
         this.FLOOR = this.gameView.background.FLOOR;
 
@@ -33,6 +33,8 @@ export class Game {
         this.paused = true;
 
         this.resetRound = this.resetRound.bind(this);
+        this.endGame = this.endGame.bind(this);
+        this.menu = menu;
     }
 
     start() {
@@ -282,7 +284,8 @@ export class Game {
         this.gameOver = true;
         this.player1.stun();
         this.player2.stun();
-        console.log("Game Over")
+        // console.log("Game Over")
+        this.menu.stopGame();
     }
 
     randomizeStage() {
@@ -329,5 +332,9 @@ export class Game {
         this.paused = false;
         this.player1.unstun();
         this.player2.unstun();
+    }
+
+    winner() {
+        return (this.scores[0] > this.scores[1]) ? "Player 1" : "Player 2";
     }
 }

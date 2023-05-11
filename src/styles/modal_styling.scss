@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 #modal-holder {
     position: fixed;
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.6);
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     font-size: 100px;
@@ -24,8 +26,8 @@
     position: relative;
     top: 0.5%;
     display: grid;
-    grid-template-rows: 75% 25%;
-    grid-template-columns: 75% 25%;
+    grid-template-rows: 85% 15%;
+    grid-template-columns: 85% 15%;
 
 }
 
@@ -52,7 +54,19 @@
     grid-row-end: 2;
     grid-column-start: 1;
     grid-column-end: 3;
-    // background: yellow;
+    text-align: center;
+    font-size: 2.3vh;
+    display: flex;
+    align-items: center;
+    color: blue;
+    line-height: 130%;
+    font-family: 'Press Start 2P', cursive;
+    ul {
+        width: 100%;
+    }
+    li {
+        padding: 20px 100px;
+    }
 }
 
 #modal-buttons {
@@ -61,4 +75,27 @@
     grid-column-start: 1;
     grid-column-end: 3;
     // background: green;
+    display: flex;
+    justify-content: space-around;
+    font-size: 2.5vh;
+
+    div {
+        text-align: center;
+        font-family: "Press Start 2P", cursive;
+        color: blue;
+        font-size: 2.5vh;
+        border: solid blue 1px;
+        margin: 20px 0px;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    div:hover {
+        margin: 16px 0px;
+        padding: 24px;
+        font-size: 110%;
+    }
 }
