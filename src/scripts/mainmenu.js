@@ -383,6 +383,7 @@ export class MainMenu {
 
     stopGame(){
         this.lastWinner = this.game.winner();
+        this.game.mute();
         delete this.game;
         this.restartMenu(true);
     }
