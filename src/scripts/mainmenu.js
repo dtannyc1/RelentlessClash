@@ -56,6 +56,56 @@ export class MainMenu {
         this.modalButtons.appendChild(button1);
         this.modalButtons.appendChild(button2);
         button1.addEventListener("click", this.hideModal);
+        button2.addEventListener("click", this.generateHowToModal)
+
+        this.showModal();
+    }
+
+    generateHowToModal() {
+        let ul = document.createElement('ul');
+        let li1 = document.createElement('li');
+        let li2 = document.createElement('li');
+        let li3 = document.createElement('li');
+        let li4 = document.createElement('li');
+        let li5 = document.createElement('li');
+        let li6 = document.createElement('li');
+        li1.innerText = "A/D/⬅️/➡️ - Move Player";
+        li2.innerText = "W/⬆️ - Jump";
+        li3.innerText = "F/; - Light Attack";
+        li4.innerText = "G/L - Medium Attack";
+        li5.innerText = "H/K - Heavy Attack";
+        li6.innerText = "ESC - Pause Game";
+        ul.appendChild(li1);
+        ul.appendChild(li2);
+        ul.appendChild(li3);
+        ul.appendChild(li4);
+        ul.appendChild(li5);
+        ul.appendChild(li6);
+        this.modalContent.innerHTML = '';
+        this.modalContent.appendChild(ul);
+
+        let button1 = document.createElement('div');
+        let button2 = document.createElement('div');
+        button1.innerText = "Game Setup";
+        button2.innerText = "Watch Computers Fight";
+        this.modalButtons.innerHTML = '';
+        let fontsize = 1.8;
+        button2.style.fontSize = `${fontsize}vh`;
+        this.modalButtons.innerHTML = '';
+        this.modalButtons.appendChild(button1);
+        this.modalButtons.appendChild(button2);
+        button1.addEventListener("click", this.hideModal);
+        button2.addEventListener("click", this.startComputerGame);
+        button2.onmouseover = () => {
+            button2.style.fontSize = `${fontsize*1.1}vh`;
+            button2.style.margin = "16px 0px";
+            button2.style.padding = "24px";
+        }
+        button2.onmouseout = () => {
+            button2.style.fontSize = `${fontsize}vh`;
+            button2.style.margin = "20px 0px";
+            button2.style.padding = "20px";
+        }
 
         this.showModal();
     }
@@ -149,6 +199,7 @@ export class MainMenu {
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.addGamePad = this.addGamePad.bind(this);
         this.generateStartModal = this.generateStartModal.bind(this);
+        this.generateHowToModal = this.generateHowToModal.bind(this);
         this.generatePauseModal = this.generatePauseModal.bind(this);
         this.generateEndModal = this.generateEndModal.bind(this);
         this.showModal = this.showModal.bind(this);
