@@ -325,7 +325,7 @@ export class MainMenu {
     }
 
     restartMenu(gameEnded = false) {
-        this.addListeners();
+        // this.addListeners();
         this.controller1.removeListeners();
         this.controller2.removeListeners();
         this.controller1.addListeners();
