@@ -1,4 +1,4 @@
-![Main Logo](assets/images/MainLogo.jpg)
+[![Main Logo](assets/images/MainLogo.jpg)](https://dtannyc1.github.io/RelentlessClash/)
 
 __Background__
 ----
