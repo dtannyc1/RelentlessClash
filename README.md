@@ -1,3 +1,4 @@
+![Demo Combat](assets/images/MainLogo.jpg)
 __Background__
 ----
 Relentless Clash is a fighting game written in vanilla JavaScript in which 2 players engage in rapid sword combat until one player wins by two rounds. Players can control their characters using a keyboard or a controller. The major functionality of the game was written in a week, with minor art assets added afterwards.
@@ -14,11 +15,11 @@ __Key Features__
 ----
 ![Demo Combat](assets/images/DemoGifs/parrying.gif)
 
-In Relentless Clash, users will be able to:
-- Move their character using keyboard presses
-- See a visual display of their current health via a health bar
-- Punch and kick their opponent to deal damage to them
-- Play against a computer player
+In Relentless Clash, users can:
+- Move their character using a keyboard or a controller and see dynamic feedback on their keypresses on the screen
+- See a visual display of their current health via a health bar as well as their current score
+- Swing their swords to deal damage to their opponent or parry their attacks
+- Play against a computer player with 10 different difficulty levels
 
 __Code Snippets__
 ----
