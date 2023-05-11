@@ -4,23 +4,20 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.25);
     display: none;
     justify-content: center;
     align-items: center;
     font-size: 100px;
-    color: red;
 }
 
 #menu-1{
-    color: blue;
+    color: rgb(52,52,255);
 }
 
 #modal{
     background: black;
-    color: red;
     font-size: 100px;
-    // border-radius: 30px;
     width: 77vh;
     height: 57.5%;
     position: relative;
@@ -28,7 +25,10 @@
     display: grid;
     grid-template-rows: 85% 15%;
     grid-template-columns: 85% 15%;
-
+    border: 3px solid;
+    border-radius: 3px;
+    border-image-source: linear-gradient(black, rgb(97, 97, 97));
+    border-image-slice: 1;
 }
 
 #links {
@@ -40,12 +40,14 @@
     justify-content: right;
 
     a {
-        width: 90px;
-        height: 90px;
+        width: 6vh;
+        height: 6vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     img {
-        width: 50px;
-        margin: 20px;
+        width: 3.3vh;
     }
 }
 
@@ -58,7 +60,7 @@
     font-size: 2.3vh;
     display: flex;
     align-items: center;
-    color: blue;
+    color: rgb(52,52,255);
     line-height: 130%;
     font-family: 'Press Start 2P', cursive;
     ul {
@@ -82,9 +84,9 @@
     div {
         text-align: center;
         font-family: "Press Start 2P", cursive;
-        color: blue;
+        color: rgb(52,52,255);
         font-size: 2.5vh;
-        border: solid blue 1px;
+        border: solid rgb(52,52,255) 1px;
         margin: 20px 0px;
         padding: 20px;
         display: flex;

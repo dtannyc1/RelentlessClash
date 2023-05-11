@@ -26,14 +26,15 @@ export class MainMenu {
         this.modal = document.querySelector("#modal");
         this.modalContent = document.querySelector("#main-modal-content");
         this.modalButtons = document.querySelector("#modal-buttons");
+        this.showingModal = false;
         this.addListeners();
         this.draw();
         // this.startGame();
 
-        this.generateModal1();
+        this.generateStartModal();
     }
 
-    generateModal1() {
+    generateStartModal() {
         let ul = document.createElement('ul');
         let li1 = document.createElement('li');
         let li2 = document.createElement('li');
@@ -49,7 +50,7 @@ export class MainMenu {
 
         let button1 = document.createElement('div');
         let button2 = document.createElement('div');
-        button1.innerText = "Start Game";
+        button1.innerText = "Game Setup";
         button2.innerText = "How to Play";
         this.modalButtons.innerHTML = '';
         this.modalButtons.appendChild(button1);
@@ -59,7 +60,7 @@ export class MainMenu {
         this.showModal();
     }
 
-    generateModal2() {
+    generatePauseModal() {
         let ul = document.createElement('ul');
         let li1 = document.createElement('li');
         let li2 = document.createElement('li');
@@ -76,7 +77,7 @@ export class MainMenu {
         let button1 = document.createElement('div');
         let button2 = document.createElement('div');
         button1.innerText = "Resume Game";
-        button2.innerText = "How to Play";
+        button2.innerText = "Main Menu";
         this.modalButtons.innerHTML = '';
         this.modalButtons.appendChild(button1);
         this.modalButtons.appendChild(button2);
@@ -84,17 +85,25 @@ export class MainMenu {
             this.game.unpause();
             this.hideModal();
         });
+        button2.addEventListener("click", () => {
+            delete this.game;
+            this.restartMenu();
+            this.hideModal();
+        })
 
+        this.modal.style.backgroundColor = "rbga(0,0,0,0.25)";
         this.showModal();
     }
 
-    generateModal3() {
+    generateEndModal() {
         let ul = document.createElement('ul');
         let li1 = document.createElement('li');
         let li2 = document.createElement('li');
         let li3 = document.createElement('li');
         li1.innerText = "Thank you for playing!";
-        li2.innerText = `The winner is ${this.lastWinner}!`;
+        if (this.lastWinner) {
+            li2.innerText = `The winner is ${this.lastWinner}!`;
+        }
         li3.innerText = "Play Again?";
         ul.appendChild(li1);
         ul.appendChild(li2);
@@ -106,19 +115,20 @@ export class MainMenu {
         let button2 = document.createElement('div');
         button1.innerText = "Play Again";
         button2.innerText = "Watch Computers Fight";
-        button2.style.fontSize = "1.5vh";
+        let fontsize = 1.8;
+        button2.style.fontSize = `${fontsize}vh`;
         this.modalButtons.innerHTML = '';
         this.modalButtons.appendChild(button1);
         this.modalButtons.appendChild(button2);
         button1.addEventListener("click", this.hideModal);
         button2.addEventListener("click", this.startComputerGame);
         button2.onmouseover = () => {
-            button2.style.fontSize = "1.65vh";
+            button2.style.fontSize = `${fontsize*1.1}vh`;
             button2.style.margin = "16px 0px";
             button2.style.padding = "24px";
         }
         button2.onmouseout = () => {
-            button2.style.fontSize = "1.5vh";
+            button2.style.fontSize = `${fontsize}vh`;
             button2.style.margin = "20px 0px";
             button2.style.padding = "20px";
         }
@@ -138,19 +148,21 @@ export class MainMenu {
     bindMethods(){
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.addGamePad = this.addGamePad.bind(this);
-        this.generateModal1 = this.generateModal1.bind(this);
-        this.generateModal2 = this.generateModal2.bind(this);
-        this.generateModal3 = this.generateModal3.bind(this);
+        this.generateStartModal = this.generateStartModal.bind(this);
+        this.generatePauseModal = this.generatePauseModal.bind(this);
+        this.generateEndModal = this.generateEndModal.bind(this);
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
         this.startComputerGame = this.startComputerGame.bind(this);
     }
 
     showModal(){
+        this.showingModal = true;
         this.modalHolder.style.display = "flex";
     }
 
     hideModal(){
+        this.showingModal = false;
         this.modalHolder.style.display = "none";
     }
 
@@ -173,7 +185,7 @@ export class MainMenu {
         let lineHeight = 30;
 
         this.ctx.fillText("Are you ready to fight?",
-                    GameView.WIDTH/2, GameView.HEIGHT*0.25);
+                    GameView.WIDTH/2, GameView.HEIGHT*0.22);
 
         this.ctx.font = "20px 'Press Start 2P'";
 
@@ -184,12 +196,13 @@ export class MainMenu {
             "W/S: Computer 1 Difficulty Level",
             "Up/Down: Computer 2 Difficulty Level",
             "",
-            "Press spacebar to start the game"
+            "Press spacebar to start the game",
+            "Press escape to pause the game"
                 ]
 
         for (let i = 0; i < menuInfo.length; i++) {
             this.ctx.fillText(menuInfo[i],
-                    GameView.WIDTH*0.5, GameView.HEIGHT*0.45 + i*lineHeight);
+                    GameView.WIDTH*0.5, GameView.HEIGHT*0.42 + i*lineHeight);
         }
 
         // draw controllers
@@ -225,35 +238,37 @@ export class MainMenu {
     handleKeyDown(event) {
         if (this.gameStarted) {
             let button = event.key;
-            if (button === "ESC") {
+            if (button === "Escape") {
                 if (this.game.paused) {
                     this.hideModal();
                     this.game.unpause();
                 } else {
                     this.game.pause();
-                    this.generateModal2();
+                    this.generatePauseModal();
                 }
             }
         } else {
-            let button = event.key;
-            if (button === "h") {
-                this.togglePlayer1();
-            } else if (button === "k") {
-                this.togglePlayer2();
-            } else if (button === " ") {
-                this.startGame();
-            } else if (button === "w"){
-                this.difficulty1 += 1;
-                if (this.difficulty1 > 10) {this.difficulty1 = 10;}
-            } else if (button === "s"){
-                this.difficulty1 -= 1;
-                if (this.difficulty1 < 1) {this.difficulty1 = 1;}
-            } else if (button === "ArrowUp") {
-                this.difficulty2 += 1;
-                if (this.difficulty2 > 10) {this.difficulty2 = 10;}
-            } else if (button === "ArrowDown") {
-                this.difficulty2 -= 1;
-                if (this.difficulty2 < 1) {this.difficulty2 = 1;}
+            if (!this.showingModal) {
+                let button = event.key;
+                if (button === "h") {
+                    this.togglePlayer1();
+                } else if (button === "k") {
+                    this.togglePlayer2();
+                } else if (button === " ") {
+                    this.startGame();
+                } else if (button === "w"){
+                    this.difficulty1 += 1;
+                    if (this.difficulty1 > 10) {this.difficulty1 = 10;}
+                } else if (button === "s"){
+                    this.difficulty1 -= 1;
+                    if (this.difficulty1 < 1) {this.difficulty1 = 1;}
+                } else if (button === "ArrowUp") {
+                    this.difficulty2 += 1;
+                    if (this.difficulty2 > 10) {this.difficulty2 = 10;}
+                } else if (button === "ArrowDown") {
+                    this.difficulty2 -= 1;
+                    if (this.difficulty2 < 1) {this.difficulty2 = 1;}
+                }
             }
         }
     }
@@ -267,7 +282,7 @@ export class MainMenu {
         this.gameStarted = false;
         this.draw();
         if (gameEnded) {
-            this.generateModal3();
+            this.generateEndModal();
         }
     }
 
