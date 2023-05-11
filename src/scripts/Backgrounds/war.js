@@ -5,7 +5,7 @@ export class War {
     static BACKGROUND_SCALE = 0.85;
     static CAMERA_LIMIT_LEFT = -400;
     static CAMERA_LIMIT_RIGHT = 190;
-    static FLOOR = 250;
+    static FLOOR = 240;
 
     static BACKGROUND_IMAGES = [
         ["assets/images/Backgrounds/War3/Bright/sky_sun.png", 0],
