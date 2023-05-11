@@ -1,4 +1,5 @@
-![Demo Combat](assets/images/MainLogo.jpg)
+![Main Logo](assets/images/MainLogo.jpg)
+
 __Background__
 ----
 
