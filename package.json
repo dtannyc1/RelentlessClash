@@ -1,10 +1,10 @@
 {
-  "name": "jsproject",
+  "name": "relentless_clash",
   "version": "1.0.0",
-  "description": "",
+  "description": "Two Player Sword Fighting Game",
   "main": "index.js",
   "keywords": [],
-  "author": "",
+  "author": "David Tan",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.21.8",
