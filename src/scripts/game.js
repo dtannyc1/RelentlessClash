@@ -41,7 +41,6 @@ export class Game {
         this.unmute = this.unmute.bind(this);
 
         this.menu = menu;
-        window.game = this;
     }
 
     start() {
