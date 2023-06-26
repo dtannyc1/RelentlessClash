@@ -244,12 +244,14 @@ body {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: margin 0.1s, padding 0.1s, font-size 0.1s;
 }
 
 #modal-buttons div:hover {
-  transform: scale(1.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  margin: 16px 0px;
+  padding: 24px;
+  font-size: 110%;
+  transition: margin 0.1s, padding 0.1s, font-size 0.1s;
 }
 
 #creator {
