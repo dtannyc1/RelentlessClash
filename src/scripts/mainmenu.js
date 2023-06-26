@@ -462,7 +462,10 @@ export class MainMenu {
     mute() {
         this.menuMusic.volume = 0;
         this.gameMusic.volume = 0;
-
+        this.muteButton.innerHTML = '';
+        let img = document.createElement('img');
+        img.src = "assets/images/Icons/mute-icon.png";
+        this.muteButton.appendChild(img);
         if (this.game){
             this.game.mute();
         }
@@ -471,6 +474,10 @@ export class MainMenu {
     unmute() {
         this.menuMusic.volume = 1;
         this.gameMusic.volume = 1;
+        this.muteButton.innerHTML = '';
+        let img = document.createElement('img');
+        img.src = "assets/images/Icons/volume-icon.png";
+        this.muteButton.appendChild(img);
 
         if (this.game) {
             this.game.unmute();
