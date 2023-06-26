@@ -191,6 +191,7 @@ body {
   display: flex;
   justify-content: right;
 }
+
 #links a {
   width: 6vh;
   height: 6vh;
@@ -198,6 +199,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 #links img {
   width: 3.3vh;
 }
@@ -215,9 +217,11 @@ body {
   line-height: 130%;
   font-family: "Press Start 2P", cursive;
 }
+
 #main-modal-content ul {
   width: 100%;
 }
+
 #main-modal-content li {
   padding: 20px 100px;
 }
@@ -244,19 +248,26 @@ body {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: margin 0.1s, padding 0.1s, font-size 0.1s;
 }
 
 #modal-buttons div:hover {
   margin: 16px 0px;
   padding: 24px;
   font-size: 110%;
+  transition: margin 0.1s, padding 0.1s, font-size 0.1s;
 }
 
 #creator {
   position: absolute;
-  font-size: 0.75vh;
+  font-size: 1vh;
   color: rgb(52, 116, 255);
   top: 6vh;
-  margin-right: 20px;
+  margin-right: 12px;
   font-family: "Press Start 2P", cursive;
+  cursor: default;
+}
+
+.start-modal {
+  margin-top: 35px;
 }
