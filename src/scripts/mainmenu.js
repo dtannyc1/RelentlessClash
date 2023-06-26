@@ -103,7 +103,10 @@ export class MainMenu {
         this.modalButtons.innerHTML = '';
         this.modalButtons.appendChild(button1);
         this.modalButtons.appendChild(button2);
-        button1.addEventListener("click", this.hideModal);
+        button1.addEventListener("click", () => {
+            this.hideModal();
+            this.menuMusic.play();
+        });
         button2.addEventListener("click", this.startComputerGame);
 
         button1.onmouseover = () => {
