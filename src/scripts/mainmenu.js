@@ -186,13 +186,24 @@ export class MainMenu {
         let button2 = document.createElement('div');
         button1.innerText = "Play Again";
         button2.innerText = "Watch Computers Fight";
-        let fontsize = 1.8;
+        let fontsize = 2;
+        button1.style.fontSize = `${fontsize}vh`;
         button2.style.fontSize = `${fontsize}vh`;
         this.modalButtons.innerHTML = '';
         this.modalButtons.appendChild(button1);
         this.modalButtons.appendChild(button2);
         button1.addEventListener("click", this.hideModal);
         button2.addEventListener("click", this.startComputerGame);
+        button1.onmouseover = () => {
+            button1.style.fontSize = `${fontsize*1.1}vh`;
+            button1.style.margin = "16px 0px";
+            button1.style.padding = "24px";
+        }
+        button1.onmouseout = () => {
+            button1.style.fontSize = `${fontsize}vh`;
+            button1.style.margin = "20px 0px";
+            button1.style.padding = "20px";
+        }
         button2.onmouseover = () => {
             button2.style.fontSize = `${fontsize*1.1}vh`;
             button2.style.margin = "16px 0px";
@@ -360,10 +371,10 @@ export class MainMenu {
         this.controller1.addListeners();
         this.controller2.addListeners();
         this.gameStarted = false;
-        this.draw();
         if (gameEnded) {
             this.generateEndModal();
         }
+        this.draw();
     }
 
     startGame() {
