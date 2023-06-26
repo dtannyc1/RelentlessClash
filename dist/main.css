@@ -260,10 +260,10 @@ body {
 
 #creator {
   position: absolute;
-  font-size: 0.75vh;
+  font-size: 1vh;
   color: rgb(52, 116, 255);
   top: 6vh;
-  margin-right: 20px;
+  margin-right: 12px;
   font-family: "Press Start 2P", cursive;
   cursor: default;
 }
