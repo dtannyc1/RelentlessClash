@@ -93,12 +93,13 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 #modal-buttons div:hover {
-    margin: 16px 0px;
-    padding: 24px;
-    font-size: 110%;
+    transform: scale(1.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    // box-shadow: 0px 0px 10px rgba(52,52,255, 0.5);
 }
 
 #creator {
@@ -108,4 +109,8 @@
     top: 6vh;
     margin-right: 20px;
     font-family: "Press Start 2P", cursive;
+}
+
+.start-modal {
+    margin-top: 35px;
 }

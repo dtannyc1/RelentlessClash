@@ -40,6 +40,7 @@ export class MainMenu {
 
     generateStartModal() {
         let ul = document.createElement('ul');
+        ul.classList.add('start-modal')
         let li1 = document.createElement('li');
         let li2 = document.createElement('li');
         let li3 = document.createElement('li');
