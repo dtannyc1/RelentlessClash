@@ -393,6 +393,9 @@ export class MainMenu {
 
         this.game = new Game(this.ctx, cont1, cont2, this);
         this.game.start();
+        if (this.muted) {
+            this.game.mute();
+        }
     }
 
     stopGame(){
