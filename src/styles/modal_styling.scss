@@ -37,17 +37,18 @@
     grid-column-end: 3;
     display: flex;
     justify-content: right;
+}
 
-    a {
-        width: 6vh;
-        height: 6vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    img {
-        width: 3.3vh;
-    }
+#links a {
+    width: 6vh;
+    height: 6vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#links img {
+    width: 3.3vh;
 }
 
 #main-modal-content {
@@ -62,12 +63,14 @@
     color: rgb(52,52,255);
     line-height: 130%;
     font-family: 'Press Start 2P', cursive;
-    ul {
-        width: 100%;
-    }
-    li {
-        padding: 20px 100px;
-    }
+}
+
+#main-modal-content ul {
+    width: 100%;
+}
+
+#main-modal-content li {
+    padding: 20px 100px;
 }
 
 #modal-buttons {
@@ -110,6 +113,7 @@
     top: 6vh;
     margin-right: 20px;
     font-family: "Press Start 2P", cursive;
+    cursor: default;
 }
 
 .start-modal {

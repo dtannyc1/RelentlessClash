@@ -191,6 +191,7 @@ body {
   display: flex;
   justify-content: right;
 }
+
 #links a {
   width: 6vh;
   height: 6vh;
@@ -198,6 +199,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 #links img {
   width: 3.3vh;
 }
@@ -215,9 +217,11 @@ body {
   line-height: 130%;
   font-family: "Press Start 2P", cursive;
 }
+
 #main-modal-content ul {
   width: 100%;
 }
+
 #main-modal-content li {
   padding: 20px 100px;
 }
@@ -261,6 +265,7 @@ body {
   top: 6vh;
   margin-right: 20px;
   font-family: "Press Start 2P", cursive;
+  cursor: default;
 }
 
 .start-modal {
