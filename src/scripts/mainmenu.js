@@ -162,7 +162,7 @@ export class MainMenu {
             this.hideModal();
         })
 
-        this.modal.style.backgroundColor = "rbga(0,0,0,0.25)";
+        this.modal.style.background = "#00000080";
         this.showModal();
     }
 
@@ -249,6 +249,7 @@ export class MainMenu {
 
     hideModal(){
         this.showingModal = false;
+        this.modal.style.background = "#000000";
         this.modalHolder.style.display = "none";
     }
 
