@@ -71,12 +71,12 @@ body {
 #mute-button{
     grid-row-start: 4;
     grid-row-end: 5;
-    width: 30px;
-    height: 30px;
-    font-size: 60px;
+    width: 4vh;
+    height: 4vh;
+    // font-size: 60px;
     position: relative;
     left: 7vh;
-    top: -7vh;
+    top: -6vh;
     cursor: pointer;
 }
 

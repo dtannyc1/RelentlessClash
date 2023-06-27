@@ -111,24 +111,16 @@ export class MainMenu {
 
         button1.onmouseover = () => {
             button1.style.fontSize = `${fontsize*1.1}vh`;
-            button1.style.margin = "16px 0px";
-            button1.style.padding = "24px";
         }
         button1.onmouseout = () => {
             button1.style.fontSize = `${fontsize}vh`;
-            button1.style.margin = "20px 0px";
-            button1.style.padding = "20px";
         }
 
         button2.onmouseover = () => {
             button2.style.fontSize = `${fontsize*1.1}vh`;
-            button2.style.margin = "16px 0px";
-            button2.style.padding = "24px";
         }
         button2.onmouseout = () => {
             button2.style.fontSize = `${fontsize}vh`;
-            button2.style.margin = "20px 0px";
-            button2.style.padding = "20px";
         }
 
         this.showModal();
@@ -199,23 +191,15 @@ export class MainMenu {
         button2.addEventListener("click", this.startComputerGame);
         button1.onmouseover = () => {
             button1.style.fontSize = `${fontsize*1.1}vh`;
-            button1.style.margin = "16px 0px";
-            button1.style.padding = "24px";
         }
         button1.onmouseout = () => {
             button1.style.fontSize = `${fontsize}vh`;
-            button1.style.margin = "20px 0px";
-            button1.style.padding = "20px";
         }
         button2.onmouseover = () => {
             button2.style.fontSize = `${fontsize*1.1}vh`;
-            button2.style.margin = "16px 0px";
-            button2.style.padding = "24px";
         }
         button2.onmouseout = () => {
             button2.style.fontSize = `${fontsize}vh`;
-            button2.style.margin = "20px 0px";
-            button2.style.padding = "20px";
         }
 
         this.showModal();
