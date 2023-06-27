@@ -43,7 +43,7 @@ body {
     background-size: auto 100vh;
     background-repeat: no-repeat;
     display: grid;
-    grid-template-rows: 12% 9.6% 57.5% 4.5% 12% auto;
+    grid-template-rows: 12% 9.6% 57.5% 2.5% 12% auto;
     background-color: transparent;
     height: 100vh;
     justify-content: center;
@@ -149,8 +149,10 @@ body {
 
 #controller1 {
     height: 100%;
+    margin: 0vh 3vh;
 }
 
 #controller2 {
     height: 100%;
+    margin: 0vh 3vh;
 }

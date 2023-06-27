@@ -295,9 +295,9 @@ export class MainMenu {
         ctx.textAlign = "left";
         ctx.font = "24px 'Press Start 2P'";
         if (this.computerplayer1) {
-            ctx.fillText(`Level ${this.difficulty1} Computer`, 225, 40);
+            ctx.fillText(`Level ${this.difficulty1} Computer`, 245, 45);
         } else {
-            ctx.fillText("Human Player 1", 225, 40);
+            ctx.fillText("Human Player 1", 245, 45);
         }
 
         ctx = this.controller2ctx;
@@ -305,9 +305,9 @@ export class MainMenu {
         ctx.textAlign = "right";
         ctx.font = "24px 'Press Start 2P'";
         if (this.computerplayer2) {
-            ctx.fillText(`Level ${this.difficulty2} Computer`, 425, 40);
+            ctx.fillText(`Level ${this.difficulty2} Computer`, 405, 45);
         } else {
-            ctx.fillText("Human Player 2", 425, 40);
+            ctx.fillText("Human Player 2", 405, 45);
         }
 
         if (!this.gameStarted) {
