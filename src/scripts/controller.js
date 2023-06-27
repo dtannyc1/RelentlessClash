@@ -99,7 +99,6 @@ export class Controller {
                 this.ctx.drawImage(img, 0, 0, 663, 227);
             }
         })
-
     }
 
     static CONTROLLER_ONE = {

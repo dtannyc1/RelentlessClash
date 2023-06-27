@@ -7,12 +7,13 @@ export class ComputerController extends Controller {
         this.player = player;
         this.opponent = opponent;
 
+        this.startController = this.startController.bind(this);
+        this.assignOpponent = this.assignOpponent.bind(this);
         this.chooseAction = this.chooseAction.bind(this);
         this.takeAction = this.takeAction.bind(this);
         this.pressButton = this.pressButton.bind(this);
         this.releaseButton = this.releaseButton.bind(this);
         this.updateDistanceFromOpponent = this.updateDistanceFromOpponent.bind(this);
-
         // difficulty scales the update rate of actions
         this.difficulty = difficulty;
         this.buttonReleaseDelay = 250 + (10-this.difficulty)*250;
@@ -57,7 +58,13 @@ export class ComputerController extends Controller {
                         !this.heldButtons.includes("X")) {
                 let choice = choices[Math.floor(Math.random()*choices.length)];
                 this.pressButton(choice);
-                setTimeout(() => this.releaseButton(choice), this.buttonReleaseDelay);
+                // debugger
+                function tmpReleaseButton() {
+                    this.releaseButton(choice)
+                }
+                tmpReleaseButton = tmpReleaseButton.bind(this);
+                setTimeout(tmpReleaseButton, this.buttonReleaseDelay);
+                // debugger
             }
         } else if (action === "run") {
             if (this.relPos[0] > 0) {
@@ -65,21 +72,27 @@ export class ComputerController extends Controller {
                 if (this.player.vel[0] === 0) {
                     this.releaseButton("RIGHT");
                 }
-                this.pressButton("RIGHT");
+                // if (!this.heldButtons.includes("RIGHT")){
+                    this.pressButton("RIGHT");
+                    // setTimeout(() => this.releaseButton("RIGHT"), this.buttonReleaseDelay);
+                // }
             } else if (this.relPos[0] < 0) {
                 this.releaseButton("RIGHT");
                 if (this.player.vel[0] === 0) {
                     this.releaseButton("LEFT");
                 }
-                this.pressButton("LEFT");
+                // if (!this.heldButtons.includes("LEFT")) {
+                    this.pressButton("LEFT");
+                    // setTimeout(() => this.releaseButton("LEFT"), this.buttonReleaseDelay);
+                // }
             }
         } else if (action === "jump") {
             this.pressButton("UP");
             setTimeout(() => this.releaseButton("UP"), this.buttonReleaseDelay);
         } else if (action === "idle") {
-            while (this.heldButtons.length > 0) {
-                this.releaseButton(this.heldButtons[0]);
-            }
+            // while (this.heldButtons.length > 0) {
+            //     this.releaseButton(this.heldButtons[0]);
+            // }
         }
     }
 
