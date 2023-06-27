@@ -130,21 +130,72 @@ body {
   font-family: "Press Start 2P";
 }
 
-#mute-button {
+#bottom-menu {
   grid-row-start: 4;
   grid-row-end: 5;
+  display: flex;
+  position: relative;
+  height: 100%;
+}
+
+#mute-button {
   width: 4vh;
   height: 4vh;
-  position: relative;
+  position: absolute;
   left: 7vh;
-  top: -6vh;
+  top: -4.5vh;
   cursor: pointer;
 }
 
 #mute-button img {
   width: 100%;
   height: 100%;
+  position: absolute;
+}
+
+#main-buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 75%;
   position: relative;
+  left: 13vh;
+}
+
+#start-game {
+  font-family: "Press Start 2P", cursive;
+  color: rgb(52, 52, 255);
+  font-size: 2.5vh;
+  border: solid rgb(52, 52, 255) 1px;
+  position: relative;
+  top: -6vh;
+  padding: 2vh;
+  transition: margin 0.1s, padding 0.1s, font-size 0.1s;
+  cursor: pointer;
+  height: fit-content;
+}
+
+#start-game:hover {
+  font-size: 2.75vh;
+  transition: margin 0.1s, padding 0.1s, font-size 0.1s;
+}
+
+#how-to-play {
+  font-family: "Press Start 2P", cursive;
+  color: rgb(52, 52, 255);
+  font-size: 2.5vh;
+  border: solid rgb(52, 52, 255) 1px;
+  position: relative;
+  top: -6vh;
+  padding: 2vh;
+  transition: margin 0.1s, padding 0.1s, font-size 0.1s;
+  cursor: pointer;
+  height: fit-content;
+}
+
+#how-to-play:hover {
+  font-size: 2.75vh;
+  transition: margin 0.1s, padding 0.1s, font-size 0.1s;
 }
 
 .controllers {
@@ -233,8 +284,12 @@ body {
   width: 100%;
 }
 
+#main-modal-content ul.extra-top-padding {
+  padding-top: 2vh;
+}
+
 #main-modal-content li {
-  padding: 3vh 3vh;
+  padding: 1.5vh 3vh;
 }
 
 #modal-buttons {

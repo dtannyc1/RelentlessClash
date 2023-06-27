@@ -70,8 +70,12 @@
     width: 100%;
 }
 
+#main-modal-content ul.extra-top-padding{
+    padding-top: 2vh;
+}
+
 #main-modal-content li {
-    padding: 3vh 3vh;
+    padding: 1.5vh 3vh;
 }
 
 #modal-buttons {

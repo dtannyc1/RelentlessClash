@@ -26,6 +26,10 @@ export class MainMenu {
         this.modal = document.querySelector("#modal");
         this.modalContent = document.querySelector("#main-modal-content");
         this.modalButtons = document.querySelector("#modal-buttons");
+        this.howToButton = document.querySelector("#how-to-play");
+        this.startGameButton = document.querySelector("#start-game");
+        this.howToButton.addEventListener("click", this.generateHowToModal);
+        this.startGameButton.addEventListener("click", this.startGame);
         this.showingModal = false;
         this.addListeners();
         this.draw();
@@ -77,6 +81,7 @@ export class MainMenu {
         let li4 = document.createElement('li');
         let li5 = document.createElement('li');
         let li6 = document.createElement('li');
+        ul.className = "extra-top-padding"
         li1.innerText = "A/D/⬅️/➡️ - Move Player";
         li2.innerText = "W/⬆️ - Jump";
         li3.innerText = "F/; - Light Attack";
@@ -227,6 +232,7 @@ export class MainMenu {
         this.mute = this.mute.bind(this);
         this.unmute = this.unmute.bind(this);
         this.toggleMute = this.toggleMute.bind(this);
+        this.startGame = this.startGame.bind(this);
     }
 
     showModal(){
@@ -276,7 +282,7 @@ export class MainMenu {
 
         for (let i = 0; i < menuInfo.length; i++) {
             this.ctx.fillText(menuInfo[i],
-                    GameView.WIDTH*0.5, GameView.HEIGHT*0.42 + i*lineHeight);
+                    GameView.WIDTH*0.5, GameView.HEIGHT*0.32 + i*lineHeight);
         }
 
         // draw controllers
@@ -362,12 +368,16 @@ export class MainMenu {
         if (gameEnded) {
             this.generateEndModal();
         }
+        this.howToButton.style.display = "flex";
+        this.startGameButton.style.display = "flex";
         this.draw();
     }
 
     startGame() {
         // this.removeListeners();
         this.gameStarted = true;
+        this.howToButton.style.display = "none";
+        this.startGameButton.style.display = "none";
         this.menuMusic.pause();
         this.menuMusic.currentTime = 0;
         this.gameMusic.currentTime = 0;
