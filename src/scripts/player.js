@@ -36,6 +36,7 @@ export class Player extends Moveable{
         this.togglePlayingAudio = this.togglePlayingAudio.bind(this);
         this.mute = this.mute.bind(this);
         this.unmute = this.unmute.bind(this);
+        this.playSwordSound = this.playSwordSound.bind(this);
 
         this.stunned = false;
         this.runAnimation = true;
@@ -135,24 +136,34 @@ export class Player extends Moveable{
                 case 'B':
                     if (moves.includes("attack1")) {
                         this.currentAction = "attack1";
+                        if (!this.playingAudio) {
+                            this.playSwordSound();
+                            this.playingAudio = true;
+                            setTimeout(this.togglePlayingAudio, 500);
+                        }
                     }
                     break;
                 case 'Y':
                     if (moves.includes("attack2")) {
                         this.currentAction = "attack2";
+                        if (!this.playingAudio) {
+                            setTimeout(this.playSwordSound, 100);
+
+                            this.playingAudio = true;
+                            setTimeout(this.togglePlayingAudio, 500);
+                        }
                     }
                     break;
                 case 'X':
                     if (moves.includes("attack3")) {
                         this.currentAction = "attack3";
+                        if (!this.playingAudio) {
+                            setTimeout(this.playSwordSound, 150);
+                            this.playingAudio = true;
+                            setTimeout(this.togglePlayingAudio, 500);
+                        }
                     }
                     break;
-            }
-
-            if ((button === "B" || button === "Y" || button || "X") && !this.playingAudio){
-                this.swordSounds[Math.floor(Math.random() * this.swordSounds.length)].play();
-                this.playingAudio = true;
-                setTimeout(this.togglePlayingAudio, 500);
             }
         }
     }
@@ -203,6 +214,10 @@ export class Player extends Moveable{
             sound.loop = false;
         })
         this.playingAudio = false;
+    }
+
+    playSwordSound() {
+        this.swordSounds[Math.floor(Math.random() * this.swordSounds.length)].play();
     }
 
     togglePlayingAudio() {
