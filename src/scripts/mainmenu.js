@@ -59,7 +59,7 @@ export class MainMenu {
 
         let button1 = document.createElement('div');
         let button2 = document.createElement('div');
-        button1.innerText = "Start Game";
+        button1.innerText = "Main Menu";
         button2.innerText = "How to Play";
         this.modalButtons.innerHTML = '';
         this.modalButtons.appendChild(button1);
@@ -99,7 +99,7 @@ export class MainMenu {
 
         let button1 = document.createElement('div');
         let button2 = document.createElement('div');
-        button1.innerText = "Start Game";
+        button1.innerText = "Main Menu";
         button2.innerText = "Watch Computers Fight";
         this.modalButtons.innerHTML = '';
         let fontsize = 2;
