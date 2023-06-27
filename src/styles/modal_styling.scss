@@ -70,8 +70,12 @@
     width: 100%;
 }
 
+#main-modal-content ul.extra-top-padding{
+    padding-top: 2vh;
+}
+
 #main-modal-content li {
-    padding: 20px 100px;
+    padding: 1.5vh 3vh;
 }
 
 #modal-buttons {
@@ -82,6 +86,7 @@
     // background: green;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     font-size: 2.5vh;
 }
 
@@ -91,8 +96,8 @@
     color: rgb(52,52,255);
     font-size: 2.5vh;
     border: solid rgb(52,52,255) 1px;
-    margin: 20px 0px;
-    padding: 20px;
+    margin: 0vh;
+    padding: 2vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -101,8 +106,8 @@
 }
 
 #modal-buttons div:hover {
-    margin: 16px 0px;
-    padding: 24px;
+    margin: 0vh;
+    padding: 2.2vh;
     font-size: 110%;
     transition: margin 0.1s, padding 0.1s, font-size 0.1s;
 }
