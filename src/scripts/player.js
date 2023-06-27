@@ -139,7 +139,7 @@ export class Player extends Moveable{
                         if (!this.playingAudio) {
                             this.playSwordSound();
                             this.playingAudio = true;
-                            setTimeout(this.togglePlayingAudio, 500);
+                            setTimeout(this.togglePlayingAudio, 50);
                         }
                     }
                     break;
