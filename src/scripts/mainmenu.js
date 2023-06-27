@@ -82,8 +82,8 @@ export class MainMenu {
         let li5 = document.createElement('li');
         let li6 = document.createElement('li');
         ul.className = "extra-top-padding"
-        li1.innerText = "A/D/⬅️/➡️ - Move Player";
-        li2.innerText = "W/⬆️ - Jump";
+        li1.innerHTML = "A/D/&larr;/&rarr; - Move Player";
+        li2.innerText = "W/↑ - Jump";
         li3.innerText = "F/; - Light Attack";
         li4.innerText = "G/L - Medium Attack";
         li5.innerText = "H/K - Heavy Attack";
