@@ -64,8 +64,7 @@ table {
 }
 
 html, body {
-  max-width: 100%;
-  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 * {
@@ -92,8 +91,8 @@ body {
   background-position-x: center;
   background-repeat: no-repeat;
   display: flex;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   justify-content: center;
   position: absolute;
   background-attachment: fixed;
@@ -103,15 +102,15 @@ body {
 #arcade-machine {
   background-image: url("../assets/images/ArcadeMachine.png");
   background-position-x: center;
-  background-size: auto 100%;
+  background-size: auto 100vh;
   background-repeat: no-repeat;
   display: grid;
   grid-template-rows: 12% 9.6% 57.5% 4.5% 12% auto;
   background-color: transparent;
-  height: 100%;
+  height: 100vh;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
 }
 
 #arcade-machine h1 {
@@ -135,7 +134,9 @@ body {
   grid-row-end: 5;
   display: flex;
   position: relative;
-  height: 100%;
+  height: 4.5vh;
+  width: 88vh;
+  margin: auto;
 }
 
 #mute-button {
@@ -143,13 +144,13 @@ body {
   height: 4vh;
   position: absolute;
   left: 7vh;
-  top: -4.5vh;
+  top: -5vh;
   cursor: pointer;
 }
 
 #mute-button img {
-  width: 100%;
-  height: 100%;
+  width: 4vh;
+  height: 4vh;
   position: absolute;
 }
 
@@ -157,7 +158,7 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 75%;
+  width: 66vh;
   position: relative;
   left: 13vh;
 }
@@ -168,7 +169,7 @@ body {
   font-size: 2.5vh;
   border: solid rgb(52, 52, 255) 1px;
   position: relative;
-  top: -6vh;
+  top: -6.5vh;
   padding: 2vh;
   transition: margin 0.1s, padding 0.1s, font-size 0.1s;
   cursor: pointer;
@@ -186,7 +187,7 @@ body {
   font-size: 2.5vh;
   border: solid rgb(52, 52, 255) 1px;
   position: relative;
-  top: -6vh;
+  top: -6.5vh;
   padding: 2vh;
   transition: margin 0.1s, padding 0.1s, font-size 0.1s;
   cursor: pointer;
@@ -204,6 +205,7 @@ body {
   display: flex;
   justify-content: center;
   height: 100%;
+  width: 100vw;
 }
 
 #controller1 {
@@ -333,6 +335,7 @@ body {
   margin-right: 12px;
   font-family: "Press Start 2P", cursive;
   cursor: default;
+  white-space: nowrap;
 }
 
 .start-modal {
